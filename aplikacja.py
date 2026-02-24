@@ -41,7 +41,7 @@ slownik_modeli = {
         "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty.",
         "Wizualizacja": (
             "graph TD\n"
-            "A[Sytuacja społeczna] --> B[Zagrożenie społeczne]\n"
+            "A[Sytuacja społeczna] --> B[Zagrożenie społeczzne]\n"
             "B --> C[Skupienie uwagi na sobie]\n"
             "C <--> D[Objawy somatyczne i poznawcze]\n"
             "C <--> E[Zachowania zabezpieczające]\n"
@@ -80,6 +80,40 @@ slownik_modeli = {
     }
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
+
+# --- BAZA ASYSTENTA DIAGNOZY (Słowa kluczowe -> Diagnoza i Różnicowanie) ---
+baza_symptomow = [
+    {
+        "slowa_kluczowe": ["lęk", "panika", "serce", "duszność", "umieranie", "zawał", "atak"],
+        "diagnoza": "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)",
+        "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne (np. arytmia), Nadczynność tarczycy."
+    },
+    {
+        "slowa_kluczowe": ["smutek", "brak energii", "płacz", "bezsenność", "myśli samobójcze", "beznadzieja", "brak apetytu", "męczliwość", "anhedonia", "depresja"],
+        "diagnoza": "F32 Epizod depresyjny / F33 Zaburzenia depresyjne nawracające",
+        "roznicowa": "Choroba afektywna dwubiegunowa - epizod depresyjny (F31), Dystymia (F34.1), Niedoczynność tarczycy, Zaburzenia adaptacyjne (F43.2)."
+    },
+    {
+        "slowa_kluczowe": ["natrętne myśli", "rytuały", "sprawdzanie", "mycie", "liczenie", "obsesje", "kompulsje", "zarazki", "brud"],
+        "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)",
+        "roznicowa": "Zaburzenie osobowości anankastycznej (OCPD - F60.5), Schizofrenia (F20), Tiki (F95), GAD (F41.1)."
+    },
+    {
+        "slowa_kluczowe": ["lęk przed oceną", "wystąpienia publiczne", "czerwienienie się", "drżenie rąk", "ludzie", "kompromitacja", "wstyd", "wzrok innych"],
+        "diagnoza": "F40.1 Fobie społeczne",
+        "roznicowa": "Osobowość lękliwa/unikająca (F60.6), Agorafobia (F40.0), Ciało dysmorficzne (F45.2)."
+    },
+    {
+        "slowa_kluczowe": ["zamartwianie się", "napięcie mięśniowe", "niepokój", "przyszłość", "niepewność", "najgorsze", "ciągły lęk"],
+        "diagnoza": "F41.1 Zaburzenie lękowe uogólnione (GAD)",
+        "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1), Hipochondria (F45.2), Depresja (F32)."
+    },
+    {
+        "slowa_kluczowe": ["wypadek", "trauma", "koszmary", "flashback", "unikanie", "stres", "uraz", "wspomnienia"],
+        "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)",
+        "roznicowa": "Ostra reakcja na stres (F43.0), Zaburzenia adaptacyjne (F43.2), Fobia specyficzna (F40.2)."
+    }
+]
 
 # --- PEŁNA BAZA ICD-10 ---
 icd10_full = {
@@ -120,7 +154,26 @@ if menu == "1. Metryczka i Diagnoza":
         st.checkbox("Czy pacjent jest bezpieczny? (ryzyko samobójstwa)")
         st.text_area("Moje własne ABC na myśl o pracy z pacjentem")
 
-    with st.expander("Wybór Diagnozy ICD-10", expanded=True):
+    # NOWOŚĆ: ASYSTENT DIAGNOZY
+    with st.expander("🤖 Asystent Diagnozy (Podpowiedzi na podstawie objawów)", expanded=True):
+        st.write("Opisz krótko główne problemy pacjenta, a system zasugeruje diagnozę oraz diagnozę różnicową.")
+        objawy_input = st.text_area("Wpisz zgłaszane problemy (np. lęk, smutek, myśli samobójcze, bezsenność, zamartwianie się):")
+        
+        if objawy_input:
+            znaleziono_dopasowanie = False
+            objawy_lower = objawy_input.lower()
+            
+            for element in baza_symptomow:
+                # Sprawdza czy którekolwiek ze słów kluczowych występuje w tekście użytkownika
+                if any(slowo in objawy_lower for slowo in element["slowa_kluczowe"]):
+                    st.success(f"**Sugerowana diagnoza:** {element['diagnoza']}")
+                    st.warning(f"**Zalecana diagnoza różnicowa:** {element['roznicowa']}")
+                    znaleziono_dopasowanie = True
+            
+            if not znaleziono_dopasowanie:
+                st.info("Nie znaleziono oczywistych słów kluczowych. Rozważ ręczny wybór diagnozy poniżej.")
+
+    with st.expander("Wybór Diagnozy ICD-10 (Ręczny)", expanded=True):
         c1, c2 = st.columns(2)
         kat_wybrana = c1.selectbox("Grupa ICD-10:", list(icd10_full.keys()))
         pelna_diagnoza = c2.selectbox("Rozpoznanie główne:", icd10_full[kat_wybrana])
