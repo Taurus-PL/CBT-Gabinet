@@ -1,41 +1,87 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 
 # --- KONFIGURACJA STRONY ---
 st.set_page_config(page_title="Zapis Przebiegu Terapii CBT - System Pro", layout="wide")
 
 # --- BAZA WIEDZY I DIAGRAMY MERMAID ---
-# Uwaga: Kod wizualizacji jest w czystym tekście, znaczniki dodawane są dynamicznie
 slownik_modeli = {
     "F41.0": {
         "Model": "Model poznawczy lęku panicznego (D. Clark, 1986)",
         "Opis": "Skupienie na błędnej, katastroficznej interpretacji normalnych doznań z ciała (np. kołatanie serca = zawał).",
         "Interwencje": "Reatrybucja doznań, hiperwentylacja (eksperyment), eliminacja zachowań zabezpieczających.",
-        "Wizualizacja": "graph TD\n A[Wewnętrzny lub zewn. wyzwalacz] --> B[Postrzegane zagrożenie]\n B --> C[Lęk / Niepokój]\n C --> D[Doznania somatyczne np. serce]\n D --> E{Katastroficzna interpretacja}\n E -- Błędne koło paniki --> B\n style E fill:#ffcccc,stroke:#ff0000,stroke-width:2px"
+        "Wizualizacja": """
+        graph TD
+            A[Wewnętrzny lub zewn. wyzwalacz] --> B[Postrzegane zagrożenie]
+            B --> C[Lęk / Niepokój]
+            C --> D[Doznania somatyczne np. serce]
+            D --> E{Katastroficzna interpretacja}
+            E -- Błędne koło paniki --> B
+            
+            style E fill:#4d0000,stroke:#ff3333,stroke-width:2px,color:#fff
+        """
     },
     "F32": {
         "Model": "Triada Poznawcza Becka / Model Aktywacji Behawioralnej (Martell)",
         "Opis": "Negatywna wizja siebie, świata i przyszłości. Spadek wzmocnień pozytywnych z otoczenia.",
         "Interwencje": "Monitorowanie aktywności, Aktywacja behawioralna (BA), restrukturyzacja myśli.",
-        "Wizualizacja": "graph TD\n A((Negatywne myśli O SOBIE)) <--> B((Negatywne myśli O ŚWIECIE))\n B <--> C((Negatywne myśli O PRZYSZŁOŚCI))\n C <--> A\n style A fill:#e6f2ff,stroke:#3399ff\n style B fill:#e6f2ff,stroke:#3399ff\n style C fill:#e6f2ff,stroke:#3399ff"
+        "Wizualizacja": """
+        graph TD
+            A((Negatywne myśli O SOBIE)) <--> B((Negatywne myśli O ŚWIECIE))
+            B <--> C((Negatywne myśli O PRZYSZŁOŚCI))
+            C <--> A
+            
+            style A fill:#002b5e,stroke:#3399ff,color:#fff
+            style B fill:#002b5e,stroke:#3399ff,color:#fff
+            style C fill:#002b5e,stroke:#3399ff,color:#fff
+        """
     },
     "F40.1": {
         "Model": "Model Lęku Społecznego (Clark i Wells, 1995)",
         "Opis": "Koncentracja uwagi na sobie, tworzenie negatywnego obrazu siebie, silne zachowania zabezpieczające.",
         "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty.",
-        "Wizualizacja": "graph TD\n A[Sytuacja społeczna] --> B[Zagrożenie społeczne]\n B --> C[Skupienie uwagi na sobie]\n C <--> D[Objawy somatyczne i poznawcze]\n C <--> E[Zachowania zabezpieczające]\n D <--> E\n style C fill:#ffe6cc,stroke:#ff9900"
+        "Wizualizacja": """
+        graph TD
+            A[Sytuacja społeczna] --> B[Zagrożenie społeczne]
+            B --> C[Skupienie uwagi na sobie]
+            C <--> D[Objawy somatyczne i poznawcze]
+            C <--> E[Zachowania zabezpieczające]
+            D <--> E
+            
+            style C fill:#663300,stroke:#ff9900,color:#fff
+        """
     },
     "F42": {
         "Model": "Model poznawczy OCD (P. Salkovskis)",
         "Opis": "Przesadne poczucie odpowiedzialności (TAF). Myśl natrętna jest interpretowana jako realne zagrożenie.",
         "Interwencje": "ERP (Ekspozycja z powstrzymaniem reakcji), restrukturyzacja przekonań o odpowiedzialności.",
-        "Wizualizacja": "graph TD\n A[Sytuacja wyzwalająca] --> B[Natrętna myśl / Obraz]\n B --> C{Zagrożenie / Odpowiedzialność}\n C --> D[Lęk i Dyskomfort]\n D --> E[Kompulsje i Rytuały]\n E --> F[Chwilowa ulga]\n F -. Wzmocnienie .-> B\n style C fill:#ffccff,stroke:#cc00cc"
+        "Wizualizacja": """
+        graph TD
+            A[Sytuacja wyzwalająca] --> B[Natrętna myśl / Obraz]
+            B --> C{Zagrożenie / Odpowiedzialność}
+            C --> D[Lęk i Dyskomfort]
+            D --> E[Kompulsje i Rytuały]
+            E --> F[Chwilowa ulga]
+            F -. Wzmocnienie .-> B
+            
+            style C fill:#4d004d,stroke:#cc00cc,color:#fff
+        """
     },
     "F41.1": {
         "Model": "Model Nietolerancji Niepewności (Dugas) / Metapoznawczy (Wells)",
         "Opis": "Zamartwianie się jako unikający styl radzenia sobie z lękiem oraz metaprzekonania.",
         "Interwencje": "Trening rozwiązywania problemów, ekspozycja na wyobrażenia, zmiana metaprzekonań.",
-        "Wizualizacja": "graph TD\n A[Sytuacja niepewna] --> B[Nietolerancja niepewności]\n B --> C[Pozytywne przekonania o martwieniu]\n C --> D[ZAMARTWIANIE SIĘ]\n D --> E[Negatywne przekonania / Lęk przed martwieniem]\n D --> F[Nieskuteczne unikanie]\n style D fill:#ffffcc,stroke:#cccc00"
+        "Wizualizacja": """
+        graph TD
+            A[Sytuacja niepewna] --> B[Nietolerancja niepewności]
+            B --> C[Pozytywne przekonania o martwieniu]
+            C --> D[ZAMARTWIANIE SIĘ]
+            D --> E[Negatywne przekonania / Lęk przed martwieniem]
+            D --> F[Nieskuteczne unikanie]
+            
+            style D fill:#4d4d00,stroke:#cccc00,color:#fff
+        """
     }
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
@@ -94,10 +140,19 @@ if menu == "1. Metryczka i Diagnoza":
             st.write(f"**Mechanizm podtrzymujący:** {dane['Opis']}")
             st.write(f"**Interwencje:** {dane['Interwencje']}")
             
+            # BEZPIECZNE RENDEROWANIE SCHEMATU W HTML/JS
             if "Wizualizacja" in dane:
                 st.markdown("### Graficzny schemat mechanizmu:")
-                kod_wizualizacji = "```mermaid\n" + dane['Wizualizacja'] + "\n```"
-                st.markdown(kod_wizualizacji)
+                mermaid_html = f"""
+                <div class="mermaid" style="background-color: transparent; display: flex; justify-content: center;">
+                {dane['Wizualizacja']}
+                </div>
+                <script type="module">
+                import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+                mermaid.initialize({{ startOnLoad: true, theme: 'dark' }});
+                </script>
+                """
+                components.html(mermaid_html, height=500)
         else:
             st.info("💡 Dla wybranego kodu zaleca się stosowanie standardowego modelu poznawczego ABC.")
 
@@ -106,7 +161,6 @@ if menu == "1. Metryczka i Diagnoza":
         f_praca = st.text_area("Sfera zawodowa / szkolna (funkcjonowanie i trudności)")
         f_spoleczna = st.text_area("Sfera społeczna (funkcjonowanie i trudności)")
         
-    # Przycisk zapisu w sesji (aby przenieść do archiwum)
     if st.button("💾 Zapisz Diagnozę w Archiwum"):
         st.session_state.baza_terapii.append({
             "Pacjent": imie, "Wiek": wiek, "Kod ICD": kod_icd, 
@@ -162,7 +216,6 @@ elif menu == "📂 Archiwum Diagnoz":
     else:
         df = pd.DataFrame(st.session_state.baza_terapii)
         
-        # Filtrowanie po kodzie ICD
         lista_diagnoz = ["Wszystkie"] + list(df['Kod ICD'].unique())
         wybrany_kod = st.selectbox("Filtruj bazę według diagnozy:", lista_diagnoz)
         
