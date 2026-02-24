@@ -4,7 +4,7 @@ import pandas as pd
 # --- KONFIGURACJA STRONY ---
 st.set_page_config(page_title="Zapis Przebiegu Terapii CBT", layout="wide")
 
-# --- BAZA WIEDZY I DIAGRAMY MERMAID (ZAKTUALIZOWANA DLA WIELU MODELI) ---
+# --- BAZA WIEDZY I DIAGRAMY MERMAID ---
 slownik_modeli = {
     "F41.0": [
         {
@@ -38,7 +38,7 @@ slownik_modeli = {
             )
         },
         {
-            "Model": "Model Aktywacji Behawioralnej - BA (C. Martell)",
+            "Model": "Model Aktywacji Behawioralnej - BA (C. Martell / P. Lewinsohn)",
             "Opis": "Depresja jako wynik spadku wzmocnień pozytywnych ze środowiska. Obniżony nastrój prowadzi do wycofania, co pogłębia brak wzmocnień.",
             "Interwencje": "Monitorowanie aktywności, planowanie aktywności (przyjemność i mistrzostwo), ocena barier.",
             "Wizualizacja": (
@@ -49,6 +49,46 @@ slownik_modeli = {
                 "D -- Błędne koło --> B\n"
                 "style C fill:#333333,stroke:#666666,color:#fff\n"
             )
+        },
+        {
+            "Model": "Model Wyuczonej Bezradności (M. Seligman)",
+            "Opis": "Depresja jako skutek poczucia braku wpływu na negatywne zdarzenia oraz przypisywania im wewnętrznych, stałych i globalnych przyczyn (pesymistyczny styl atrybucyjny).",
+            "Interwencje": "Zmiana stylu atrybucyjnego, budowanie poczucia sprawstwa (empowerment), eksperymenty przywracające kontrolę nad otoczeniem.",
+            "Wizualizacja": (
+                "graph TD\n"
+                "A[Negatywne zdarzenie] --> B{Brak poczucia kontroli}\n"
+                "B --> C[Styl atrybucyjny: Wewnętrzny, Stały, Globalny]\n"
+                "C --> D[Poczucie bezradności i beznadziei]\n"
+                "D --> E[Objawy depresyjne: Bierność, Rezygnacja]\n"
+                "style C fill:#4d4d4d,stroke:#808080,color:#fff\n"
+            )
+        },
+        {
+            "Model": "Model poznawczy oparty na uważności - MBCT (Segal, Williams, Teasdale)",
+            "Opis": "Nawroty depresji wynikają z reaktywacji starych wzorców myślenia przez drobne wahania nastroju. Pacjent wpada w ruminacje i zautomatyzowany 'tryb działania'.",
+            "Interwencje": "Trening uważności (mindfulness), decentracja (oddzielenie od myśli), świadome przejście z trybu 'działania' do trybu 'bycia'.",
+            "Wizualizacja": (
+                "graph TD\n"
+                "A[Początkowy spadek nastroju] --> B[Zautomatyzowane negatywne myślenie]\n"
+                "B --> C[Ruminacje / Próba myślowego 'naprawienia' nastroju]\n"
+                "C --> D[Pogłębienie i utrwalenie depresji]\n"
+                "D -- Sprzężenie zwrotne --> B\n"
+                "style C fill:#336699,stroke:#6699cc,color:#fff\n"
+            )
+        },
+        {
+            "Model": "Model Elastyczności Psychologicznej - ACT (S. Hayes)",
+            "Opis": "Cierpienie depresyjne wynika z unikania trudnych emocji (unikanie doświadczania) oraz utknięcia w dosłownym traktowaniu własnych myśli (fuzja poznawcza).",
+            "Interwencje": "Defuzja poznawcza, akceptacja, ugruntowanie w chwili obecnej, klaryfikacja wartości i zaangażowane działanie.",
+            "Wizualizacja": (
+                "graph TD\n"
+                "A[Trudne myśli i emocje] --> B[Unikanie doświadczania]\n"
+                "A --> C[Fuzja poznawcza - myśli traktowane jako fakty]\n"
+                "B --> D[Oderwanie od życiowych wartości]\n"
+                "C --> D\n"
+                "D --> E[Bierność i Epizod Depresyjny]\n"
+                "style D fill:#660033,stroke:#99004d,color:#fff\n"
+            )
         }
     ],
     "F40.1": [
@@ -58,7 +98,7 @@ slownik_modeli = {
             "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty ze zrzucaniem zachowań zabezpieczających.",
             "Wizualizacja": (
                 "graph TD\n"
-                "A[Sytuacja społeczna] --> B[Zagrożenie społeczne]\n"
+                "A[Sytuacja społeczna] --> B[Zagrożenie społeczzne]\n"
                 "B --> C[Skupienie uwagi na sobie]\n"
                 "C <--> D[Objawy somatyczne i poznawcze]\n"
                 "C <--> E[Zachowania zabezpieczające]\n"
@@ -341,13 +381,13 @@ if menu == "I. Diagnoza i Konceptualizacja":
     kod_icd = pelna_diagnoza.split(" ")[0]
     inne_rozpoznania = st.text_input("Inne rozpoznania (np. somatyczne, psychiatryczne współwystępujące):")
 
-    # WIEDZA EBM I MODELE CBT (ZAKTUALIZOWANA PĘTLA)
+    # WIEDZA EBM I MODELE CBT
     st.divider()
     st.header(f"🧩 Poznawczo-behawioralne modele: {pelna_diagnoza}")
     
     if kod_icd in slownik_modeli:
         modele = slownik_modeli[kod_icd]
-        st.info(f"Znaleziono {len(modele)} kluczowe, oparte na dowodach (EBM) modele CBT dla tego zaburzenia.")
+        st.info(f"Znaleziono {len(modele)} kluczowe, oparte na dowodach (EBM) modele dla tego zaburzenia.")
         
         for dane in modele:
             nazwa_modelu = dane["Model"]
