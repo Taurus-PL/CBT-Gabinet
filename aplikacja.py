@@ -93,7 +93,7 @@ slownik_modeli = {
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
 
-# --- BAZA ASYSTENTA DIAGNOZY (Słownik NLP + Profil CBT + Cele SMART + Protokoły EBM) ---
+# --- BAZA ASYSTENTA DIAGNOZY ---
 baza_symptomow = [
     {
         "slowa_kluczowe": ["serce mi wali", "zaraz umrę", "uduszę się", "brakuje mi tchu", "zawał", "tracę kontrolę", "zwariuję", "kłucie w klatce", "duszno", "miękną mi nogi", "nagle mnie łapie", "atak paniki", "myślałem że to zawał", "nogi z waty", "zaraz zemdleję", "ścisk w gardle", "jakbym był obok siebie", "odrealnienie", "nagle robi mi się słabo", "uderzenie gorąca"], 
@@ -262,7 +262,7 @@ if menu == "I. Diagnoza i Konceptualizacja":
                     st.session_state.wybrany_protokol = "[Wpisz nazwę protokołu, np. Terapia Poznawcza Becka]"
                     st.session_state.uzasadnienie_planu = "1) [Wpisz interwencję nr 1...]\n2) [Wpisz interwencję nr 2...]"
                 
-                # KLUCZOWA ZMIANA: Nadpisujemy interfejs, aby wygenerowany tekst pojawił się na ekranie!
+                # KLUCZOWA ZMIANA: Nadpisujemy interfejs
                 st.session_state.ui_problemy = st.session_state.lista_problemow
                 st.session_state.ui_cele = st.session_state.cele_terapii
                 st.session_state.ui_protokol = st.session_state.wybrany_protokol
@@ -276,38 +276,23 @@ if menu == "I. Diagnoza i Konceptualizacja":
     kod_icd = pelna_diagnoza.split(" ")[0]
     inne_rozpoznania = st.text_input("Inne rozpoznania (np. somatyczne, psychiatryczne współwystępujące):")
 
-    # WIEDZA EBM I ŁĄCZENIE MODELI CBT
+    # WIEDZA EBM I MODELE CBT
     st.divider()
-    st.header("🧩 Modułowe łączenie modeli CBT")
+    st.header(f"🧩 Poznawczo-behawioralne modele: {pelna_diagnoza}")
     
-    lista_wszystkich_modeli = [dane["Model"] for dane in slownik_modeli.values()]
-    kody_do_nazw = {kod: dane["Model"] for kod, dane in slownik_modeli.items()}
-    nazwy_do_kodow = {dane["Model"]: kod for kod, dane in slownik_modeli.items()}
-    
-    kody_sugerowane = set(st.session_state.wykryte_kody)
     if kod_icd in slownik_modeli:
-        kody_sugerowane.add(kod_icd)
+        dane = slownik_modeli[kod_icd]
+        nazwa_modelu = dane["Model"]
         
-    modele_sugerowane = [kody_do_nazw[k] for k in kody_sugerowane if k in kody_do_nazw]
-
-    wybrane_modele = st.multiselect(
-        "Wybierz modele do uwzględnienia w konceptualizacji:",
-        options=list(set(lista_wszystkich_modeli)),
-        default=modele_sugerowane
-    )
-    
-    if wybrane_modele:
-        for nazwa_modelu in wybrane_modele:
-            kod = nazwy_do_kodow[nazwa_modelu]
-            dane = slownik_modeli[kod]
-            
-            st.markdown(f"### 🛠️ {nazwa_modelu}")
-            st.write(f"**Mechanizm:** {dane['Opis']}")
-            st.write(f"**Główne interwencje:** {dane['Interwencje']}")
-            
-            if "Wizualizacja" in dane:
-                with st.expander(f"ZOBACZ SCHEMAT: {nazwa_modelu}"):
-                    st.markdown(f"```mermaid\n{dane['Wizualizacja']}\n```")
+        st.markdown(f"### 🛠️ {nazwa_modelu}")
+        st.write(f"**Mechanizm:** {dane['Opis']}")
+        st.write(f"**Główne interwencje:** {dane['Interwencje']}")
+        
+        if "Wizualizacja" in dane:
+            with st.expander(f"ZOBACZ SCHEMAT: {nazwa_modelu}"):
+                st.markdown(f"```mermaid\n{dane['Wizualizacja']}\n```")
+    else:
+        st.info("Brak szczegółowego modelu CBT w podręcznej bazie dla wybranego rozpoznania. Możesz oprzeć się na ogólnym protokole poznawczo-behawioralnym.")
 
     st.divider()
     st.header("I.3. Konceptualizacja problemu")
