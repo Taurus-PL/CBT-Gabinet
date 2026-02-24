@@ -1,68 +1,62 @@
 import streamlit as st
-import pandas as pd
 
-# Konfiguracja wizualna
-st.set_page_config(page_title="CBT Pro - System Wspomagania Terapii", layout="wide")
+st.set_page_config(page_title="System Wspomagania Terapii CBT", layout="wide")
 
-# STYLIZACJA
-st.markdown("""
-    <style>
-    .main { background-color: #f5f7f9; }
-    .stButton>button { width: 100%; border-radius: 5px; height: 3em; background-color: #007bff; color: white; }
-    </style>
-    """, unsafe_allow_html=True)
+st.sidebar.title("📋 Arkusz Przebiegu Terapii")
+nawigacja = st.sidebar.radio("Przejdź do sekcji:", [
+    "1. Dane i Autorefleksja",
+    "2. Diagnoza i Problemy",
+    "3. Konceptualizacja (ABC)",
+    "4. Przekonania i Historia",
+    "5. Plan i Realizacja Sesji",
+    "6. Podsumowanie Terapii"
+])
 
-# SIDEBAR - NAWIGACJA
-with st.sidebar:
-    st.title("🛡️ CBT Pro v2.0")
-    st.subheader("Moduły Terapeutyczne")
-    opcja = st.radio("Wybierz obszar:", 
-        ["Panel Główny", "Diagnostyka (Skale)", "Protokoły EBM", "Dziennik Pacjenta", "Baza Wiedzy (Pliki)"])
-    st.divider()
-    st.info("Zalogowany jako: Terapeuta (Taurus-PL)")
+# --- SEKCJA 1: DANE I AUTOREFLEKSJA ---
+if nawigacja == "1. Dane i Autorefleksja":
+    st.header("I. Dane pacjenta i autorefleksja terapeuty")
+    col1, col2 = st.columns(2)
+    with col1:
+        pacjent = st.text_input("Pacjent (inicjały/imię)")
+        wiek = st.number_input("Wiek", min_value=0)
+    with col2:
+        st.radio("Płeć", ["K", "M"], horizontal=True)
+        status = st.selectbox("Status terapii", ["w trakcie", "zakończona", "przerwana"])
 
-# --- PANEL GŁÓWNY ---
-if opcja == "Panel Główny":
-    st.title("Witaj w profesjonalnym systemie CBT")
-    st.write("Wybierz moduł z lewej strony, aby rozpocząć sesję.")
+    st.subheader("Autorefleksja przed superwizją")
+    st.text_area("Co jest problemem w pracy z tym pacjentem?")
+    st.checkbox("Czy znam model teoretyczny najlepiej opisujący problem?")
+    st.checkbox("Czy pacjent jest bezpieczny (ryzyko samobójstwa)?")
+
+# --- SEKCJA 3: KONCEPTUALIZACJA ABC ---
+elif nawigacja == "3. Konceptualizacja (ABC)":
+    st.header("I.3. Konceptualizacja - Poziom Pierwszy")
+    st.info("Sytuacja wyzwalająca → Myśli ↔ Emocje ↔ Fizjologia ↔ Zachowanie")
     
-    col1, col2, col3 = st.columns(3)
-    col1.metric("Aktywne Protokoły", "12")
-    col2.metric("Skuteczność (EBM)", "94%")
-    col3.metric("Ostatnia sesja", "Dzisiaj")
-
-# --- PROTOKOŁY EBM ---
-elif opcja == "Protokoły EBM":
-    st.title("📚 Protokoły Potwierdzone Naukowo")
-    zaburzenie = st.selectbox("Wybierz diagnozę:", ["Lęk Paniczny", "Depresja", "OCD", "Lęk Społeczny"])
+    sytuacja = st.text_area("Sytuacja ilustrująca problem (A)")
     
-    if zaburzenie == "Lęk Paniczny":
-        st.header("Model Clarka (1986)")
-        
-        st.write("**Główny cel:** Reatrybucja doznań somatycznych.")
-        st.warning("Skuteczność: Poziom A (najwyższa w badaniach meta-analitycznych).")
-        
-        with st.expander("Zobacz protokół krok po kroku"):
-            st.write("1. Identyfikacja katastroficznych myśli.")
-            st.write("2. Eksperymenty z hiperwentylacją.")
-            st.write("3. Eliminacja zachowań zabezpieczających.")
-
-# --- BAZA WIEDZY (PLIKI) ---
-elif opcja == "Baza Wiedzy (Pliki)":
-    st.title("📂 Twoje Dokumenty i Pliki")
-    uploaded_file = st.file_uploader("Dodaj nowy protokół (PDF/CSV)")
-    if uploaded_file is not None:
-        st.success("Plik gotowy do analizy!")
+    col1, col2 = st.columns(2)
+    with col1:
+        mysli = st.text_area("Automatyczne myśli (B)")
+        emocje = st.text_area("Emocje (C)")
+    with col2:
+        fizjologia = st.text_area("Reakcje fizjologiczne (C)")
+        zachowanie = st.text_area("Zachowania / Strategie zabezpieczające")
     
-    st.subheader("Dostępne materiały:")
-    st.button("📄 Protokół_Depresja_Standard.pdf")
-    st.button("📄 Formularz_ERP_OCD.pdf")
+    st.subheader("Konsekwencje")
+    st.text_area("Wzmocnienia pozytywne i negatywne")
 
-# --- DIAGNOSTYKA ---
-elif opcja == "Diagnostyka (Skale)":
-    st.title("📊 Skale i Pomiar Wyników")
-    st.subheader("Skala GAD-7 (Lęk Uogólniony)")
-    q1 = st.radio("Denerwowanie się lub poczucie napięcia:", [0, 1, 2, 3], horizontal=True)
-    q2 = st.radio("Niemożność zaprzestania martwienia się:", [0, 1, 2, 3], horizontal=True)
-    wynik = q1 + q2
-    st.header(f"Wynik: {wynik} pkt")
+# --- SEKCJA 4: PRZEKONANIA ---
+elif nawigacja == "4. Przekonania i Historia":
+    st.header("Drugi Poziom Konceptualizacji")
+    st.text_area("Przekonania kluczowe (schematy)")
+    st.text_area("Przekonania warunkowe (zasady)")
+    
+    st.subheader("Procesy transdiagnostyczne")
+    st.multiselect("Zidentyfikowane procesy:", 
+                   ["Unikanie poznawcze", "Zamartwianie się", "Ruminacje", "Perfekcjonizm", "Monitorowanie zagrożenia"])
+    
+    st.subheader("Profil rozwojowy")
+    st.text_area("Istotne wydarzenia z przeszłości i ich znaczenie")
+
+# Pozostałe sekcje (Planowanie, Podsumowanie) budujemy analogicznie...
