@@ -41,7 +41,7 @@ slownik_modeli = {
         "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty.",
         "Wizualizacja": (
             "graph TD\n"
-            "A[Sytuacja społeczna] --> B[Zagrożenie społeczniczne]\n"
+            "A[Sytuacja społeczna] --> B[Zagrożenie społeczne]\n"
             "B --> C[Skupienie uwagi na sobie]\n"
             "C <--> D[Objawy somatyczne i poznawcze]\n"
             "C <--> E[Zachowania zabezpieczające]\n"
@@ -165,7 +165,7 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.divider()
     st.header("I.2. Diagnoza kliniczna")
     
-    # DODANO PRZYCISK W ASYSTENCIE
+    # ASYSTENT Z ZACHOWANIEM WSZYSTKICH 3 ELEMENTÓW
     with st.expander("🤖 Asystent Diagnozy (Podpowiedzi i Kryteria)", expanded=True):
         st.write("Wpisz główne objawy pacjenta, a następnie kliknij przycisk poniżej.")
         objawy_input = st.text_area("Zgłaszane problemy (np. smutek, brak energii, lęk przed ludźmi, natrętne myśli):")
@@ -175,8 +175,8 @@ if menu == "I. Diagnoza i Konceptualizacja":
                 znaleziono = False
                 for el in baza_symptomow:
                     if any(slowo in objawy_input.lower() for slowo in el["slowa_kluczowe"]):
-                        st.success(f"**Sugerowana diagnoza:** {el['diagnoza']}")
-                        st.warning(f"**Diagnoza różnicowa:** {el['roznicowa']}")
+                        st.success(f"🎯 **Sugerowana diagnoza:** {el['diagnoza']}")
+                        st.warning(f"⚖️ **Diagnoza różnicowa:** {el['roznicowa']}")
                         st.info(f"📋 **Główne kryteria (ICD-10):**\n\n{el['kryteria']}")
                         znaleziono = True
                 if not znaleziono:
