@@ -1,10 +1,11 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 
 # --- KONFIGURACJA STRONY ---
 st.set_page_config(page_title="Zapis Przebiegu Terapii CBT", layout="wide")
 
-# --- BAZA WIEDZY I DIAGRAMY MERMAID (BEZ POTRÓJNYCH CUDZYSŁOWÓW) ---
+# --- BAZA WIEDZY I DIAGRAMY MERMAID ---
 slownik_modeli = {
     "F41.0": {
         "Model": "Model poznawczy lęku panicznego (D. Clark, 1986)",
@@ -17,7 +18,7 @@ slownik_modeli = {
             "C --> D[Doznania somatyczne np. serce]\n"
             "D --> E{Katastroficzna interpretacja}\n"
             "E -- Błędne koło paniki --> B\n"
-            "style E fill:#ffcccc,stroke:#ff0000,stroke-width:2px,color:#000"
+            "style E fill:#4d0000,stroke:#ff3333,stroke-width:2px,color:#fff\n"
         )
     },
     "F32": {
@@ -29,9 +30,9 @@ slownik_modeli = {
             "A((Negatywne myśli O SOBIE)) <--> B((Negatywne myśli O ŚWIECIE))\n"
             "B <--> C((Negatywne myśli O PRZYSZŁOŚCI))\n"
             "C <--> A\n"
-            "style A fill:#e6f2ff,stroke:#3399ff,color:#000\n"
-            "style B fill:#e6f2ff,stroke:#3399ff,color:#000\n"
-            "style C fill:#e6f2ff,stroke:#3399ff,color:#000"
+            "style A fill:#002b5e,stroke:#3399ff,color:#fff\n"
+            "style B fill:#002b5e,stroke:#3399ff,color:#fff\n"
+            "style C fill:#002b5e,stroke:#3399ff,color:#fff\n"
         )
     },
     "F40.1": {
@@ -45,7 +46,7 @@ slownik_modeli = {
             "C <--> D[Objawy somatyczne i poznawcze]\n"
             "C <--> E[Zachowania zabezpieczające]\n"
             "D <--> E\n"
-            "style C fill:#ffe6cc,stroke:#ff9900,color:#000"
+            "style C fill:#663300,stroke:#ff9900,color:#fff\n"
         )
     },
     "F42": {
@@ -60,7 +61,7 @@ slownik_modeli = {
             "D --> E[Kompulsje i Rytuały]\n"
             "E --> F[Chwilowa ulga]\n"
             "F -. Wzmocnienie .-> B\n"
-            "style C fill:#ffccff,stroke:#cc00cc,color:#000"
+            "style C fill:#4d004d,stroke:#cc00cc,color:#fff\n"
         )
     },
     "F41.1": {
@@ -74,7 +75,7 @@ slownik_modeli = {
             "C --> D[ZAMARTWIANIE SIĘ]\n"
             "D --> E[Negatywne przekonania / Lęk przed martwieniem]\n"
             "D --> F[Nieskuteczne unikanie]\n"
-            "style D fill:#ffffcc,stroke:#cccc00,color:#000"
+            "style D fill:#4d4d00,stroke:#cccc00,color:#fff\n"
         )
     }
 }
@@ -134,11 +135,19 @@ if menu == "1. Metryczka i Diagnoza":
             st.write(f"**Mechanizm podtrzymujący:** {dane['Opis']}")
             st.write(f"**Interwencje:** {dane['Interwencje']}")
             
-            # NATYWNE RENDEROWANIE MERMAID W STREAMLIT
+            # WŁASNY MODUŁ HTML DO RENDEROWANIA (Bez potrójnych cudzysłowów)
             if "Wizualizacja" in dane:
                 st.markdown("### Graficzny schemat mechanizmu:")
-                kod_mermaid = "```mermaid\n" + dane["Wizualizacja"] + "\n```"
-                st.markdown(kod_mermaid)
+                kod_html = (
+                    "<div class='mermaid' style='background-color: transparent; display: flex; justify-content: center;'>"
+                    + dane["Wizualizacja"] +
+                    "</div>"
+                    "<script type='module'>"
+                    "import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';"
+                    "mermaid.initialize({ startOnLoad: true, theme: 'dark' });"
+                    "</script>"
+                )
+                components.html(kod_html, height=450)
         else:
             st.info("💡 Dla wybranego kodu zaleca się stosowanie standardowego modelu poznawczego ABC.")
 
@@ -210,4 +219,3 @@ elif menu == "📂 Archiwum Diagnoz":
             st.write(f"Znaleziono pacjentów dla kodu: **{wybrany_kod}**")
             
         st.dataframe(df, use_container_width=True)
-
