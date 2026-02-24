@@ -1,126 +1,90 @@
 import streamlit as st
+import pandas as pd
 
 # Konfiguracja strony
-st.set_page_config(page_title="Zapis Przebiegu Terapii - System Pro", layout="wide")
+st.set_page_config(page_title="CBT Pro - Baza Terapii", layout="wide")
 
-# --- SŁOWNIK DIAGNOSTYCZNY (ICD-11 / DSM-5) ---
-# Struktura pogrupowana dla ułatwienia nawigacji
+# --- INICJALIZACJA BAZY DANYCH (SESSION STATE) ---
+if 'baza_pacjentow' not in st.session_state:
+    st.session_state.baza_pacjentow = []
+
+# --- PEŁNA LISTA DIAGNOZ ---
 kategorie_diagnoz = {
-    "Zaburzenia lękowe i związane ze strachem": [
-        "6B00 Zaburzenie lękowe uogólnione (GAD)",
-        "6B01 Zaburzenie lękowe z napadami lęku (Lęk paniczny)",
-        "6B02 Specyficzna fobia",
-        "6B03 Zaburzenie lękowe społeczne (Fobia społeczna)",
-        "6B04 Agorafobia",
-        "6B05 Zaburzenie lękowe separacyjne"
-    ],
-    "Zaburzenia nastroju (Afektywne)": [
-        "6A70 Pojedynczy epizod depresyjny",
-        "6A71 Zaburzenie depresyjne nawracające",
-        "6A72 Zaburzenie dystymiczne",
-        "6A60 Zaburzenie afektywne dwubiegunowe typu I",
-        "6A61 Zaburzenie afektywne dwubiegunowe typu II",
-        "6A62 Zaburzenie cyklotymiczne"
-    ],
-    "Zaburzenia obsesyjno-kompulsyjne i pokrewne": [
-        "6B20 Zaburzenie obsesyjno-kompulsyjne (OCD)",
-        "6B21 Zaburzenie dysmorficzne (Body Dysmorphic Disorder)",
-        "6B22 Zaburzenie zbieractwa (Hoarding)",
-        "6B24 Trichotillomania",
-        "6B25 Zaburzenie skubania skóry (Excoriation)"
-    ],
-    "Zaburzenia związane ze stresem": [
-        "6B40 Zaburzenie stresowe pourazowe (PTSD)",
-        "6B41 Złożone zaburzenie stresowe pourazowe (CPTSD)",
-        "6B42 Zaburzenie adaptacyjne",
-        "6B43 Przedłużona reakcja żałoby"
-    ],
-    "Zaburzenia odżywiania i jedzenia": [
-        "6B80 Jadłowstręt psychiczny (Anorexia Nervosa)",
-        "6B81 Żarłoczność psychiczna (Bulimia Nervosa)",
-        "6B82 Zaburzenie z napadami objadania się (Binge Eating)",
-        "6B83 Unikanie/restrykcyjne przyjmowanie pokarmów (ARFID)"
-    ],
-    "Zaburzenia neurorozwojowe": [
-        "6A02 Zaburzenie ze spektrum autyzmu (ASD)",
-        "6A05 Zaburzenie z deficytem uwagi i nadaktywnością (ADHD)",
-        "6A00 Zaburzenia rozwoju intelektualnego",
-        "6A01 Zaburzenia rozwojowe mowy lub języka"
-    ],
-    "Zaburzenia osobowości": [
-        "6D10 Łagodne zaburzenie osobowości",
-        "6D11 Umiarkowane zaburzenie osobowości",
-        "6D11.5 Typ Borderline (Wzorce osobowości)",
-        "DSM-5: Osobowość paranoiczna",
-        "DSM-5: Osobowość narcystyczna",
-        "DSM-5: Osobowość unikająca",
-        "DSM-5: Osobowość zależna",
-        "DSM-5: Osobowość antyspołeczna"
-    ],
-    "Zaburzenia psychotyczne": [
-        "6A20 Schizofrenia",
-        "6A21 Zaburzenie schizoafektywne",
-        "6A23 Zaburzenie urojeniowe"
-    ]
+    "Zaburzenia lękowe (6B00-6B05)": ["6B00 GAD", "6B01 Panika", "6B03 Lęk społeczny", "6B04 Agorafobia"],
+    "Zaburzenia nastroju (6A70-6A8Z)": ["6A70 Depresja (epizod)", "6A71 Depresja nawracająca", "6A72 Dystymia", "6A60 ChAD"],
+    "Stres i Trauma (6B40-6B4Z)": ["6B40 PTSD", "6B41 CPTSD", "6B42 Zaburzenia adaptacyjne"],
+    "Obsesyjno-kompulsyjne (6B20-6B2Z)": ["6B20 OCD", "6B21 Dysmorfofobia", "6B22 Zbieractwo"],
+    "Osobowość (6D10-6D11)": ["6D11.5 Borderline", "Anankastyczna", "Unikająca", "Zależna", "Narcystyczna"],
+    "Odżywianie (6B80-6B8Z)": ["6B80 Anoreksja", "6B81 Bulimia", "6B82 Napadowe objadanie się"]
 }
 
-# --- INTERFEJS ---
-st.title("ZAPIS PRZEBIEGU TERAPII 2021 – FORMULARZ")
-st.caption("Zgodny z arkuszem A. Popiel i E. Pragłowskiej")
-
+# --- MENU BOCZNE ---
 with st.sidebar:
-    sekcja = st.radio("Sekcje arkusza:", [
-        "Metryczka", "I.1. Diagnoza", "I.2. Problemy", "I.3. Konceptualizacja", "II. Plan", "III. Ewaluacja"
-    ])
-
-if sekcja == "Metryczka":
-    st.header("Metryczka i Autorefleksja")
-    st.text_input("Terapeuta")
-    st.text_input("Pacjent")
-    st.checkbox("Czy pacjent jest bezpieczny?")
-    st.text_area("Moje własne ABC (terapeuty)")
-
-elif sekcja == "I.1. Diagnoza":
-    st.header("I.1. Ogólna diagnoza kliniczna")
-    st.text_area("Zgłaszane problemy i wywiad")
-    st.text_area("Opis badania stanu psychicznego")
-    
-    st.subheader("Wybór diagnozy (ICD-11 / DSM-5)")
-    
-    # KROK 1: Wybór kategorii
-    kat = st.selectbox("Wybierz grupę zaburzeń:", [""] + list(kategorie_diagnoz.keys()))
-    
-    # KROK 2: Wybór konkretnego zaburzenia
-    if kat:
-        diagnoza = st.selectbox("Wybierz jednostkę statystyczną:", kategorie_diagnoz[kat])
-        st.success(f"Wybrano: {diagnoza}")
-    
-    st.multiselect("Zaburzenia współwystępujące:", 
-                  [item for sublist in kategorie_diagnoz.values() for item in sublist])
-    
-    st.text_input("Inna diagnoza / Kod spoza listy:")
-    st.text_input("Choroby somatyczne")
-
-    st.subheader("Opis funkcjonowania")
-    st.text_area("Sfera rodzinna")
-    st.text_area("Sfera zawodowa/szkolna")
-    st.text_area("Sfera społeczna")
-
-elif sekcja == "I.3. Konceptualizacja":
-    st.header("I.3. Konceptualizacja")
-    
-    st.subheader("Poziom I (ABC)")
-    col1, col2 = st.columns(2)
-    with col1:
-        st.text_area("A - Wyzwalacz")
-        st.text_area("B - Myśli")
-    with col2:
-        st.text_area("C - Emocje/Fizjologia")
-        st.text_area("C - Zachowanie")
-    
+    st.title("🛡️ CBT System Pro")
+    menu = st.radio("Nawigacja:", ["Nowa Karta Terapii", "Archiwum i Filtrowanie"])
     st.divider()
-    st.subheader("Poziom II")
-    st.text_area("Przekonania kluczowe")
-    st.text_area("Historia uczenia się")
+    if st.button("Wyczyść sesję (Reset)"):
+        st.session_state.baza_pacjentow = []
+        st.rerun()
 
-# --- RESZTA KODU ANALOGICZNIE ---
+# --- MODUŁ 1: NOWA KARTA TERAPII ---
+if menu == "Nowa Karta Terapii":
+    st.header("📝 Nowy Arkusz Przebiegu Terapii")
+    
+    with st.expander("Metryczka i Diagnoza", expanded=True):
+        col1, col2 = st.columns(2)
+        with col1:
+            imie = st.text_input("Pacjent (inicjały)")
+            wiek = st.number_input("Wiek", min_value=0)
+        with col2:
+            kat = st.selectbox("Grupa diagnostyczna", [""] + list(kategorie_diagnoz.keys()))
+            diag = st.selectbox("Diagnoza główna (ICD-11/DSM-5)", kategorie_diagnoz[kat] if kat else [])
+    
+    with st.expander("Konceptualizacja i Przebieg"):
+        abc_mysli = st.text_area("B - Myśli automatyczne")
+        abc_zachowanie = st.text_area("C - Zachowanie")
+        plan = st.text_area("Planowane interwencje (EBM)")
+
+    if st.button("✅ ZAPISZ DO BAZY"):
+        nowy_pacjent = {
+            "Pacjent": imie,
+            "Wiek": wiek,
+            "Diagnoza": diag,
+            "Grupa": kat,
+            "Myśli": abc_mysli,
+            "Zachowanie": abc_zachowanie,
+            "Plan": plan
+        }
+        st.session_state.baza_pacjentow.append(nowy_pacjent)
+        st.success(f"Pomyślnie zapisano pacjenta {imie} w grupie {diag}!")
+
+# --- MODUŁ 2: ARCHIWUM I FILTROWANIE ---
+elif menu == "Archiwum i Filtrowanie":
+    st.header("📂 Archiwum Prowadzonych Terapii")
+    
+    if not st.session_state.baza_pacjentow:
+        st.info("Baza jest pusta. Dodaj pierwszego pacjenta w zakładce 'Nowa Karta Terapii'.")
+    else:
+        # Filtrowanie
+        st.subheader("🔍 Filtruj według diagnozy")
+        wszystkie_diagnozy = list(set([p['Diagnoza'] for p in st.session_state.baza_pacjentow]))
+        wybrany_filtr = st.selectbox("Wybierz jednostkę chorobową, aby zobaczyć historię leczenia:", ["Wszystkie"] + wszystkie_diagnozy)
+        
+        # Przygotowanie danych do tabeli
+        df = pd.DataFrame(st.session_state.baza_pacjentow)
+        
+        if wybrany_filtr != "Wszystkie":
+            df = df[df['Diagnoza'] == wybrany_filtr]
+            st.write(f"Wyświetlasz pacjentów z rozpoznaniem: **{wybrany_filtr}**")
+        
+        # Wyświetlanie tabeli
+        st.dataframe(df, use_container_width=True)
+        
+        # Szczegółowy podgląd
+        st.divider()
+        st.subheader("📄 Podgląd szczegółowy")
+        for i, p in df.iterrows():
+            with st.expander(f"Pacjent: {p['Pacjent']} | Diagnoza: {p['Diagnoza']}"):
+                st.write(f"**Wiek:** {p['Wiek']}")
+                st.write(f"**Konceptualizacja (Myśli):** {p['Myśli']}")
+                st.write(f"**Interwencje:** {p['Plan']}")
