@@ -40,7 +40,7 @@ slownik_modeli = {
         "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty.",
         "Wizualizacja": (
             "graph TD\n"
-            "A[Sytuacja społeczna] --> B[Zagrożenie społeczzne]\n"
+            "A[Sytuacja społeczna] --> B[Zagrożenie społeczne]\n"
             "B --> C[Skupienie uwagi na sobie]\n"
             "C <--> D[Objawy somatyczne i poznawcze]\n"
             "C <--> E[Zachowania zabezpieczające]\n"
@@ -138,7 +138,7 @@ baza_symptomow = [
         "cbt_problemy": "LĘK UOGÓLNIONY (ZAMARTWIANIE SIĘ):\n- Poznawcze: Chroniczne zamartwianie się ('a co jeśli...'), nietolerancja niepewności, tworzenie czarnych scenariuszy, dodatnie i ujemne przekonania o martwieniu się.\n- Emocjonalne: Wolnopłynący lęk, chroniczne poczucie niepokoju, drażliwość.\n- Fizjologiczne: Uporczywe napięcie mięśniowe (np. bóle karku), uczucie 'bycia na krawędzi', ścisk w żołądku, trudności z koncentracją i snem.\n- Behawioralne: Nadmierne poszukiwanie informacji/zapewnień, overplanning (przesadne planowanie w celu redukcji niepewności), unikanie delegowania zadań innym.",
         "cele_smart": "1. Ograniczenie martwienia się do wyznaczonego „czasu na martwienie” (max 20 minut dziennie o stałej porze) przy użyciu techniki odraczania.\n2. Zmniejszenie uśrednionego poziomu napięcia wolnopłynącego z 8/10 do 4/10 w skali tygodnia poprzez trening relaksacji mięśniowej (PMR).\n3. Rezygnacja z pytania bliskich o zdanie (poszukiwanie upewnień) przy podejmowaniu 3 codziennych, drobnych decyzji w tygodniu.",
         "protokol_nazwa": "Protokół Nietolerancji Niepewności (M. Dugas) / Terapia Metapoznawcza (MCT) A. Wellsa",
-        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Trening odraczania martwienia się w celu odzyskania poczucia kontroli nad tym procesem.\n2) Restrukturyzację poznawczą metaprzekonań na temat martwienia się (zarówno dodatnich, np. 'martwienie mnie chroni', jak i ujemnych, np. 'od tego zwariuję').\n3) Ekspozycję wyobrażeniowej na najgorsze scenariusze (rozwijanie skryptów) oraz trening rozwiązywania realnych problemów."
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Trening odraczania martwienia się w celu odzyskania poczucia kontroli nad tym procesem.\n2) Restrukturyzację poznawczą metaprzekonań na temat martwienia się (zarówno dodatnich, np. 'martwienie mnie chroni', jak i ujemnych, np. 'od tego zwariuję').\n3) Ekspozycję wyobrażeniową na najgorsze scenariusze (rozwijanie skryptów) oraz trening rozwiązywania realnych problemów."
     },
     {
         "slowa_kluczowe": ["ciągle mi się to śni", "wspomnienia wracają", "mam przed oczami", "unikam miejsc", "budzę się z krzykiem", "odkąd zdarzył się ten wypadek", "flashbacki", "czuję jakby to działo się znowu", "od tamtej pory", "trauma", "wraca jak bumerang", "koszmary z tamtego", "wystarczy jeden dźwięk", "ciągle na krawędzi", "unikam wszystkiego co", "nie czuję się już bezpiecznie", "odrętwienie", "czuję że to znowu się dzieje"], 
@@ -285,7 +285,6 @@ if menu == "I. Diagnoza i Konceptualizacja":
             
             if "Wizualizacja" in dane:
                 with st.expander(f"ZOBACZ SCHEMAT: {nazwa_modelu}"):
-                    # Poprawione renderowanie schematów (natywne wsparcie Streamlit)
                     st.markdown(f"```mermaid\n{dane['Wizualizacja']}\n```")
 
     st.divider()
@@ -294,6 +293,10 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.subheader("I.3.1. Lista problemów i cele terapii")
     st.text_area("Lista problemów (w ujęciu poznawczo-behawioralnym)", key="lista_problemow", height=250)
     st.text_area("Cele terapii (zoperacjonalizowane, mierzalne, SMART)", key="cele_terapii", height=150)
+
+    # NOWOŚĆ: Wyświetlanie sugerowanego protokołu od razu pod celami!
+    if st.session_state.wybrany_protokol:
+        st.success(f"📚 **Sugerowany protokół leczenia w oparciu o który będzie prowadzona praca nad realizacją celów:**\n\n**{st.session_state.wybrany_protokol}**\n\n*(Pełne uzasadnienie i plan interwencji zostały automatycznie przeniesione do zakładki 'II. Plan i Interwencje' w menu bocznym).*")
 
     st.subheader("I.3.2. Poziom pierwszy (Sytuacja bieżąca - przekrój poprzeczny)")
     st.text_area("Sytuacja (typowa sytuacja ilustrująca problem)")
