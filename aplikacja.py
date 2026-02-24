@@ -210,3 +210,4 @@ elif menu == "📂 Archiwum Diagnoz":
             st.write(f"Znaleziono pacjentów dla kodu: **{wybrany_kod}**")
             
         st.dataframe(df, use_container_width=True)
+
