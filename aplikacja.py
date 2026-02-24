@@ -138,7 +138,7 @@ baza_symptomow = [
         "cbt_problemy": "LĘK UOGÓLNIONY (ZAMARTWIANIE SIĘ):\n- Poznawcze: Chroniczne zamartwianie się ('a co jeśli...'), nietolerancja niepewności, tworzenie czarnych scenariuszy, dodatnie i ujemne przekonania o martwieniu się.\n- Emocjonalne: Wolnopłynący lęk, chroniczne poczucie niepokoju, drażliwość.\n- Fizjologiczne: Uporczywe napięcie mięśniowe (np. bóle karku), uczucie 'bycia na krawędzi', ścisk w żołądku, trudności z koncentracją i snem.\n- Behawioralne: Nadmierne poszukiwanie informacji/zapewnień, overplanning (przesadne planowanie w celu redukcji niepewności), unikanie delegowania zadań innym.",
         "cele_smart": "1. Ograniczenie martwienia się do wyznaczonego „czasu na martwienie” (max 20 minut dziennie o stałej porze) przy użyciu techniki odraczania.\n2. Zmniejszenie uśrednionego poziomu napięcia wolnopłynącego z 8/10 do 4/10 w skali tygodnia poprzez trening relaksacji mięśniowej (PMR).\n3. Rezygnacja z pytania bliskich o zdanie (poszukiwanie upewnień) przy podejmowaniu 3 codziennych, drobnych decyzji w tygodniu.",
         "protokol_nazwa": "Protokół Nietolerancji Niepewności (M. Dugas) / Terapia Metapoznawcza (MCT) A. Wellsa",
-        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Trening odraczania martwienia się w celu odzyskania poczucia kontroli nad tym procesem.\n2) Restrukturyzację poznawczą metaprzekonań na temat martwienia się (zarówno dodatnich, np. 'martwienie mnie chroni', jak i ujemnych, np. 'od tego zwariuję').\n3) Ekspozycję wyobrażeniową na najgorsze scenariusze (rozwijanie skryptów) oraz trening rozwiązywania realnych problemów."
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Trening odraczania martwienia się w celu odzyskania poczucia kontroli nad tym procesem.\n2) Restrukturyzację poznawczą metaprzekonań na temat martwienia się (zarówno dodatnich, np. 'martwienie mnie chroni', jak i ujemnych, np. 'od tego zwariuję').\n3) Ekspozycję wyobrażeniowej na najgorsze scenariusze (rozwijanie skryptów) oraz trening rozwiązywania realnych problemów."
     },
     {
         "slowa_kluczowe": ["ciągle mi się to śni", "wspomnienia wracają", "mam przed oczami", "unikam miejsc", "budzę się z krzykiem", "odkąd zdarzył się ten wypadek", "flashbacki", "czuję jakby to działo się znowu", "od tamtej pory", "trauma", "wraca jak bumerang", "koszmary z tamtego", "wystarczy jeden dźwięk", "ciągle na krawędzi", "unikam wszystkiego co", "nie czuję się już bezpiecznie", "odrętwienie", "czuję że to znowu się dzieje"], 
@@ -176,6 +176,12 @@ if 'uzasadnienie_planu' not in st.session_state:
     st.session_state.uzasadnienie_planu = ""
 if 'wykryte_kody' not in st.session_state:
     st.session_state.wykryte_kody = []
+
+# --- FUNKCJE SYNCHRONIZUJĄCE INTERFEJS Z PAMIĘCIĄ ---
+def sync_problemy(): st.session_state.lista_problemow = st.session_state.ui_problemy
+def sync_cele(): st.session_state.cele_terapii = st.session_state.ui_cele
+def sync_protokol(): st.session_state.wybrany_protokol = st.session_state.ui_protokol
+def sync_uzasadnienie(): st.session_state.uzasadnienie_planu = st.session_state.ui_uzasadnienie
 
 # --- MENU BOCZNE ---
 st.sidebar.title("🛡️ Zapis Terapii CBT")
@@ -291,10 +297,21 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.header("I.3. Konceptualizacja problemu")
     
     st.subheader("I.3.1. Lista problemów i cele terapii")
-    st.text_area("Lista problemów (w ujęciu poznawczo-behawioralnym)", key="lista_problemow", height=250)
-    st.text_area("Cele terapii (zoperacjonalizowane, mierzalne, SMART)", key="cele_terapii", height=150)
+    st.text_area(
+        "Lista problemów (w ujęciu poznawczo-behawioralnym)", 
+        value=st.session_state.lista_problemow, 
+        key="ui_problemy", 
+        on_change=sync_problemy, 
+        height=250
+    )
+    st.text_area(
+        "Cele terapii (zoperacjonalizowane, mierzalne, SMART)", 
+        value=st.session_state.cele_terapii, 
+        key="ui_cele", 
+        on_change=sync_cele, 
+        height=150
+    )
 
-    # NOWOŚĆ: Wyświetlanie sugerowanego protokołu od razu pod celami!
     if st.session_state.wybrany_protokol:
         st.success(f"📚 **Sugerowany protokół leczenia w oparciu o który będzie prowadzona praca nad realizacją celów:**\n\n**{st.session_state.wybrany_protokol}**\n\n*(Pełne uzasadnienie i plan interwencji zostały automatycznie przeniesione do zakładki 'II. Plan i Interwencje' w menu bocznym).*")
 
@@ -335,12 +352,16 @@ elif menu == "II. Plan i Interwencje":
     
     st.text_input(
         "Sugerowany protokół oparty na dowodach naukowych (EBM) do pracy nad realizacją celów:", 
-        key="wybrany_protokol"
+        value=st.session_state.wybrany_protokol,
+        key="ui_protokol",
+        on_change=sync_protokol
     )
     
     st.text_area(
         "Uzasadnienie poznawczo-behawioralne (w jaki sposób wybrane interwencje zrealizują postawione cele):", 
-        key="uzasadnienie_planu", 
+        value=st.session_state.uzasadnienie_planu, 
+        key="ui_uzasadnienie",
+        on_change=sync_uzasadnienie,
         height=150
     )
     
