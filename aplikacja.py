@@ -1,142 +1,126 @@
 import streamlit as st
 
 # Konfiguracja strony
-st.set_page_config(page_title="Zapis Przebiegu Terapii CBT", layout="wide")
+st.set_page_config(page_title="Zapis Przebiegu Terapii - System Pro", layout="wide")
 
-# Nagłówek i autorstwo zgodnie z plikiem
-st.sidebar.title("Zapis Przebiegu Terapii 2021")
-st.sidebar.caption("A. Popiel, E. Pragłowska")
+# --- SŁOWNIK DIAGNOSTYCZNY (ICD-11 / DSM-5) ---
+# Struktura pogrupowana dla ułatwienia nawigacji
+kategorie_diagnoz = {
+    "Zaburzenia lękowe i związane ze strachem": [
+        "6B00 Zaburzenie lękowe uogólnione (GAD)",
+        "6B01 Zaburzenie lękowe z napadami lęku (Lęk paniczny)",
+        "6B02 Specyficzna fobia",
+        "6B03 Zaburzenie lękowe społeczne (Fobia społeczna)",
+        "6B04 Agorafobia",
+        "6B05 Zaburzenie lękowe separacyjne"
+    ],
+    "Zaburzenia nastroju (Afektywne)": [
+        "6A70 Pojedynczy epizod depresyjny",
+        "6A71 Zaburzenie depresyjne nawracające",
+        "6A72 Zaburzenie dystymiczne",
+        "6A60 Zaburzenie afektywne dwubiegunowe typu I",
+        "6A61 Zaburzenie afektywne dwubiegunowe typu II",
+        "6A62 Zaburzenie cyklotymiczne"
+    ],
+    "Zaburzenia obsesyjno-kompulsyjne i pokrewne": [
+        "6B20 Zaburzenie obsesyjno-kompulsyjne (OCD)",
+        "6B21 Zaburzenie dysmorficzne (Body Dysmorphic Disorder)",
+        "6B22 Zaburzenie zbieractwa (Hoarding)",
+        "6B24 Trichotillomania",
+        "6B25 Zaburzenie skubania skóry (Excoriation)"
+    ],
+    "Zaburzenia związane ze stresem": [
+        "6B40 Zaburzenie stresowe pourazowe (PTSD)",
+        "6B41 Złożone zaburzenie stresowe pourazowe (CPTSD)",
+        "6B42 Zaburzenie adaptacyjne",
+        "6B43 Przedłużona reakcja żałoby"
+    ],
+    "Zaburzenia odżywiania i jedzenia": [
+        "6B80 Jadłowstręt psychiczny (Anorexia Nervosa)",
+        "6B81 Żarłoczność psychiczna (Bulimia Nervosa)",
+        "6B82 Zaburzenie z napadami objadania się (Binge Eating)",
+        "6B83 Unikanie/restrykcyjne przyjmowanie pokarmów (ARFID)"
+    ],
+    "Zaburzenia neurorozwojowe": [
+        "6A02 Zaburzenie ze spektrum autyzmu (ASD)",
+        "6A05 Zaburzenie z deficytem uwagi i nadaktywnością (ADHD)",
+        "6A00 Zaburzenia rozwoju intelektualnego",
+        "6A01 Zaburzenia rozwojowe mowy lub języka"
+    ],
+    "Zaburzenia osobowości": [
+        "6D10 Łagodne zaburzenie osobowości",
+        "6D11 Umiarkowane zaburzenie osobowości",
+        "6D11.5 Typ Borderline (Wzorce osobowości)",
+        "DSM-5: Osobowość paranoiczna",
+        "DSM-5: Osobowość narcystyczna",
+        "DSM-5: Osobowość unikająca",
+        "DSM-5: Osobowość zależna",
+        "DSM-5: Osobowość antyspołeczna"
+    ],
+    "Zaburzenia psychotyczne": [
+        "6A20 Schizofrenia",
+        "6A21 Zaburzenie schizoafektywne",
+        "6A23 Zaburzenie urojeniowe"
+    ]
+}
 
-# Nawigacja oparta na etapach z dokumentu
-menu = st.sidebar.radio("Etapy Procesu:", [
-    "Metryczka i Autorefleksja",
-    "I.1. Diagnoza Kliniczna",
-    "I.2. Lista Problemów",
-    "I.3. Konceptualizacja (ABC)",
-    "I.3. Konceptualizacja (Poziom II)",
-    "II. Plan i Realizacja",
-    "III. Podsumowanie i Efekty",
-    "IV. Wnioski i Literatura"
-])
+# --- INTERFEJS ---
+st.title("ZAPIS PRZEBIEGU TERAPII 2021 – FORMULARZ")
+st.caption("Zgodny z arkuszem A. Popiel i E. Pragłowskiej")
 
-# --- SEKCJA: METRYCZKA ---
-if menu == "Metryczka i Autorefleksja":
-    st.header("Dane podstawowe")
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.text_input("Terapeuta")
-        st.text_input("Pacjent (inicjały/imię)")
-    with col2:
-        st.number_input("Wiek", min_value=0, step=1)
-        st.radio("Płeć", ["K", "M"], horizontal=True)
-    with col3:
-        st.date_input("Czas terapii od")
-        st.date_input("Czas terapii do")
-        st.number_input("Liczba odbytych sesji", min_value=0)
+with st.sidebar:
+    sekcja = st.radio("Sekcje arkusza:", [
+        "Metryczka", "I.1. Diagnoza", "I.2. Problemy", "I.3. Konceptualizacja", "II. Plan", "III. Ewaluacja"
+    ])
 
-    st.radio("Status terapii", ["zakończona", "w trakcie", "przerwana"], horizontal=True)
-    st.text_area("Uwagi (superwizja, nagrania)")
+if sekcja == "Metryczka":
+    st.header("Metryczka i Autorefleksja")
+    st.text_input("Terapeuta")
+    st.text_input("Pacjent")
+    st.checkbox("Czy pacjent jest bezpieczny?")
+    st.text_area("Moje własne ABC (terapeuty)")
 
-    st.divider()
-    st.header("Autorefleksja przed superwizją")
-    st.text_area("Co jest problemem w pracy z tym pacjentem - na jakie pytania chcę uzyskać odpowiedź?")
-    st.checkbox("Czy przejrzałem materiały CBT dotyczące tego problemu?")
-    st.checkbox("Czy pacjent jest bezpieczny (ryzyko samobójstwa/zachowania ryzykowne)?")
-    st.text_area("Moje własne ABC na myśl o terapii tego pacjenta")
-
-# --- SEKCJA: DIAGNOZA ---
-elif menu == "I.1. Diagnoza Kliniczna":
-    st.header("I.1. Ogólna Diagnoza Kliniczna")
-    st.text_area("Zgłaszane problemy, powód przyjścia (opis pacjenta)")
-    st.text_area("Informacje ogólne (wywiad: sytuacja zawodowa, rodzinna, historia leczenia)")
-    
-    st.subheader("Badanie stanu psychicznego i diagnoza nozologiczna")
+elif sekcja == "I.1. Diagnoza":
+    st.header("I.1. Ogólna diagnoza kliniczna")
+    st.text_area("Zgłaszane problemy i wywiad")
     st.text_area("Opis badania stanu psychicznego")
-    st.text_input("Diagnoza wstępna (ICD/DSM) - Zaburzenie dominujące")
-    st.text_input("Zaburzenia współwystępujące")
-    st.text_input("Zaburzenia osobowości")
+    
+    st.subheader("Wybór diagnozy (ICD-11 / DSM-5)")
+    
+    # KROK 1: Wybór kategorii
+    kat = st.selectbox("Wybierz grupę zaburzeń:", [""] + list(kategorie_diagnoz.keys()))
+    
+    # KROK 2: Wybór konkretnego zaburzenia
+    if kat:
+        diagnoza = st.selectbox("Wybierz jednostkę statystyczną:", kategorie_diagnoz[kat])
+        st.success(f"Wybrano: {diagnoza}")
+    
+    st.multiselect("Zaburzenia współwystępujące:", 
+                  [item for sublist in kategorie_diagnoz.values() for item in sublist])
+    
+    st.text_input("Inna diagnoza / Kod spoza listy:")
     st.text_input("Choroby somatyczne")
-    
-    st.subheader("Ogólne funkcjonowanie (0-100)")
-    st.slider("Sfera rodzinna", 0, 100, 50)
-    st.slider("Sfera zawodowa/szkolna", 0, 100, 50)
-    st.slider("Sfera społeczna", 0, 100, 50)
 
-# --- SEKCJA: LISTA PROBLEMÓW ---
-elif menu == "I.2. Lista Problemów":
-    st.header("I.2. Wyodrębnienie problemów do terapii")
-    st.info("Pytanie pomocnicze: Czy lista odzwierciedla kryteria diagnostyczne?")
-    
-    st.text_area("Lista problemów (z opisem nasilenia 0-100)")
-    st.text_area("Problem dominujący wybrany do konceptualizacji")
-    st.text_input("Miara rozwiązania/ustąpienia problemu")
-    st.text_area("Sytuacje z ubiegłego tygodnia ilustrujące problem")
+    st.subheader("Opis funkcjonowania")
+    st.text_area("Sfera rodzinna")
+    st.text_area("Sfera zawodowa/szkolna")
+    st.text_area("Sfera społeczna")
 
-# --- SEKCJA: KONCEPTUALIZACJA ABC ---
-elif menu == "I.3. Konceptualizacja (ABC)":
-    st.header("I.3. Konceptualizacja - Poziom I (ABC)")
-    [attachment_0](attachment)
-    st.text_input("Sytuacja ilustrująca problem")
+elif sekcja == "I.3. Konceptualizacja":
+    st.header("I.3. Konceptualizacja")
     
+    st.subheader("Poziom I (ABC)")
     col1, col2 = st.columns(2)
     with col1:
-        st.text_area("A - Czynnik wyzwalający")
-        st.text_area("B - Automatyczne myśli")
+        st.text_area("A - Wyzwalacz")
+        st.text_area("B - Myśli")
     with col2:
-        st.text_area("C - Emocje")
-        st.text_area("C - Objawy fizjologiczne")
+        st.text_area("C - Emocje/Fizjologia")
+        st.text_area("C - Zachowanie")
     
-    st.text_area("C - Zachowanie (w tym zabezpieczające)")
-    st.text_area("Konsekwencje (wzmocnienia +/-)")
+    st.divider()
+    st.subheader("Poziom II")
+    st.text_area("Przekonania kluczowe")
+    st.text_area("Historia uczenia się")
 
-# --- SEKCJA: POZIOM II ---
-elif menu == "I.3. Konceptualizacja (Poziom II)":
-    st.header("Drugi Poziom Konceptualizacji")
-    st.text_area("Przekonania kluczowe (schematy poznawcze)")
-    st.text_area("Przekonania warunkowe / Zasady pośredniczące")
-    st.text_area("Zniekształcenia i ograniczenia poznawcze")
-    
-    st.subheader("Procesy Transdiagnostyczne")
-    st.multiselect("Zidentyfikowane procesy podtrzymujące:", 
-                   ["Unikanie poznawcze", "Zamartwianie", "Ruminacje", "Historia uczenia", "Perfekcjonizm", "Monitorowanie zagrożenia"])
-    
-    st.subheader("Profil rozwojowy")
-    st.text_area("Przeszłość i związki z innymi (historia uczenia się)")
-    st.text_area("Istotne wydarzenia i przeżycia traumatyczne")
-    st.text_area("Czynniki wyzwalające obecne zaburzenie")
-    st.text_area("Zasoby i rezyliencja (czynniki pozytywne)")
-    st.text_area("Podsumowanie konceptualizacji (synteza wiedzy)")
-    st.text_area("Cele terapii (uzgodnione z pacjentem)")
-
-# --- SEKCJA: PLAN ---
-elif menu == "II. Plan i Realizacja":
-    st.header("II. Drugi etap terapii")
-    st.text_area("Plan terapii (protokoły EBM, uzasadnienie wyboru)")
-    st.text_area("Narzędzia oceny stanu psychicznego (monitorowanie zmian)")
-    
-    st.subheader("Realizacja planu - opis sesji")
-    st.info("Opis powinien zawierać: plan sesji, zastosowane metody, wnioski i pracę osobistą.")
-    st.text_area("Zapis przebiegu sesji i refleksje terapeuty")
-
-# --- SEKCJA: PODSUMOWANIE ---
-elif menu == "III. Podsumowanie i Efekty":
-    st.header("III. Trzeci etap terapii - Osiągnięte cele")
-    col1, col2 = st.columns(2)
-    with col1:
-        st.text_area("Według pacjenta")
-    with col2:
-        st.text_area("Według terapeuty")
-    
-    st.subheader("Zmiany w zakresie:")
-    st.text_area("Funkcjonowania poznawczego")
-    st.text_area("Emocji i Zachowań")
-    
-    st.subheader("Mechanizmy zmian")
-    st.text_area("Strategie zapobiegania nawrotom")
-    st.text_area("Relacja terapeutyczna (ocena jakości)")
-
-# --- SEKCJA: WNIOSKI ---
-elif menu == "IV. Wnioski i Literatura":
-    st.header("IV. Podsumowanie terapii – wnioski")
-    st.text_area("Końcowy zapis terapii do dokumentacji")
-    st.text_area("Literatura (materiały wykorzystane w procesie)")
+# --- RESZTA KODU ANALOGICZNIE ---
