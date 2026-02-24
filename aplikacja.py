@@ -81,14 +81,44 @@ slownik_modeli = {
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
 
-# --- BAZA ASYSTENTA DIAGNOZY ---
+# --- BAZA ASYSTENTA DIAGNOZY (Rozszerzona o kryteria) ---
 baza_symptomow = [
-    {"slowa_kluczowe": ["lęk", "panika", "serce", "duszność", "umieranie", "zawał", "atak"], "diagnoza": "F41.0 Zaburzenie lękowe z napadami lęku", "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne, Nadczynność tarczycy."},
-    {"slowa_kluczowe": ["smutek", "brak energii", "płacz", "bezsenność", "myśli samobójcze", "beznadzieja", "brak apetytu", "anhedonia", "depresja"], "diagnoza": "F32 Epizod depresyjny / F33 Zaburzenia depresyjne nawracające", "roznicowa": "ChAD - epizod depresyjny (F31), Dystymia (F34.1), Niedoczynność tarczycy."},
-    {"slowa_kluczowe": ["natrętne myśli", "rytuały", "sprawdzanie", "mycie", "liczenie", "obsesje", "kompulsje"], "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", "roznicowa": "Osobowość anankastyczna (F60.5), Schizofrenia (F20), Tiki (F95)."},
-    {"slowa_kluczowe": ["lęk przed oceną", "wystąpienia publiczne", "czerwienienie się", "kompromitacja", "wstyd", "wzrok innych"], "diagnoza": "F40.1 Fobie społeczne", "roznicowa": "Osobowość unikająca (F60.6), Agorafobia (F40.0)."},
-    {"slowa_kluczowe": ["zamartwianie się", "napięcie mięśniowe", "niepokój", "przyszłość", "niepewność", "ciągły lęk"], "diagnoza": "F41.1 Zaburzenie lękowe uogólnione (GAD)", "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1), Hipochondria (F45.2)."},
-    {"slowa_kluczowe": ["wypadek", "trauma", "koszmary", "flashback", "unikanie", "stres", "uraz"], "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)", "roznicowa": "Ostra reakcja na stres (F43.0), Zaburzenia adaptacyjne (F43.2)."}
+    {
+        "slowa_kluczowe": ["lęk", "panika", "serce", "duszność", "umieranie", "zawał", "atak"], 
+        "diagnoza": "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)", 
+        "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne, Nadczynność tarczycy.",
+        "kryteria": "• Nawracające, nieprzewidywalne napady paniki (niezwiązane z konkretną sytuacją).\n• Nagły początek i osiągnięcie maksimum w kilka minut.\n• Min. 4 objawy somatyczne/poznawcze (np. kołatanie serca, duszność, pocenie się, obawa przed śmiercią lub utratą kontroli)."
+    },
+    {
+        "slowa_kluczowe": ["smutek", "brak energii", "płacz", "bezsenność", "myśli samobójcze", "beznadzieja", "brak apetytu", "anhedonia", "depresja"], 
+        "diagnoza": "F32 Epizod depresyjny / F33 Zaburzenia depresyjne nawracające", 
+        "roznicowa": "ChAD - epizod depresyjny (F31), Dystymia (F34.1), Niedoczynność tarczycy.",
+        "kryteria": "• Trwanie objawów min. 2 tygodnie.\n• Przynajmniej 2 z 3 objawów podstawowych: obniżony nastrój, utrata zainteresowań (anhedonia), spadek energii/zwiększona męczliwość.\n• Objawy dodatkowe (np. zaburzenia snu, apetytu, poczucie winy, myśli samobójcze)."
+    },
+    {
+        "slowa_kluczowe": ["natrętne myśli", "rytuały", "sprawdzanie", "mycie", "liczenie", "obsesje", "kompulsje"], 
+        "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", 
+        "roznicowa": "Osobowość anankastyczna (F60.5), Schizofrenia (F20), Tiki (F95).",
+        "kryteria": "• Obsesje (myśli) i/lub kompulsje (czynności) obecne przez większość dni przez min. 2 kolejne tygodnie.\n• Są one źródłem cierpienia i zaburzają funkcjonowanie.\n• Pacjent uznaje je za własne (nie narzucone z zewnątrz), ale uważa za przesadne i próbuje się im opierać."
+    },
+    {
+        "slowa_kluczowe": ["lęk przed oceną", "wystąpienia publiczne", "czerwienienie się", "kompromitacja", "wstyd", "wzrok innych"], 
+        "diagnoza": "F40.1 Fobie społeczne", 
+        "roznicowa": "Osobowość unikająca (F60.6), Agorafobia (F40.0).",
+        "kryteria": "• Wyraźna obawa przed znalezieniem się w centrum uwagi lub strach przed kompromitującym zachowaniem.\n• Unikanie sytuacji społecznych.\n• Objawy lęku w sytuacjach społecznych (np. czerwienienie się, drżenie, obawa przed wymiotami/oddaniem moczu)."
+    },
+    {
+        "slowa_kluczowe": ["zamartwianie się", "napięcie mięśniowe", "niepokój", "przyszłość", "niepewność", "ciągły lęk", "napięcie"], 
+        "diagnoza": "F41.1 Zaburzenie lękowe uogólnione (GAD)", 
+        "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1), Hipochondria (F45.2).",
+        "kryteria": "• Uogólniony i uporczywy lęk (tzw. wolnopłynący) trwający min. 6 miesięcy.\n• Objawy napięcia ruchowego (drżenie, napięcie mięśni).\n• Wzmożona aktywność układu autonomicznego (pocenie się, suchość w ustach).\n• Obawy i zamartwianie się codziennymi wydarzeniami/problemami."
+    },
+    {
+        "slowa_kluczowe": ["wypadek", "trauma", "koszmary", "flashback", "unikanie", "stres", "uraz"], 
+        "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)", 
+        "roznicowa": "Ostra reakcja na stres (F43.0), Zaburzenia adaptacyjne (F43.2).",
+        "kryteria": "• Ekspozycja na stresor o wyjątkowej sile (zagrażający życiu lub zdrowiu).\n• Uporczywe przypominanie sobie traumy (natrętne wspomnienia, flashbacki, sny).\n• Unikanie sytuacji przypominających traumę.\n• Wzbudzenie wegetatywne lub trudności z zasypianiem (objawy trwają powyżej 1 miesiąca)."
+    }
 ]
 
 # --- PEŁNA BAZA ICD-10 ---
@@ -134,17 +164,20 @@ if menu == "I. Diagnoza i Konceptualizacja":
 
     st.divider()
     st.header("I.2. Diagnoza kliniczna")
-    with st.expander("🤖 Asystent Diagnozy (Podpowiedzi)", expanded=False):
-        objawy_input = st.text_area("Wpisz zgłaszane problemy (np. lęk, smutek):")
+    with st.expander("🤖 Asystent Diagnozy (Podpowiedzi i Kryteria)", expanded=True):
+        st.write("Wpisz główne objawy pacjenta. System przeanalizuje słowa kluczowe i wskaże kryteria.")
+        objawy_input = st.text_area("Zgłaszane problemy (np. smutek, brak energii, lęk przed ludźmi, natrętne myśli):")
+        
         if objawy_input:
             znaleziono = False
             for el in baza_symptomow:
                 if any(slowo in objawy_input.lower() for slowo in el["slowa_kluczowe"]):
                     st.success(f"**Sugerowana diagnoza:** {el['diagnoza']}")
                     st.warning(f"**Diagnoza różnicowa:** {el['roznicowa']}")
+                    st.info(f"📋 **Główne kryteria (ICD-10):**\n{el['kryteria']}")
                     znaleziono = True
             if not znaleziono:
-                st.info("Brak oczywistych dopasowań. Wybierz kod ręcznie.")
+                st.info("Brak oczywistych dopasowań w bazie słów kluczowych. Sprawdź inne objawy lub wybierz kod ręcznie.")
 
     c1, c2 = st.columns(2)
     kat_wybrana = c1.selectbox("Grupa ICD-10:", list(icd10_full.keys()))
