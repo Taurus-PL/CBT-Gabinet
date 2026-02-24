@@ -94,40 +94,40 @@ slownik_modeli = {
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
 
-# --- BAZA ASYSTENTA DIAGNOZY (Słownik NLP - potoczny język pacjenta) ---
+# --- BAZA ASYSTENTA DIAGNOZY (Mocno rozbudowany słownik NLP) ---
 baza_symptomow = [
     {
-        "slowa_kluczowe": ["serce mi wali", "zaraz umrę", "uduszę się", "brakuje mi tchu", "zawał", "tracę kontrolę", "zwariuję", "kłucie w klatce", "duszno", "miękną mi nogi", "nagle mnie łapie", "atak paniki", "myślałem że to zawał"], 
+        "slowa_kluczowe": ["serce mi wali", "zaraz umrę", "uduszę się", "brakuje mi tchu", "zawał", "tracę kontrolę", "zwariuję", "kłucie w klatce", "duszno", "miękną mi nogi", "nagle mnie łapie", "atak paniki", "myślałem że to zawał", "nogi z waty", "zaraz zemdleję", "ścisk w gardle", "jakbym był obok siebie", "odrealnienie", "nagle robi mi się słabo", "uderzenie gorąca"], 
         "diagnoza": "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)", 
         "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne, Nadczynność tarczycy.",
         "kryteria": "• Nawracające, nieprzewidywalne napady paniki (niezwiązane z konkretną sytuacją).\n• Nagły początek i osiągnięcie maksimum w kilka minut.\n• Min. 4 objawy somatyczne/poznawcze (np. kołatanie serca, duszność, pocenie się, obawa przed śmiercią lub utratą kontroli)."
     },
     {
-        "slowa_kluczowe": ["nie mam siły", "nic mnie nie cieszy", "nie chce mi się żyć", "budzę się w nocy", "płaczę bez powodu", "jestem beznadziejny", "nie mam apetytu", "wszystko jest bez sensu", "ciągle chce mi się spać", "zmuszam się do", "nic nie ma sensu", "poczucie winy", "smutek", "zrezygnowany"], 
+        "slowa_kluczowe": ["nie mam siły", "nic mnie nie cieszy", "nie chce mi się żyć", "budzę się w nocy", "płaczę bez powodu", "jestem beznadziejny", "nie mam apetytu", "wszystko jest bez sensu", "ciągle chce mi się spać", "zmuszam się do", "nic nie ma sensu", "poczucie winy", "smutek", "zrezygnowany", "przytłumione", "po co w ogóle wstawać", "ciało jest ciężkie", "mokry koc", "ponad siły", "jestem do niczego", "zawsze tak będzie", "radość gdzieś za szybą", "nie mam energii udawać", "rozsypuje się", "wegetuję", "czarna dziura", "pustka", "robię minimum"], 
         "diagnoza": "F32 Epizod depresyjny / F33 Zaburzenia depresyjne nawracające", 
         "roznicowa": "ChAD - epizod depresyjny (F31), Dystymia (F34.1), Niedoczynność tarczycy.",
         "kryteria": "• Trwanie objawów min. 2 tygodnie.\n• Przynajmniej 2 z 3 objawów podstawowych: obniżony nastrój, utrata zainteresowań (anhedonia), spadek energii/zwiększona męczliwość.\n• Objawy dodatkowe (np. zaburzenia snu, apetytu, poczucie winy, myśli samobójcze)."
     },
     {
-        "slowa_kluczowe": ["muszę to sprawdzić", "ciągle myję", "głupie myśli", "nie mogę przestać o tym myśleć", "muszę policzyć", "mam wrażenie że coś się stanie", "natrętne", "rytuał", "robię to żeby nie zapeszyć", "ciągle wraca ta myśl", "czuję brud", "układam", "muszę ułożyć"], 
+        "slowa_kluczowe": ["muszę to sprawdzić", "ciągle myję", "głupie myśli", "nie mogę przestać o tym myśleć", "muszę policzyć", "mam wrażenie że coś się stanie", "natrętne", "rytuał", "robię to żeby nie zapeszyć", "ciągle wraca ta myśl", "czuję brud", "układam", "muszę ułożyć", "inaczej zwariuję", "zarazki", "coś złego się stanie jak", "odliczam w myślach", "magiczne myślenie", "czuję że muszę", "chore myśli", "muszę mieć pewność"], 
         "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", 
         "roznicowa": "Osobowość anankastyczna (F60.5), Schizofrenia (F20), Tiki (F95).",
         "kryteria": "• Obsesje (myśli) i/lub kompulsje (czynności) obecne przez większość dni przez min. 2 kolejne tygodnie.\n• Są one źródłem cierpienia i zaburzają funkcjonowanie.\n• Pacjent uznaje je za własne (nie narzucone z zewnątrz), ale uważa za przesadne i próbuje się im opierać."
     },
     {
-        "slowa_kluczowe": ["boję się odezwać", "wszyscy na mnie patrzą", "spalę się ze wstydu", "wyśmieją mnie", "robię się czerwony", "boję się ludzi", "trzęsą mi się ręce jak", "kompromitacja", "boję się co pomyślą", "wypaść głupio", "wzrok innych", "wystąpienia publiczne"], 
+        "slowa_kluczowe": ["boję się odezwać", "wszyscy na mnie patrzą", "spalę się ze wstydu", "wyśmieją mnie", "robię się czerwony", "boję się ludzi", "trzęsą mi się ręce jak", "kompromitacja", "boję się co pomyślą", "wypaść głupio", "wzrok innych", "wystąpienia publiczne", "zrobię z siebie pośmiewisko", "zablokuje mnie", "pustka w głowie jak", "nie wiem gdzie podziać ręce", "boję się oceny", "wymsknie mi się coś głupiego", "głos mi drży", "czuję że mnie oceniają"], 
         "diagnoza": "F40.1 Fobia społeczna", 
         "roznicowa": "Osobowość unikająca (F60.6), Agorafobia (F40.0).",
         "kryteria": "• Wyraźna obawa przed znalezieniem się w centrum uwagi lub strach przed kompromitującym zachowaniem.\n• Unikanie sytuacji społecznych.\n• Objawy lęku w sytuacjach społecznych (np. czerwienienie się, drżenie, obawa przed wymiotami/oddaniem moczu)."
     },
     {
-        "slowa_kluczowe": ["ciągle się martwię", "co będzie jak", "nie mogę się rozluźnić", "mam spięte mięśnie", "najgorsze scenariusze", "a co jeśli", "boli mnie kark", "niepokój", "czuję takie napięcie", "nie umiem przestać myśleć o problemach", "martwię się o zdrowie", "martwię się o bliskich"], 
+        "slowa_kluczowe": ["ciągle się martwię", "co będzie jak", "nie mogę się rozluźnić", "mam spięte mięśnie", "najgorsze scenariusze", "a co jeśli", "boli mnie kark", "niepokój", "czuję takie napięcie", "nie umiem przestać myśleć o problemach", "martwię się o zdrowie", "martwię się o bliskich", "czarne scenariusze", "nie potrafię odpuścić", "ścisk w żołądku ze stresu", "głowa mi pęka od myślenia", "myśli krążą", "zawsze muszę być przygotowany", "wieczne napięcie", "jak na szpilkach", "natłok myśli"], 
         "diagnoza": "F41.1 Zaburzenie lękowe uogólnione (GAD)", 
         "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1), Hipochondria (F45.2).",
         "kryteria": "• Uogólniony i uporczywy lęk (tzw. wolnopłynący) trwający min. 6 miesięcy.\n• Objawy napięcia ruchowego (drżenie, napięcie mięśni).\n• Wzmożona aktywność układu autonomicznego (pocenie się, suchość w ustach).\n• Obawy i zamartwianie się codziennymi wydarzeniami/problemami."
     },
     {
-        "slowa_kluczowe": ["ciągle mi się to śni", "wspomnienia wracają", "mam przed oczami", "unikam miejsc", "budzę się z krzykiem", "odkąd zdarzył się ten wypadek", "flashbacki", "czuję jakby to działo się znowu", "od tamtej pory", "trauma"], 
+        "slowa_kluczowe": ["ciągle mi się to śni", "wspomnienia wracają", "mam przed oczami", "unikam miejsc", "budzę się z krzykiem", "odkąd zdarzył się ten wypadek", "flashbacki", "czuję jakby to działo się znowu", "od tamtej pory", "trauma", "wraca jak bumerang", "koszmary z tamtego", "wystarczy jeden dźwięk", "ciągle na krawędzi", "unikam wszystkiego co", "nie czuję się już bezpiecznie", "odrętwienie", "czuję że to znowu się dzieje"], 
         "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)", 
         "roznicowa": "Ostra reakcja na stres (F43.0), Zaburzenia adaptacyjne (F43.2).",
         "kryteria": "• Ekspozycja na stresor o wyjątkowej sile (zagrażający życiu lub zdrowiu).\n• Uporczywe przypominanie sobie traumy (natrętne wspomnienia, flashbacki, sny).\n• Unikanie sytuacji przypominających traumę.\n• Wzbudzenie wegetatywne lub trudności z zasypianiem (objawy trwają powyżej 1 miesiąca)."
@@ -140,7 +140,7 @@ icd10_full = {
     "F10-F19 Zab. spowodowane substancjami": ["F10 Zab. spowodowane alkoholem", "F11 Zab. spowodowane opioidami", "F12 Zab. spowodowane kanabinoidami", "F13 Leki uspokajające i nasenne", "F17 Palenie tytoniu"],
     "F20-F29 Schizofrenia i urojeniowe": ["F20 Schizofrenia", "F21 Zaburzenie schizotypowe", "F22 Uporczywe zaburzenia urojeniowe", "F23 Ostre zaburzenia psychotyczne", "F25 Zaburzenia schizoafektywne"],
     "F30-F39 Zaburzenia nastroju (afektywne)": ["F30 Epizod maniakalny", "F31 ChAD", "F32 Epizod depresyjny", "F33 Zaburzenia depresyjne nawracające", "F34 Uporczywe zaburzenia nastroju (Dystymia)"],
-    "F40-F48 Zaburzenia nerwicowe i lękowe": ["F40.0 Agorafobia", "F40.1 Fobie społeczne", "F40.2 Specyficzne fobie", "F41.0 Zaburzenie lękowe z napadami lęku", "F41.1 Zaburzenie lękowe uogólnione (GAD)", "F41.2 Zab. lękowo-depresyjne mieszane", "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", "F43.0 Ostra reakcja na stres", "F43.1 Zaburzenie stresowe pourazowe (PTSD)", "F43.2 Zaburzenia adaptacyjne", "F44 Zaburzenia dysocjacyjne", "F45 Zaburzenia pod postacią somatyczną"],
+    "F40-F48 Zaburzenia nerwicowe i lękowe": ["F40.0 Agorafobia", "F40.1 Fobie społeczne", "F40.2 Specyficzne fobie", "F41.0 Zaburzenie lękowe z napadami lęku", "F41.1 Zaburzenie lękowe uogólnione (GAD)", "F41.2 Zab. lękowo-depresyjne mieszane", "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", "F43.0 Ostra reakcja na stres", "F43.1 Zaburzenie stresowe pourazowe (PTSD)", "F43.2 Zaburzenia adaptacyjne", "F44 Zaburzenia dysocjacyjne", "F45 Zaburzenia pod postacią somatyczną (np. Hipochondria)"],
     "F50-F59 Zespoły behawioralne": ["F50.0 Jadłowstręt psychiczny (Anoreksja)", "F50.2 Żarłoczność psychiczna (Bulimia)", "F51 Nieorganiczne zaburzenia snu", "F52 Dysfunkcje seksualne"],
     "F60-F69 Zaburzenia osobowości": ["F60.0 Osobowość paranoiczna", "F60.1 Osobowość schizoidalna", "F60.2 Osobowość dyssocjalna", "F60.30 Os. chwiejna emocjonalnie typ impulsywny", "F60.31 Os. chwiejna emocjonalnie typ borderline", "F60.4 Os. histrioniczna", "F60.5 Os. anankastyczna (OCPD)", "F60.6 Os. lękliwa (unikająca)", "F60.7 Os. zależna", "F61 Mieszane zab. osobowości"],
     "F90-F98 Zaburzenia wieku dziecięcego": ["F90 Zaburzenia hiperkinetyczne (ADHD)", "F91 Zaburzenia zachowania", "F95 Tiki"]
@@ -189,11 +189,11 @@ if menu == "I. Diagnoza i Konceptualizacja":
     
     # ASYSTENT DIAGNOZY
     with st.expander("🤖 Asystent Diagnozy (Język Pacjenta)", expanded=True):
-        st.write("Wpisz objawy własnymi słowami pacjenta. System wyłapie wszystko, by zasugerować współchorobowość.")
+        st.write("Wpisz objawy własnymi słowami pacjenta. System wyłapie ukryte wzorce językowe, by zasugerować diagnozę i modele CBT.")
         objawy_input = st.text_area("Cytaty pacjenta / Skarga główna:", key="skarga_pacjenta")
         
         if st.button("🔍 Analizuj objawy i skopiuj do Listy Problemów", on_click=kopiuj_do_listy):
-            st.session_state.wykryte_kody = [] # Resetuj kody przed nową analizą
+            st.session_state.wykryte_kody = []
             if objawy_input:
                 znaleziono = False
                 input_do_analizy = objawy_input.lower()
@@ -208,7 +208,7 @@ if menu == "I. Diagnoza i Konceptualizacja":
                         znaleziono = True
                         
                 if not znaleziono:
-                    st.info("Brak oczywistych dopasowań w bazie.")
+                    st.info("Brak oczywistych dopasowań. Rozbuduj opis lub wybierz diagnozę ręcznie poniżej.")
             else:
                 st.warning("Wpisz najpierw to, co zgłasza pacjent!")
 
@@ -223,12 +223,10 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.header("🧩 Modułowe łączenie modeli CBT")
     st.write("Dobierz protokoły transdiagnostycznie. Na podstawie diagnozy głównej i języka pacjenta, system podpowiada odpowiednie modele do połączenia.")
     
-    # Zbudowanie list do multiselectu
     lista_wszystkich_modeli = [dane["Model"] for dane in slownik_modeli.values()]
     kody_do_nazw = {kod: dane["Model"] for kod, dane in slownik_modeli.items()}
     nazwy_do_kodow = {dane["Model"]: kod for kod, dane in slownik_modeli.items()}
     
-    # Wyliczenie modeli sugerowanych (z wyboru ręcznego ICD-10 ORAZ słów pacjenta)
     kody_sugerowane = set(st.session_state.wykryte_kody)
     if kod_icd in slownik_modeli:
         kody_sugerowane.add(kod_icd)
@@ -241,7 +239,6 @@ if menu == "I. Diagnoza i Konceptualizacja":
         default=modele_sugerowane
     )
     
-    # Wyświetlanie wybranych protokołów
     if wybrane_modele:
         for nazwa_modelu in wybrane_modele:
             kod = nazwy_do_kodow[nazwa_modelu]
