@@ -115,19 +115,9 @@ if menu == "I. Diagnoza i Konceptualizacja":
         st.write(f"**Mechanizm podtrzymujący:** {dane['Opis']}")
         st.write(f"**Sugerowane Interwencje:** {dane['Interwencje']}")
         
-        # Wyzwalanie diagramów edukacyjnych
-        if kod_icd == "F41.0":
-            st.markdown("**(Wizualizacja):**")
-            
-        elif kod_icd in ["F32", "F33"]:
-            st.markdown("**(Wizualizacja):**")
-            [attachment_0](attachment)
-        elif kod_icd == "F40.1":
-            st.markdown("**(Wizualizacja):**")
-            
-        elif kod_icd == "F42":
-            st.markdown("**(Wizualizacja):**")
-            
+        # BEZPIECZNA WIZUALIZACJA - BEZ BŁĘDÓW KODU
+        st.markdown("**(Miejsce na wizualizację modelu):**")
+        st.info("Tutaj w przyszłości podepniemy graficzne schematy modeli. Na razie aplikacja działa stabilnie i wyświetla treść merytoryczną.")
 
     else:
         st.info("💡 Dla wybranego kodu zaleca się stosowanie standardowego modelu poznawczego ABC i ogólnych technik CBT.")
