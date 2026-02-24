@@ -34,4 +34,26 @@ elif kategoria == "Depresja":
     nastroj = st.select_slider("Poziom nastroju po aktywności", options=range(1, 11))
     st.button("Zapisz w dzienniku")
 
-# Dalsze moduły (OCD, PTSD) będziemy dopisywać w miarę rozwoju aplikacji
+# # --- SEKCJA: LĘK SPOŁECZNY ---
+elif kategoria == "Lęk Społeczny":
+    st.title("👥 Protokół: Lęk Społeczny (Model Clarka i Wellsa)")
+    st.subheader("Model Poznawczy")
+    
+    st.info("Kluczowym elementem jest skupienie uwagi na sobie i tworzenie negatywnego obrazu siebie w oczach innych.")
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        st.write("**Zachowania zabezpieczające:**")
+        st.write("- Unikanie kontaktu wzrokowego")
+        st.write("- Planowanie wypowiedzi")
+        st.write("- Ukrywanie rumieńców")
+    
+    with col2:
+        st.write("**Zniekształcenia poznawcze:**")
+        st.write("- Czytanie w myślach")
+        st.write("- Przepowiadanie przyszłości")
+        st.write("- Personalizacja")
+
+    st.subheader("Ćwiczenie: Przenoszenie Uwagi")
+    st.write("Skoncentruj się na otoczeniu, a nie na własnych odczuciach z ciała.")
+ moduły (OCD, PTSD) będziemy dopisywać w miarę rozwoju aplikacji
