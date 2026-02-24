@@ -8,7 +8,7 @@ st.set_page_config(page_title="Zapis Przebiegu Terapii CBT", layout="wide")
 # --- BAZA WIEDZY I DIAGRAMY MERMAID ---
 slownik_modeli = {
     "F41.0": {
-        "Model": "Model poznawczy lęku panicznego (D. Clark, 1986)",
+        "Model": "Model poznawczy lęku panicznego (D. Clark)",
         "Opis": "Skupienie na błędnej, katastroficznej interpretacji normalnych doznań z ciała (np. kołatanie serca = zawał).",
         "Interwencje": "Reatrybucja doznań, hiperwentylacja (eksperyment), eliminacja zachowań zabezpieczających.",
         "Wizualizacja": (
@@ -36,7 +36,7 @@ slownik_modeli = {
         )
     },
     "F40.1": {
-        "Model": "Model Lęku Społecznego (Clark i Wells, 1995)",
+        "Model": "Model Lęku Społecznego (Clark i Wells)",
         "Opis": "Koncentracja uwagi na sobie, tworzenie negatywnego obrazu siebie, silne zachowania zabezpieczające.",
         "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty.",
         "Wizualizacja": (
@@ -76,6 +76,19 @@ slownik_modeli = {
             "D --> E[Negatywne przekonania / Lęk przed martwieniem]\n"
             "D --> F[Nieskuteczne unikanie]\n"
             "style D fill:#4d4d00,stroke:#cccc00,color:#fff\n"
+        )
+    },
+    "F43.1": {
+        "Model": "Model poznawczy PTSD (Ehlers i Clark)",
+        "Opis": "Poczucie aktualnego zagrożenia wynikające z negatywnej oceny traumy i zaburzeń pamięci autobiograficznej.",
+        "Interwencje": "Przedłużona ekspozycja (PE), restrukturyzacja punktów zapalnych, zmiana zachowań zabezpieczających.",
+        "Wizualizacja": (
+            "graph TD\n"
+            "A[Wyzwalacze traumy] --> B[Wrażenie: To dzieje się teraz]\n"
+            "B --> C[Silny lęk i emocje]\n"
+            "C --> D[Unikanie i dysocjacja]\n"
+            "D -. Brak przetworzenia traumy .-> B\n"
+            "style C fill:#004d4d,stroke:#00cccc,color:#fff\n"
         )
     }
 }
@@ -136,11 +149,12 @@ icd10_full = {
 # --- BAZA DANYCH W PAMIĘCI I STAN APLIKACJI ---
 if 'baza_terapii' not in st.session_state:
     st.session_state.baza_terapii = []
-
 if 'lista_problemow' not in st.session_state:
     st.session_state.lista_problemow = ""
+if 'wykryte_kody' not in st.session_state:
+    st.session_state.wykryte_kody = []
 
-# Funkcja callback - kopiuje natychmiastowo przed przeładowaniem strony
+# Funkcja callback
 def kopiuj_do_listy():
     if "skarga_pacjenta" in st.session_state:
         st.session_state.lista_problemow = st.session_state.skarga_pacjenta
@@ -154,7 +168,7 @@ menu = st.sidebar.radio("Spis treści:", [
     "📂 Archiwum Diagnoz"
 ])
 st.sidebar.divider()
-st.sidebar.caption("Oparte na: Zapis przebiegu terapii CBT (A. Popiel, E. Pragłowska)")
+st.sidebar.caption("Oparte na: Zapis przebiegu terapii CBT")
 
 # ==========================================================
 # MODUŁ I: DIAGNOZA I KONCEPTUALIZACJA ZJAWISKA
@@ -175,53 +189,81 @@ if menu == "I. Diagnoza i Konceptualizacja":
     
     # ASYSTENT DIAGNOZY
     with st.expander("🤖 Asystent Diagnozy (Język Pacjenta)", expanded=True):
-        st.write("Wpisz objawy własnymi słowami pacjenta (np. 'nie mam siły wstać z łóżka, nic mnie nie cieszy'), a następnie kliknij przycisk poniżej.")
-        
-        # Klucz skarga_pacjenta łączy się z funkcją kopiuj_do_listy()
+        st.write("Wpisz objawy własnymi słowami pacjenta. System wyłapie wszystko, by zasugerować współchorobowość.")
         objawy_input = st.text_area("Cytaty pacjenta / Skarga główna:", key="skarga_pacjenta")
         
-        # on_click gwarantuje natychmiastowe kopiowanie
         if st.button("🔍 Analizuj objawy i skopiuj do Listy Problemów", on_click=kopiuj_do_listy):
+            st.session_state.wykryte_kody = [] # Resetuj kody przed nową analizą
             if objawy_input:
                 znaleziono = False
                 input_do_analizy = objawy_input.lower()
                 
                 for el in baza_symptomow:
                     if any(fraza in input_do_analizy for fraza in el["slowa_kluczowe"]):
-                        st.success(f"🎯 **Sugerowana diagnoza:** {el['diagnoza']}")
+                        kod_glowny = el['diagnoza'].split(" ")[0]
+                        st.session_state.wykryte_kody.append(kod_glowny)
+                        
+                        st.success(f"🎯 **Wykryto element:** {el['diagnoza']}")
                         st.warning(f"⚖️ **Diagnoza różnicowa:** {el['roznicowa']}")
-                        st.info(f"📋 **Główne kryteria (ICD-10):**\n\n{el['kryteria']}")
                         znaleziono = True
+                        
                 if not znaleziono:
-                    st.info("Brak oczywistych dopasowań w bazie. Zastosuj wywiad diagnostyczny i wybierz rozpoznanie poniżej.")
+                    st.info("Brak oczywistych dopasowań w bazie.")
             else:
                 st.warning("Wpisz najpierw to, co zgłasza pacjent!")
 
     c1, c2 = st.columns(2)
     kat_wybrana = c1.selectbox("Grupa ICD-10:", list(icd10_full.keys()))
-    pelna_diagnoza = c2.selectbox("Rozpoznanie główne:", icd10_full[kat_wybrana])
+    pelna_diagnoza = c2.selectbox("Rozpoznanie główne potwierdzone ręcznie:", icd10_full[kat_wybrana])
     kod_icd = pelna_diagnoza.split(" ")[0]
-    
     inne_rozpoznania = st.text_input("Inne rozpoznania (np. somatyczne, psychiatryczne współwystępujące):")
 
-    # WIEDZA EBM I SCHEMATY
+    # WIEDZA EBM I ŁĄCZENIE MODELI CBT
+    st.divider()
+    st.header("🧩 Modułowe łączenie modeli CBT")
+    st.write("Dobierz protokoły transdiagnostycznie. Na podstawie diagnozy głównej i języka pacjenta, system podpowiada odpowiednie modele do połączenia.")
+    
+    # Zbudowanie list do multiselectu
+    lista_wszystkich_modeli = [dane["Model"] for dane in slownik_modeli.values()]
+    kody_do_nazw = {kod: dane["Model"] for kod, dane in slownik_modeli.items()}
+    nazwy_do_kodow = {dane["Model"]: kod for kod, dane in slownik_modeli.items()}
+    
+    # Wyliczenie modeli sugerowanych (z wyboru ręcznego ICD-10 ORAZ słów pacjenta)
+    kody_sugerowane = set(st.session_state.wykryte_kody)
     if kod_icd in slownik_modeli:
-        dane = slownik_modeli[kod_icd]
-        st.success(f"🧠 **Sugerowany protokół EBM dla: {kod_icd}**")
-        st.write(f"**Model:** {dane['Model']} | **Mechanizm:** {dane['Opis']}")
-        if "Wizualizacja" in dane:
-            kod_html = (
-                "<div class='mermaid' style='display: flex; justify-content: center;'>"
-                + dane["Wizualizacja"] +
-                "</div><script type='module'>import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>"
-            )
-            components.html(kod_html, height=450)
+        kody_sugerowane.add(kod_icd)
+        
+    modele_sugerowane = [kody_do_nazw[k] for k in kody_sugerowane if k in kody_do_nazw]
+
+    wybrane_modele = st.multiselect(
+        "Wybierz modele do uwzględnienia w konceptualizacji:",
+        options=list(set(lista_wszystkich_modeli)),
+        default=modele_sugerowane
+    )
+    
+    # Wyświetlanie wybranych protokołów
+    if wybrane_modele:
+        for nazwa_modelu in wybrane_modele:
+            kod = nazwy_do_kodow[nazwa_modelu]
+            dane = slownik_modeli[kod]
+            
+            st.markdown(f"### 🛠️ {nazwa_modelu}")
+            st.write(f"**Mechanizm:** {dane['Opis']}")
+            st.write(f"**Główne interwencje:** {dane['Interwencje']}")
+            
+            if "Wizualizacja" in dane:
+                with st.expander(f"ZOBACZ SCHEMAT: {nazwa_modelu}"):
+                    kod_html = (
+                        "<div class='mermaid' style='display: flex; justify-content: center;'>"
+                        + dane["Wizualizacja"] +
+                        "</div><script type='module'>import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>"
+                    )
+                    components.html(kod_html, height=450)
 
     st.divider()
     st.header("I.3. Konceptualizacja problemu")
     
     st.subheader("I.3.1. Lista problemów i cele terapii")
-    # Pole, które przyjmuje skopiowaną wartość dzięki key="lista_problemow"
     st.text_area("Lista problemów (w ujęciu poznawczo-behawioralnym)", key="lista_problemow")
     st.text_area("Cele terapii (zoperacjonalizowane, mierzalne, SMART)")
 
