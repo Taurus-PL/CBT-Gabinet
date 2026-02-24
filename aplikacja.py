@@ -81,40 +81,40 @@ slownik_modeli = {
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
 
-# --- BAZA ASYSTENTA DIAGNOZY (Rozszerzona o kryteria) ---
+# --- BAZA ASYSTENTA DIAGNOZY (Słownik NLP - potoczny język pacjenta) ---
 baza_symptomow = [
     {
-        "slowa_kluczowe": ["lęk", "panika", "serce", "duszność", "umieranie", "zawał", "atak"], 
+        "slowa_kluczowe": ["serce mi wali", "zaraz umrę", "uduszę się", "brakuje mi tchu", "zawał", "tracę kontrolę", "zwariuję", "kłucie w klatce", "duszno", "miękną mi nogi", "nagle mnie łapie", "atak paniki", "myślałem że to zawał"], 
         "diagnoza": "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)", 
         "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne, Nadczynność tarczycy.",
         "kryteria": "• Nawracające, nieprzewidywalne napady paniki (niezwiązane z konkretną sytuacją).\n• Nagły początek i osiągnięcie maksimum w kilka minut.\n• Min. 4 objawy somatyczne/poznawcze (np. kołatanie serca, duszność, pocenie się, obawa przed śmiercią lub utratą kontroli)."
     },
     {
-        "slowa_kluczowe": ["smutek", "brak energii", "płacz", "bezsenność", "myśli samobójcze", "beznadzieja", "brak apetytu", "anhedonia", "depresja"], 
+        "slowa_kluczowe": ["nie mam siły", "nic mnie nie cieszy", "nie chce mi się żyć", "budzę się w nocy", "płaczę bez powodu", "jestem beznadziejny", "nie mam apetytu", "wszystko jest bez sensu", "ciągle chce mi się spać", "zmuszam się do", "nic nie ma sensu", "poczucie winy", "smutek", "zrezygnowany"], 
         "diagnoza": "F32 Epizod depresyjny / F33 Zaburzenia depresyjne nawracające", 
         "roznicowa": "ChAD - epizod depresyjny (F31), Dystymia (F34.1), Niedoczynność tarczycy.",
         "kryteria": "• Trwanie objawów min. 2 tygodnie.\n• Przynajmniej 2 z 3 objawów podstawowych: obniżony nastrój, utrata zainteresowań (anhedonia), spadek energii/zwiększona męczliwość.\n• Objawy dodatkowe (np. zaburzenia snu, apetytu, poczucie winy, myśli samobójcze)."
     },
     {
-        "slowa_kluczowe": ["natrętne myśli", "rytuały", "sprawdzanie", "mycie", "liczenie", "obsesje", "kompulsje"], 
+        "slowa_kluczowe": ["muszę to sprawdzić", "ciągle myję", "głupie myśli", "nie mogę przestać o tym myśleć", "muszę policzyć", "mam wrażenie że coś się stanie", "natrętne", "rytuał", "robię to żeby nie zapeszyć", "ciągle wraca ta myśl", "czuję brud", "układam", "muszę ułożyć"], 
         "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", 
         "roznicowa": "Osobowość anankastyczna (F60.5), Schizofrenia (F20), Tiki (F95).",
         "kryteria": "• Obsesje (myśli) i/lub kompulsje (czynności) obecne przez większość dni przez min. 2 kolejne tygodnie.\n• Są one źródłem cierpienia i zaburzają funkcjonowanie.\n• Pacjent uznaje je za własne (nie narzucone z zewnątrz), ale uważa za przesadne i próbuje się im opierać."
     },
     {
-        "slowa_kluczowe": ["lęk przed oceną", "wystąpienia publiczne", "czerwienienie się", "kompromitacja", "wstyd", "wzrok innych"], 
-        "diagnoza": "F40.1 Fobie społeczne", 
+        "slowa_kluczowe": ["boję się odezwać", "wszyscy na mnie patrzą", "spalę się ze wstydu", "wyśmieją mnie", "robię się czerwony", "boję się ludzi", "trzęsą mi się ręce jak", "kompromitacja", "boję się co pomyślą", "wypaść głupio", "wzrok innych", "wystąpienia publiczne"], 
+        "diagnoza": "F40.1 Fobia społeczna", 
         "roznicowa": "Osobowość unikająca (F60.6), Agorafobia (F40.0).",
         "kryteria": "• Wyraźna obawa przed znalezieniem się w centrum uwagi lub strach przed kompromitującym zachowaniem.\n• Unikanie sytuacji społecznych.\n• Objawy lęku w sytuacjach społecznych (np. czerwienienie się, drżenie, obawa przed wymiotami/oddaniem moczu)."
     },
     {
-        "slowa_kluczowe": ["zamartwianie się", "napięcie mięśniowe", "niepokój", "przyszłość", "niepewność", "ciągły lęk", "napięcie"], 
+        "slowa_kluczowe": ["ciągle się martwię", "co będzie jak", "nie mogę się rozluźnić", "mam spięte mięśnie", "najgorsze scenariusze", "a co jeśli", "boli mnie kark", "niepokój", "czuję takie napięcie", "nie umiem przestać myśleć o problemach", "martwię się o zdrowie", "martwię się o bliskich"], 
         "diagnoza": "F41.1 Zaburzenie lękowe uogólnione (GAD)", 
         "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1), Hipochondria (F45.2).",
         "kryteria": "• Uogólniony i uporczywy lęk (tzw. wolnopłynący) trwający min. 6 miesięcy.\n• Objawy napięcia ruchowego (drżenie, napięcie mięśni).\n• Wzmożona aktywność układu autonomicznego (pocenie się, suchość w ustach).\n• Obawy i zamartwianie się codziennymi wydarzeniami/problemami."
     },
     {
-        "slowa_kluczowe": ["wypadek", "trauma", "koszmary", "flashback", "unikanie", "stres", "uraz"], 
+        "slowa_kluczowe": ["ciągle mi się to śni", "wspomnienia wracają", "mam przed oczami", "unikam miejsc", "budzę się z krzykiem", "odkąd zdarzył się ten wypadek", "flashbacki", "czuję jakby to działo się znowu", "od tamtej pory", "trauma"], 
         "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)", 
         "roznicowa": "Ostra reakcja na stres (F43.0), Zaburzenia adaptacyjne (F43.2).",
         "kryteria": "• Ekspozycja na stresor o wyjątkowej sile (zagrażający życiu lub zdrowiu).\n• Uporczywe przypominanie sobie traumy (natrętne wspomnienia, flashbacki, sny).\n• Unikanie sytuacji przypominających traumę.\n• Wzbudzenie wegetatywne lub trudności z zasypianiem (objawy trwają powyżej 1 miesiąca)."
@@ -166,23 +166,26 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.header("I.2. Diagnoza kliniczna")
     
     # ASYSTENT Z ZACHOWANIEM WSZYSTKICH 3 ELEMENTÓW
-    with st.expander("🤖 Asystent Diagnozy (Podpowiedzi i Kryteria)", expanded=True):
-        st.write("Wpisz główne objawy pacjenta, a następnie kliknij przycisk poniżej.")
-        objawy_input = st.text_area("Zgłaszane problemy (np. smutek, brak energii, lęk przed ludźmi, natrętne myśli):")
+    with st.expander("🤖 Asystent Diagnozy (Język Pacjenta)", expanded=True):
+        st.write("Wpisz objawy własnymi słowami pacjenta (np. 'nie mam siły wstać z łóżka, nic mnie nie cieszy'), a następnie kliknij przycisk poniżej.")
+        objawy_input = st.text_area("Cytaty pacjenta / Skarga główna:")
         
         if st.button("🔍 Analizuj objawy"):
             if objawy_input:
                 znaleziono = False
+                input_do_analizy = objawy_input.lower()
+                
                 for el in baza_symptomow:
-                    if any(slowo in objawy_input.lower() for slowo in el["slowa_kluczowe"]):
+                    # Sprawdzamy czy fraza ze słownika występuje w tekście użytkownika
+                    if any(fraza in input_do_analizy for fraza in el["slowa_kluczowe"]):
                         st.success(f"🎯 **Sugerowana diagnoza:** {el['diagnoza']}")
                         st.warning(f"⚖️ **Diagnoza różnicowa:** {el['roznicowa']}")
                         st.info(f"📋 **Główne kryteria (ICD-10):**\n\n{el['kryteria']}")
                         znaleziono = True
                 if not znaleziono:
-                    st.info("Brak oczywistych dopasowań w bazie słów kluczowych. Sprawdź inne objawy lub wybierz kod ręcznie.")
+                    st.info("Brak oczywistych dopasowań w bazie. Zastosuj wywiad diagnostyczny i wybierz rozpoznanie poniżej.")
             else:
-                st.warning("Najpierw wpisz objawy pacjenta w pole tekstowe powyżej!")
+                st.warning("Wpisz najpierw to, co zgłasza pacjent!")
 
     c1, c2 = st.columns(2)
     kat_wybrana = c1.selectbox("Grupa ICD-10:", list(icd10_full.keys()))
