@@ -6,200 +6,94 @@ st.set_page_config(page_title="Zapis Przebiegu Terapii CBT", layout="wide")
 
 # --- BAZA WIEDZY I DIAGRAMY MERMAID ---
 slownik_modeli = {
-    "F41.0": [
-        {
-            "Model": "Model poznawczy lęku panicznego (D. Clark)",
-            "Opis": "Skupienie na błędnej, katastroficznej interpretacji normalnych doznań z ciała (np. kołatanie serca = zawał).",
-            "Interwencje": "Reatrybucja doznań, hiperwentylacja (eksperyment), eliminacja zachowań zabezpieczających.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Wewnętrzny lub zewn. wyzwalacz] --> B[Postrzegane zagrożenie]\n"
-                "B --> C[Lęk / Niepokój]\n"
-                "C --> D[Doznania somatyczne np. serce]\n"
-                "D --> E{Katastroficzna interpretacja}\n"
-                "E -- Błędne koło paniki --> B\n"
-                "style E fill:#4d0000,stroke:#ff3333,stroke-width:2px,color:#fff\n"
-            )
-        }
-    ],
-    "F32": [
-        {
-            "Model": "Triada Poznawcza Depresji (A. Beck)",
-            "Opis": "Negatywna wizja siebie, świata i przyszłości wynikająca z dysfunkcjonalnych schematów i błędów poznawczych.",
-            "Interwencje": "Zapisywanie myśli (Tabela Becka), restrukturyzacja poznawcza, testowanie przekonań.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A((Negatywne myśli O SOBIE)) <--> B((Negatywne myśli O ŚWIECIE))\n"
-                "B <--> C((Negatywne myśli O PRZYSZŁOŚCI))\n"
-                "C <--> A\n"
-                "style A fill:#002b5e,stroke:#3399ff,color:#fff\n"
-                "style B fill:#002b5e,stroke:#3399ff,color:#fff\n"
-                "style C fill:#002b5e,stroke:#3399ff,color:#fff\n"
-            )
-        },
-        {
-            "Model": "Model Aktywacji Behawioralnej - BA (C. Martell / P. Lewinsohn)",
-            "Opis": "Depresja jako wynik spadku wzmocnień pozytywnych ze środowiska. Obniżony nastrój prowadzi do wycofania, co pogłębia brak wzmocnień.",
-            "Interwencje": "Monitorowanie aktywności, planowanie aktywności (przyjemność i mistrzostwo), ocena barier.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Stresory / Spadek wzmocnień] --> B[Obniżony nastrój / Brak energii]\n"
-                "B --> C[Wycofanie / Bierność / Ruminacje]\n"
-                "C --> D[Jeszcze mniej wzmocnień i więcej problemów]\n"
-                "D -- Błędne koło --> B\n"
-                "style C fill:#333333,stroke:#666666,color:#fff\n"
-            )
-        },
-        {
-            "Model": "Model Wyuczonej Bezradności (M. Seligman)",
-            "Opis": "Depresja jako skutek poczucia braku wpływu na negatywne zdarzenia oraz przypisywania im wewnętrznych, stałych i globalnych przyczyn (pesymistyczny styl atrybucyjny).",
-            "Interwencje": "Zmiana stylu atrybucyjnego, budowanie poczucia sprawstwa (empowerment), eksperymenty przywracające kontrolę nad otoczeniem.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Negatywne zdarzenie] --> B{Brak poczucia kontroli}\n"
-                "B --> C[Styl atrybucyjny: Wewnętrzny, Stały, Globalny]\n"
-                "C --> D[Poczucie bezradności i beznadziei]\n"
-                "D --> E[Objawy depresyjne: Bierność, Rezygnacja]\n"
-                "style C fill:#4d4d4d,stroke:#808080,color:#fff\n"
-            )
-        },
-        {
-            "Model": "Model poznawczy oparty na uważności - MBCT (Segal, Williams, Teasdale)",
-            "Opis": "Nawroty depresji wynikają z reaktywacji starych wzorców myślenia przez drobne wahania nastroju. Pacjent wpada w ruminacje i zautomatyzowany 'tryb działania'.",
-            "Interwencje": "Trening uważności (mindfulness), decentracja (oddzielenie od myśli), świadome przejście z trybu 'działania' do trybu 'bycia'.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Początkowy spadek nastroju] --> B[Zautomatyzowane negatywne myślenie]\n"
-                "B --> C[Ruminacje / Próba myślowego 'naprawienia' nastroju]\n"
-                "C --> D[Pogłębienie i utrwalenie depresji]\n"
-                "D -- Sprzężenie zwrotne --> B\n"
-                "style C fill:#336699,stroke:#6699cc,color:#fff\n"
-            )
-        },
-        {
-            "Model": "Model Elastyczności Psychologicznej - ACT (S. Hayes)",
-            "Opis": "Cierpienie depresyjne wynika z unikania trudnych emocji (unikanie doświadczania) oraz utknięcia w dosłownym traktowaniu własnych myśli (fuzja poznawcza).",
-            "Interwencje": "Defuzja poznawcza, akceptacja, ugruntowanie w chwili obecnej, klaryfikacja wartości i zaangażowane działanie.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Trudne myśli i emocje] --> B[Unikanie doświadczania]\n"
-                "A --> C[Fuzja poznawcza - myśli traktowane jako fakty]\n"
-                "B --> D[Oderwanie od życiowych wartości]\n"
-                "C --> D\n"
-                "D --> E[Bierność i Epizod Depresyjny]\n"
-                "style D fill:#660033,stroke:#99004d,color:#fff\n"
-            )
-        }
-    ],
-    "F40.1": [
-        {
-            "Model": "Model Lęku Społecznego (Clark i Wells)",
-            "Opis": "Koncentracja uwagi na sobie, tworzenie negatywnego obrazu siebie jako obiektu społecznego, silne zachowania zabezpieczające.",
-            "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty ze zrzucaniem zachowań zabezpieczających.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Sytuacja społeczna] --> B[Zagrożenie społeczzne]\n"
-                "B --> C[Skupienie uwagi na sobie]\n"
-                "C <--> D[Objawy somatyczne i poznawcze]\n"
-                "C <--> E[Zachowania zabezpieczające]\n"
-                "D <--> E\n"
-                "style C fill:#663300,stroke:#ff9900,color:#fff\n"
-            )
-        }
-    ],
-    "F42": [
-        {
-            "Model": "Model poznawczy OCD (P. Salkovskis)",
-            "Opis": "Przesadne poczucie odpowiedzialności (TAF). Myśl natrętna jest interpretowana jako realne zagrożenie i znak moralny.",
-            "Interwencje": "Restrukturyzacja przekonań o odpowiedzialności, ciasto odpowiedzialności, edukacja o naturze myśli.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Wyzwalacz] --> B[Natrętna myśl / Obraz]\n"
-                "B --> C{Nadmierna Odpowiedzialność}\n"
-                "C --> D[Silny Lęk i Poczucie Winy]\n"
-                "D --> E[Kompulsje i Unikanie]\n"
-                "E --> F[Chwilowa ulga]\n"
-                "F -. Wzmocnia wiarę w odpowiedzialność .-> C\n"
-                "style C fill:#4d004d,stroke:#cc00cc,color:#fff\n"
-            )
-        },
-        {
-            "Model": "Model habituacyjny OCD / ERP (E. Foa)",
-            "Opis": "Mechanizm warunkowania strachu. Kompulsje zapobiegają naturalnemu wygasaniu lęku (habituacji).",
-            "Interwencje": "Ekspozycja z powstrzymaniem reakcji (ERP), hierarchia lęku, przedłużony kontakt z bodźcem.",
-            "Wizualizacja": (
-                "graph LR\n"
-                "A[Ekspozycja na wyzwalacz] --> B[Wzrost Lęku]\n"
-                "B --> C[Powstrzymanie Kompulsji]\n"
-                "C --> D[Naturalna Habituacja Lęku]\n"
-                "D --> E[Nowe uczenie się]\n"
-                "style C fill:#006600,stroke:#009900,color:#fff\n"
-            )
-        }
-    ],
-    "F41.1": [
-        {
-            "Model": "Model Nietolerancji Niepewności (M. Dugas)",
-            "Opis": "Zamartwianie się jako unikający styl radzenia sobie z lękiem. Pacjent uważa, że niepewność jest nie do zniesienia.",
-            "Interwencje": "Trening rozwiązywania problemów, ekspozycja na wyobrażenia, rozwój tolerancji na niepewność.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Sytuacja o niepewnym wyniku] --> B{Nietolerancja Niepewności}\n"
-                "B --> C[Zamartwianie się - próba zyskania pewności]\n"
-                "C --> D[Iluzja kontroli]\n"
-                "C --> E[Spadek umiejętności rozwiązywania problemów]\n"
-                "style B fill:#4d4d00,stroke:#cccc00,color:#fff\n"
-            )
-        },
-        {
-            "Model": "Model Metapoznawczy - MCT (A. Wells)",
-            "Opis": "Skupienie na metaprzekonaniach. Pozytywnych ('martwienie mnie chroni') i negatywnych ('stracę kontrolę nad martwieniem').",
-            "Interwencje": "Odraczanie martwienia się, testowanie przekonań o utracie kontroli, trening odłączania uwagi (Detached Mindfulness).",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Wyzwalacz: A co jeśli...] --> B[Pozytywne metaprzekonania]\n"
-                "B --> C[ZAMARTWIANIE SIĘ TYPU 1]\n"
-                "C --> D[Negatywne metaprzekonania - Typ 2]\n"
-                "D --> E[Lęk, emocje, nieskuteczne unikanie]\n"
-                "style D fill:#993300,stroke:#cc3300,color:#fff\n"
-            )
-        }
-    ],
-    "F43.1": [
-        {
-            "Model": "Przedłużona Ekspozycja - PE (E. Foa)",
-            "Opis": "PTSD wynika z niepełnego przetworzenia wspomnień traumatycznych z powodu silnego unikania.",
-            "Interwencje": "Ekspozycja wyobrażeniowa (nagrywanie i słuchanie), ekspozycja in vivo na unikane obiekty.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Doświadczenie Traumatyczne] --> B[Silny Lęk warunkowy]\n"
-                "B --> C[Unikanie bodźców i wspomnień]\n"
-                "C --> D[Brak przetwarzania emocjonalnego]\n"
-                "D -- Podtrzymanie lęku --> B\n"
-                "style C fill:#003366,stroke:#006699,color:#fff\n"
-            )
-        },
-        {
-            "Model": "Model poznawczy PTSD (Ehlers i Clark)",
-            "Opis": "Poczucie ciągłego zagrożenia 'tu i teraz' przez negatywną ocenę traumy i zaburzenia pamięci autobiograficznej.",
-            "Interwencje": "Aktualizacja pamięci traumy, restrukturyzacja punktów zapalnych, porzucenie zachowań zabezpieczających.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Trauma] --> B[Negatywna ocena traumy/siebie]\n"
-                "A --> C[Pamięć oparta na zmysłach - brak kontekstu]\n"
-                "B --> D[Poczucie AKTUALNEGO zagrożenia]\n"
-                "C --> D\n"
-                "D --> E[Intruzje / Pobudzenie]\n"
-                "E --> F[Unikanie]\n"
-                "F -- Utrudnia zmianę --> B\n"
-                "style D fill:#660000,stroke:#990000,color:#fff\n"
-            )
-        }
-    ]
+    "F41.0": {
+        "Model": "Model poznawczy lęku panicznego (D. Clark)",
+        "Opis": "Skupienie na błędnej, katastroficznej interpretacji normalnych doznań z ciała (np. kołatanie serca = zawał).",
+        "Interwencje": "Reatrybucja doznań, hiperwentylacja (eksperyment), eliminacja zachowań zabezpieczających.",
+        "Wizualizacja": (
+            "graph TD\n"
+            "A[Wewnętrzny lub zewn. wyzwalacz] --> B[Postrzegane zagrożenie]\n"
+            "B --> C[Lęk / Niepokój]\n"
+            "C --> D[Doznania somatyczne np. serce]\n"
+            "D --> E{Katastroficzna interpretacja}\n"
+            "E -- Błędne koło paniki --> B\n"
+            "style E fill:#4d0000,stroke:#ff3333,stroke-width:2px,color:#fff\n"
+        )
+    },
+    "F32": {
+        "Model": "Triada Poznawcza Becka / Model Aktywacji Behawioralnej (Martell)",
+        "Opis": "Negatywna wizja siebie, świata i przyszłości. Spadek wzmocnień pozytywnych z otoczenia.",
+        "Interwencje": "Monitorowanie aktywności, Aktywacja behawioralna (BA), restrukturyzacja myśli.",
+        "Wizualizacja": (
+            "graph TD\n"
+            "A((Negatywne myśli O SOBIE)) <--> B((Negatywne myśli O ŚWIECIE))\n"
+            "B <--> C((Negatywne myśli O PRZYSZŁOŚCI))\n"
+            "C <--> A\n"
+            "style A fill:#002b5e,stroke:#3399ff,color:#fff\n"
+            "style B fill:#002b5e,stroke:#3399ff,color:#fff\n"
+            "style C fill:#002b5e,stroke:#3399ff,color:#fff\n"
+        )
+    },
+    "F40.1": {
+        "Model": "Model Lęku Społecznego (Clark i Wells)",
+        "Opis": "Koncentracja uwagi na sobie, tworzenie negatywnego obrazu siebie, silne zachowania zabezpieczające.",
+        "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty.",
+        "Wizualizacja": (
+            "graph TD\n"
+            "A[Sytuacja społeczna] --> B[Zagrożenie społeczne]\n"
+            "B --> C[Skupienie uwagi na sobie]\n"
+            "C <--> D[Objawy somatyczne i poznawcze]\n"
+            "C <--> E[Zachowania zabezpieczające]\n"
+            "D <--> E\n"
+            "style C fill:#663300,stroke:#ff9900,color:#fff\n"
+        )
+    },
+    "F42": {
+        "Model": "Model poznawczy OCD (P. Salkovskis)",
+        "Opis": "Przesadne poczucie odpowiedzialności (TAF). Myśl natrętna jest interpretowana jako realne zagrożenie.",
+        "Interwencje": "ERP (Ekspozycja z powstrzymaniem reakcji), restrukturyzacja przekonań o odpowiedzialności.",
+        "Wizualizacja": (
+            "graph TD\n"
+            "A[Sytuacja wyzwalająca] --> B[Natrętna myśl / Obraz]\n"
+            "B --> C{Zagrożenie / Odpowiedzialność}\n"
+            "C --> D[Lęk i Dyskomfort]\n"
+            "D --> E[Kompulsje i Rytuały]\n"
+            "E --> F[Chwilowa ulga]\n"
+            "F -. Wzmocnienie .-> B\n"
+            "style C fill:#4d004d,stroke:#cc00cc,color:#fff\n"
+        )
+    },
+    "F41.1": {
+        "Model": "Model Nietolerancji Niepewności (Dugas) / Metapoznawczy (Wells)",
+        "Opis": "Zamartwianie się jako unikający styl radzenia sobie z lękiem oraz metaprzekonania.",
+        "Interwencje": "Trening rozwiązywania problemów, ekspozycja na wyobrażenia, zmiana metaprzekonań.",
+        "Wizualizacja": (
+            "graph TD\n"
+            "A[Sytuacja niepewna] --> B[Nietolerancja niepewności]\n"
+            "B --> C[Pozytywne przekonania o martwieniu]\n"
+            "C --> D[ZAMARTWIANIE SIĘ]\n"
+            "D --> E[Negatywne przekonania / Lęk przed martwieniem]\n"
+            "D --> F[Nieskuteczne unikanie]\n"
+            "style D fill:#4d4d00,stroke:#cccc00,color:#fff\n"
+        )
+    },
+    "F43.1": {
+        "Model": "Model poznawczy PTSD (Ehlers i Clark)",
+        "Opis": "Poczucie aktualnego zagrożenia wynikające z negatywnej oceny traumy i zaburzeń pamięci autobiograficznej.",
+        "Interwencje": "Przedłużona ekspozycja (PE), restrukturyzacja punktów zapalnych, zmiana zachowań zabezpieczających.",
+        "Wizualizacja": (
+            "graph TD\n"
+            "A[Wyzwalacze traumy] --> B[Wrażenie: To dzieje się teraz]\n"
+            "B --> C[Silny lęk i emocje]\n"
+            "C --> D[Unikanie i dysocjacja]\n"
+            "D -. Brak przetworzenia traumy .-> B\n"
+            "style C fill:#004d4d,stroke:#00cccc,color:#fff\n"
+        )
+    }
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
 
-# --- BAZA ASYSTENTA DIAGNOZY ---
+# --- BAZA ASYSTENTA DIAGNOZY (Słownik NLP + Profil CBT + Cele SMART + Protokoły EBM) ---
 baza_symptomow = [
     {
         "slowa_kluczowe": ["serce mi wali", "zaraz umrę", "uduszę się", "brakuje mi tchu", "zawał", "tracę kontrolę", "zwariuję", "kłucie w klatce", "duszno", "miękną mi nogi", "nagle mnie łapie", "atak paniki", "myślałem że to zawał", "nogi z waty", "zaraz zemdleję", "ścisk w gardle", "jakbym był obok siebie", "odrealnienie", "nagle robi mi się słabo", "uderzenie gorąca"], 
@@ -283,22 +177,6 @@ if 'uzasadnienie_planu' not in st.session_state:
 if 'wykryte_kody' not in st.session_state:
     st.session_state.wykryte_kody = []
 
-# --- INICJALIZACJA KLUCZY UI ---
-if 'ui_problemy' not in st.session_state:
-    st.session_state.ui_problemy = ""
-if 'ui_cele' not in st.session_state:
-    st.session_state.ui_cele = ""
-if 'ui_protokol' not in st.session_state:
-    st.session_state.ui_protokol = ""
-if 'ui_uzasadnienie' not in st.session_state:
-    st.session_state.ui_uzasadnienie = ""
-
-# --- FUNKCJE SYNCHRONIZUJĄCE INTERFEJS Z PAMIĘCIĄ ---
-def sync_problemy(): st.session_state.lista_problemow = st.session_state.ui_problemy
-def sync_cele(): st.session_state.cele_terapii = st.session_state.ui_cele
-def sync_protokol(): st.session_state.wybrany_protokol = st.session_state.ui_protokol
-def sync_uzasadnienie(): st.session_state.uzasadnienie_planu = st.session_state.ui_uzasadnienie
-
 # --- MENU BOCZNE ---
 st.sidebar.title("🛡️ Zapis Terapii CBT")
 menu = st.sidebar.radio("Spis treści:", [
@@ -367,11 +245,6 @@ if menu == "I. Diagnoza i Konceptualizacja":
                     st.session_state.cele_terapii = "1. [Wpisz cel SMART - co? o ile? w jakim czasie?]\n2. [Wpisz cel SMART]"
                     st.session_state.wybrany_protokol = "[Wpisz nazwę protokołu, np. Terapia Poznawcza Becka]"
                     st.session_state.uzasadnienie_planu = "1) [Wpisz interwencję nr 1...]\n2) [Wpisz interwencję nr 2...]"
-                
-                st.session_state.ui_problemy = st.session_state.lista_problemow
-                st.session_state.ui_cele = st.session_state.cele_terapii
-                st.session_state.ui_protokol = st.session_state.wybrany_protokol
-                st.session_state.ui_uzasadnienie = st.session_state.uzasadnienie_planu
             else:
                 st.warning("Wpisz najpierw to, co zgłasza pacjent!")
 
@@ -381,16 +254,31 @@ if menu == "I. Diagnoza i Konceptualizacja":
     kod_icd = pelna_diagnoza.split(" ")[0]
     inne_rozpoznania = st.text_input("Inne rozpoznania (np. somatyczne, psychiatryczne współwystępujące):")
 
-    # WIEDZA EBM I MODELE CBT
+    # WIEDZA EBM I ŁĄCZENIE MODELI CBT
     st.divider()
-    st.header(f"🧩 Poznawczo-behawioralne modele: {pelna_diagnoza}")
+    st.header("🧩 Modułowe łączenie modeli CBT")
     
+    lista_wszystkich_modeli = [dane["Model"] for dane in slownik_modeli.values()]
+    kody_do_nazw = {kod: dane["Model"] for kod, dane in slownik_modeli.items()}
+    nazwy_do_kodow = {dane["Model"]: kod for kod, dane in slownik_modeli.items()}
+    
+    kody_sugerowane = set(st.session_state.wykryte_kody)
     if kod_icd in slownik_modeli:
-        modele = slownik_modeli[kod_icd]
-        st.info(f"Znaleziono {len(modele)} kluczowe, oparte na dowodach (EBM) modele dla tego zaburzenia.")
+        kody_sugerowane.add(kod_icd)
         
-        for dane in modele:
-            nazwa_modelu = dane["Model"]
+    modele_sugerowane = [kody_do_nazw[k] for k in kody_sugerowane if k in kody_do_nazw]
+
+    wybrane_modele = st.multiselect(
+        "Wybierz modele do uwzględnienia w konceptualizacji:",
+        options=list(set(lista_wszystkich_modeli)),
+        default=modele_sugerowane
+    )
+    
+    if wybrane_modele:
+        for nazwa_modelu in wybrane_modele:
+            kod = nazwy_do_kodow[nazwa_modelu]
+            dane = slownik_modeli[kod]
+            
             st.markdown(f"### 🛠️ {nazwa_modelu}")
             st.write(f"**Mechanizm:** {dane['Opis']}")
             st.write(f"**Główne interwencje:** {dane['Interwencje']}")
@@ -398,26 +286,15 @@ if menu == "I. Diagnoza i Konceptualizacja":
             if "Wizualizacja" in dane:
                 with st.expander(f"ZOBACZ SCHEMAT: {nazwa_modelu}"):
                     st.markdown(f"```mermaid\n{dane['Wizualizacja']}\n```")
-    else:
-        st.info("Brak szczegółowego modelu CBT w podręcznej bazie dla wybranego rozpoznania. Możesz oprzeć się na ogólnym protokole poznawczo-behawioralnym.")
 
     st.divider()
     st.header("I.3. Konceptualizacja problemu")
     
     st.subheader("I.3.1. Lista problemów i cele terapii")
-    st.text_area(
-        "Lista problemów (w ujęciu poznawczo-behawioralnym)", 
-        key="ui_problemy", 
-        on_change=sync_problemy, 
-        height=250
-    )
-    st.text_area(
-        "Cele terapii (zoperacjonalizowane, mierzalne, SMART)", 
-        key="ui_cele", 
-        on_change=sync_cele, 
-        height=150
-    )
+    st.text_area("Lista problemów (w ujęciu poznawczo-behawioralnym)", key="lista_problemow", height=250)
+    st.text_area("Cele terapii (zoperacjonalizowane, mierzalne, SMART)", key="cele_terapii", height=150)
 
+    # NOWOŚĆ: Wyświetlanie sugerowanego protokołu od razu pod celami!
     if st.session_state.wybrany_protokol:
         st.success(f"📚 **Sugerowany protokół leczenia w oparciu o który będzie prowadzona praca nad realizacją celów:**\n\n**{st.session_state.wybrany_protokol}**\n\n*(Pełne uzasadnienie i plan interwencji zostały automatycznie przeniesione do zakładki 'II. Plan i Interwencje' w menu bocznym).*")
 
@@ -458,14 +335,12 @@ elif menu == "II. Plan i Interwencje":
     
     st.text_input(
         "Sugerowany protokół oparty na dowodach naukowych (EBM) do pracy nad realizacją celów:", 
-        key="ui_protokol",
-        on_change=sync_protokol
+        key="wybrany_protokol"
     )
     
     st.text_area(
         "Uzasadnienie poznawczo-behawioralne (w jaki sposób wybrane interwencje zrealizują postawione cele):", 
-        key="ui_uzasadnienie",
-        on_change=sync_uzasadnienie,
+        key="uzasadnienie_planu", 
         height=150
     )
     
