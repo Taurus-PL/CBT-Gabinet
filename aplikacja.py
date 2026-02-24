@@ -100,42 +100,36 @@ baza_symptomow = [
         "slowa_kluczowe": ["serce mi wali", "zaraz umrę", "uduszę się", "brakuje mi tchu", "zawał", "tracę kontrolę", "zwariuję", "kłucie w klatce", "duszno", "miękną mi nogi", "nagle mnie łapie", "atak paniki", "myślałem że to zawał", "nogi z waty", "zaraz zemdleję", "ścisk w gardle", "jakbym był obok siebie", "odrealnienie", "nagle robi mi się słabo", "uderzenie gorąca"], 
         "diagnoza": "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)", 
         "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne, Nadczynność tarczycy.",
-        "kryteria": "• Nawracające, nieprzewidywalne napady paniki.\n• Nagły początek i osiągnięcie maksimum w kilka minut.",
         "cbt_problemy": "LĘK PANICZNY:\n- Poznawcze: Katastroficzna interpretacja normalnych doznań płynących z ciała (np. 'mam zawał', 'uduszę się', 'zwariuję').\n- Emocjonalne: Napady nagłego, obezwładniającego lęku (panika).\n- Fizjologiczne: Silne pobudzenie wegetatywne (tachykardia, duszności, zawroty głowy, hiperwentylacja).\n- Behawioralne: Unikanie sytuacji wyzwalających, stosowanie zachowań zabezpieczających (np. noszenie leków, ciągłe sprawdzanie pulsu)."
     },
     {
         "slowa_kluczowe": ["nie mam siły", "nic mnie nie cieszy", "nie chce mi się żyć", "budzę się w nocy", "płaczę bez powodu", "jestem beznadziejny", "nie mam apetytu", "wszystko jest bez sensu", "ciągle chce mi się spać", "zmuszam się do", "nic nie ma sensu", "poczucie winy", "smutek", "zrezygnowany", "przytłumione", "po co w ogóle wstawać", "ciało jest ciężkie", "mokry koc", "ponad siły", "jestem do niczego", "zawsze tak będzie", "radość gdzieś za szybą", "nie mam energii udawać", "rozsypuje się", "wegetuję", "czarna dziura", "pustka", "robię minimum"], 
         "diagnoza": "F32 Epizod depresyjny / F33 Zab. depresyjne nawracające", 
         "roznicowa": "ChAD - epizod depresyjny (F31), Dystymia (F34.1), Niedoczynność tarczycy.",
-        "kryteria": "• Trwanie objawów min. 2 tygodnie.\n• Przynajmniej 2 z 3 objawów podstawowych: obniżony nastrój, anhedonia, spadek energii.",
         "cbt_problemy": "ZESPÓŁ DEPRESYJNY:\n- Poznawcze: Negatywna triada Becka (pesymistyczne przekonania o sobie: 'jestem do niczego', o świecie: 'nikt mnie nie rozumie' i o przyszłości: 'zawsze tak będzie'), nadmierne ruminacje.\n- Emocjonalne: Utrzymujący się obniżony nastrój, anhedonia (brak zdolności odczuwania radości), poczucie winy, odrętwienie.\n- Fizjologiczne: Wyraźny spadek energii ('ciało jak mokry koc'), zaburzenia snu (np. wczesne wybudzanie), zmiany apetytu, ociężałość psychomotoryczna.\n- Behawioralne: Zaniechanie aktywności celowej, wycofanie z relacji społecznych, bierność (pozostawanie w łóżku/domu)."
     },
     {
         "slowa_kluczowe": ["muszę to sprawdzić", "ciągle myję", "głupie myśli", "nie mogę przestać o tym myśleć", "muszę policzyć", "mam wrażenie że coś się stanie", "natrętne", "rytuał", "robię to żeby nie zapeszyć", "ciągle wraca ta myśl", "czuję brud", "układam", "muszę ułożyć", "inaczej zwariuję", "zarazki", "coś złego się stanie jak", "odliczam w myślach", "magiczne myślenie", "czuję że muszę", "chore myśli", "muszę mieć pewność"], 
         "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", 
         "roznicowa": "Osobowość anankastyczna (F60.5), Schizofrenia (F20), Tiki (F95).",
-        "kryteria": "• Obsesje (myśli) i/lub kompulsje (czynności) obecne przez większość dni przez min. 2 kolejne tygodnie.",
         "cbt_problemy": "ZABURZENIE OBSESYJNO-KOMPULSYJNE:\n- Poznawcze: Występowanie myśli/obrazów natrętnych (obsesji), fuzja myśli z działaniem (TAF), wyolbrzymione poczucie odpowiedzialności za zapobieganie szkodzie.\n- Emocjonalne: Silny lęk i napięcie po pojawieniu się intruzji, poczucie winy, czasem obrzydzenie.\n- Fizjologiczne: Pobudzenie wegetatywne będące reakcją na wyzwalacz/obsesję.\n- Behawioralne: Rytuały jawne i ukryte (kompulsje) mające na celu redukcję lęku, ciągłe poszukiwanie zapewnień ze strony innych, unikanie bodźców."
     },
     {
         "slowa_kluczowe": ["boję się odezwać", "wszyscy na mnie patrzą", "spalę się ze wstydu", "wyśmieją mnie", "robię się czerwony", "boję się ludzi", "trzęsą mi się ręce jak", "kompromitacja", "boję się co pomyślą", "wypaść głupio", "wzrok innych", "wystąpienia publiczne", "zrobię z siebie pośmiewisko", "zablokuje mnie", "pustka w głowie jak", "nie wiem gdzie podziać ręce", "boję się oceny", "wymsknie mi się coś głupiego", "głos mi drży", "czuję że mnie oceniają"], 
         "diagnoza": "F40.1 Fobia społeczna", 
         "roznicowa": "Osobowość unikająca (F60.6), Agorafobia (F40.0).",
-        "kryteria": "• Wyraźna obawa przed znalezieniem się w centrum uwagi.\n• Unikanie sytuacji społecznych.",
         "cbt_problemy": "LĘK SPOŁECZNY:\n- Poznawcze: Skupienie uwagi na sobie (tworzenie i monitorowanie negatywnego obrazu własnego 'ja'), przewidywanie negatywnej oceny przez otoczenie ('wyśmieją mnie').\n- Emocjonalne: Ostry lęk przed i w trakcie ekspozycji społecznej, poczucie wstydu i zakłopotania.\n- Fizjologiczne: Czerwienienie się, drżenie rąk/głosu, nadmierna potliwość, suchość w ustach, tachykardia.\n- Behawioralne: Unikanie (izolacja) lub znoszenie z silnym lękiem sytuacji społecznych, zachowania zabezpieczające (np. brak kontaktu wzrokowego, zaciskanie rąk, chowanie się w tle)."
     },
     {
         "slowa_kluczowe": ["ciągle się martwię", "co będzie jak", "nie mogę się rozluźnić", "mam spięte mięśnie", "najgorsze scenariusze", "a co jeśli", "boli mnie kark", "niepokój", "czuję takie napięcie", "nie umiem przestać myśleć o problemach", "martwię się o zdrowie", "martwię się o bliskich", "czarne scenariusze", "nie potrafię odpuścić", "ścisk w żołądku ze stresu", "głowa mi pęka od myślenia", "myśli krążą", "zawsze muszę być przygotowany", "wieczne napięcie", "jak na szpilkach", "natłok myśli"], 
         "diagnoza": "F41.1 Zaburzenie lękowe uogólnione (GAD)", 
         "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1), Hipochondria (F45.2).",
-        "kryteria": "• Uogólniony i uporczywy lęk trwający min. 6 miesięcy.\n• Objawy napięcia ruchowego i obawy.",
         "cbt_problemy": "LĘK UOGÓLNIONY (ZAMARTWIANIE SIĘ):\n- Poznawcze: Chroniczne zamartwianie się ('a co jeśli...'), nietolerancja niepewności, tworzenie czarnych scenariuszy, dodatnie (martwienie się pomaga) i ujemne (martwienie się mi zaszkodzi) przekonania o martwieniu się.\n- Emocjonalne: Wolnopłynący lęk, chroniczne poczucie niepokoju, drażliwość.\n- Fizjologiczne: Uporczywe napięcie mięśniowe (np. bóle karku), uczucie 'bycia na krawędzi', ścisk w żołądku, trudności z koncentracją i snem.\n- Behawioralne: Nadmierne poszukiwanie informacji/zapewnień, overplanning (przesadne planowanie w celu redukcji niepewności), unikanie delegowania zadań innym."
     },
     {
         "slowa_kluczowe": ["ciągle mi się to śni", "wspomnienia wracają", "mam przed oczami", "unikam miejsc", "budzę się z krzykiem", "odkąd zdarzył się ten wypadek", "flashbacki", "czuję jakby to działo się znowu", "od tamtej pory", "trauma", "wraca jak bumerang", "koszmary z tamtego", "wystarczy jeden dźwięk", "ciągle na krawędzi", "unikam wszystkiego co", "nie czuję się już bezpiecznie", "odrętwienie", "czuję że to znowu się dzieje"], 
         "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)", 
         "roznicowa": "Ostra reakcja na stres (F43.0), Zaburzenia adaptacyjne (F43.2).",
-        "kryteria": "• Ekspozycja na stresor o wyjątkowej sile.\n• Uporczywe przypominanie sobie traumy i unikanie bodźców.",
         "cbt_problemy": "ZABURZENIE POTRAUMATYCZNE:\n- Poznawcze: Poczucie ciągłego, aktualnego zagrożenia pomimo ustania bodźca traumatycznego, natrętne wspomnienia (intruzje/flashbacki), negatywne przekonania o świecie i własnej skuteczności.\n- Emocjonalne: Przerażenie w reakcji na triggery, silny gniew, poczucie winy (tzw. wina ocalałego), odrętwienie emocjonalne.\n- Fizjologiczne: Chroniczna hiperreaktywność, wzmożony odruch orientacyjny (wzdryganie się), poważne zaburzenia snu i koszmary.\n- Behawioralne: Unikanie myśli, emocji i rozmów związanych z traumą, unikanie zewnętrznych wyzwalaczy (ludzi, miejsc, dźwięków), czujność i zachowania sprawdzające otoczenie."
     }
 ]
@@ -212,13 +206,12 @@ if menu == "I. Diagnoza i Konceptualizacja":
                         znaleziono = True
                         
                 if znaleziono:
-                    # Komponowanie struktury do wpisania w Listę problemów
-                    sformatowany_tekst = f"CYTATY PACJENTA:\n\"{objawy_input}\"\n\n---\n\nZIDENTYFIKOWANE PROBLEMY (PROFIL CBT):\n\n"
-                    sformatowany_tekst += "\n\n".join(wykryte_problemy_cbt)
-                    st.session_state.lista_problemow = sformatowany_tekst
+                    # Ładujemy TYLKO czysty profil CBT bez żadnych cytatów
+                    st.session_state.lista_problemow = "\n\n".join(wykryte_problemy_cbt)
                 else:
-                    st.info("Brak oczywistych dopasowań. Rozbuduj opis lub wybierz diagnozę ręcznie.")
-                    st.session_state.lista_problemow = objawy_input
+                    st.info("Brak oczywistych dopasowań NLP. Dodano pusty szablon CBT.")
+                    # Pusty szablon zamiast surowego tekstu
+                    st.session_state.lista_problemow = "OBSZAR POZNAWCZY:\n- \n\nOBSZAR EMOCJONALNY:\n- \n\nOBSZAR FIZJOLOGICZNY:\n- \n\nOBSZAR BEHAWIORALNY:\n- "
             else:
                 st.warning("Wpisz najpierw to, co zgłasza pacjent!")
 
