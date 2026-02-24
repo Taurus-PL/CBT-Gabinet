@@ -57,3 +57,10 @@ elif kategoria == "Lęk Społeczny":
     st.subheader("Ćwiczenie: Przenoszenie Uwagi")
     st.write("Skoncentruj się na otoczeniu, a nie na własnych odczuciach z ciała.")
  moduły (OCD, PTSD) będziemy dopisywać w miarę rozwoju aplikacji
+with open("protokol_depresja.pdf", "rb") as file:
+    st.download_button(
+        label="📄 Pobierz pełny protokół leczenia (PDF)",
+        data=file,
+        file_name="protokol_depresja.pdf",
+        mime="application/pdf"
+    )
