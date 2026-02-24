@@ -41,7 +41,7 @@ slownik_modeli = {
         "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty.",
         "Wizualizacja": (
             "graph TD\n"
-            "A[Sytuacja społeczna] --> B[Zagrożenie społeczniczne]\n"
+            "A[Sytuacja społeczna] --> B[Zagrożenie społeczne]\n"
             "B --> C[Skupienie uwagi na sobie]\n"
             "C <--> D[Objawy somatyczne i poznawcze]\n"
             "C <--> E[Zachowania zabezpieczające]\n"
@@ -133,13 +133,17 @@ icd10_full = {
     "F90-F98 Zaburzenia wieku dziecięcego": ["F90 Zaburzenia hiperkinetyczne (ADHD)", "F91 Zaburzenia zachowania", "F95 Tiki"]
 }
 
-# --- BAZA DANYCH W PAMIĘCI ---
+# --- BAZA DANYCH W PAMIĘCI I STAN APLIKACJI ---
 if 'baza_terapii' not in st.session_state:
     st.session_state.baza_terapii = []
 
-# Zmienna do przechowywania tekstu dla Listy Problemów
 if 'lista_problemow' not in st.session_state:
     st.session_state.lista_problemow = ""
+
+# Funkcja callback - kopiuje natychmiastowo przed przeładowaniem strony
+def kopiuj_do_listy():
+    if "skarga_pacjenta" in st.session_state:
+        st.session_state.lista_problemow = st.session_state.skarga_pacjenta
 
 # --- MENU BOCZNE ---
 st.sidebar.title("🛡️ Zapis Terapii CBT")
@@ -169,16 +173,16 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.divider()
     st.header("I.2. Diagnoza kliniczna")
     
-    # ASYSTENT DIAGNOZY Z AUTOMATYCZNYM PRZEPISYWANIEM
+    # ASYSTENT DIAGNOZY
     with st.expander("🤖 Asystent Diagnozy (Język Pacjenta)", expanded=True):
         st.write("Wpisz objawy własnymi słowami pacjenta (np. 'nie mam siły wstać z łóżka, nic mnie nie cieszy'), a następnie kliknij przycisk poniżej.")
-        objawy_input = st.text_area("Cytaty pacjenta / Skarga główna:")
         
-        if st.button("🔍 Analizuj objawy i skopiuj do Listy Problemów"):
+        # Klucz skarga_pacjenta łączy się z funkcją kopiuj_do_listy()
+        objawy_input = st.text_area("Cytaty pacjenta / Skarga główna:", key="skarga_pacjenta")
+        
+        # on_click gwarantuje natychmiastowe kopiowanie
+        if st.button("🔍 Analizuj objawy i skopiuj do Listy Problemów", on_click=kopiuj_do_listy):
             if objawy_input:
-                # Automatyczne przepisanie tekstu do session_state
-                st.session_state.lista_problemow = objawy_input
-                
                 znaleziono = False
                 input_do_analizy = objawy_input.lower()
                 
@@ -217,7 +221,7 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.header("I.3. Konceptualizacja problemu")
     
     st.subheader("I.3.1. Lista problemów i cele terapii")
-    # POLE Z POWIĄZANYM KLUCZEM (KEY) - AUTO-UZUPEŁNIANIE
+    # Pole, które przyjmuje skopiowaną wartość dzięki key="lista_problemow"
     st.text_area("Lista problemów (w ujęciu poznawczo-behawioralnym)", key="lista_problemow")
     st.text_area("Cele terapii (zoperacjonalizowane, mierzalne, SMART)")
 
