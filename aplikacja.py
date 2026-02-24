@@ -41,7 +41,7 @@ slownik_modeli = {
         "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty.",
         "Wizualizacja": (
             "graph TD\n"
-            "A[Sytuacja społeczna] --> B[Zagrożenie społeczne]\n"
+            "A[Sytuacja społeczna] --> B[Zagrożenie społeczniczne]\n"
             "B --> C[Skupienie uwagi na sobie]\n"
             "C <--> D[Objawy somatyczne i poznawcze]\n"
             "C <--> E[Zachowania zabezpieczające]\n"
@@ -137,6 +137,10 @@ icd10_full = {
 if 'baza_terapii' not in st.session_state:
     st.session_state.baza_terapii = []
 
+# Zmienna do przechowywania tekstu dla Listy Problemów
+if 'lista_problemow' not in st.session_state:
+    st.session_state.lista_problemow = ""
+
 # --- MENU BOCZNE ---
 st.sidebar.title("🛡️ Zapis Terapii CBT")
 menu = st.sidebar.radio("Spis treści:", [
@@ -165,18 +169,20 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.divider()
     st.header("I.2. Diagnoza kliniczna")
     
-    # ASYSTENT Z ZACHOWANIEM WSZYSTKICH 3 ELEMENTÓW
+    # ASYSTENT DIAGNOZY Z AUTOMATYCZNYM PRZEPISYWANIEM
     with st.expander("🤖 Asystent Diagnozy (Język Pacjenta)", expanded=True):
         st.write("Wpisz objawy własnymi słowami pacjenta (np. 'nie mam siły wstać z łóżka, nic mnie nie cieszy'), a następnie kliknij przycisk poniżej.")
         objawy_input = st.text_area("Cytaty pacjenta / Skarga główna:")
         
-        if st.button("🔍 Analizuj objawy"):
+        if st.button("🔍 Analizuj objawy i skopiuj do Listy Problemów"):
             if objawy_input:
+                # Automatyczne przepisanie tekstu do session_state
+                st.session_state.lista_problemow = objawy_input
+                
                 znaleziono = False
                 input_do_analizy = objawy_input.lower()
                 
                 for el in baza_symptomow:
-                    # Sprawdzamy czy fraza ze słownika występuje w tekście użytkownika
                     if any(fraza in input_do_analizy for fraza in el["slowa_kluczowe"]):
                         st.success(f"🎯 **Sugerowana diagnoza:** {el['diagnoza']}")
                         st.warning(f"⚖️ **Diagnoza różnicowa:** {el['roznicowa']}")
@@ -211,7 +217,8 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.header("I.3. Konceptualizacja problemu")
     
     st.subheader("I.3.1. Lista problemów i cele terapii")
-    st.text_area("Lista problemów (w ujęciu poznawczo-behawioralnym)")
+    # POLE Z POWIĄZANYM KLUCZEM (KEY) - AUTO-UZUPEŁNIANIE
+    st.text_area("Lista problemów (w ujęciu poznawczo-behawioralnym)", key="lista_problemow")
     st.text_area("Cele terapii (zoperacjonalizowane, mierzalne, SMART)")
 
     st.subheader("I.3.2. Poziom pierwszy (Sytuacja bieżąca - przekrój poprzeczny)")
