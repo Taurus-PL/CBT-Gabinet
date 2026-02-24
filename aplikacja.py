@@ -1,136 +1,103 @@
 import streamlit as st
-import pandas as pd
 
 # --- KONFIGURACJA STRONY ---
-st.set_page_config(page_title="Zapis Przebiegu Terapii CBT", layout="wide")
+st.set_page_config(page_title="Zapis Terapii CBT", layout="wide")
 
-# --- BAZA WIEDZY I DIAGRAMY MERMAID ---
+# --- BAZA WIEDZY I MODELE ---
 slownik_modeli = {
     "F41.0": [
         {
             "Model": "Model poznawczy lęku panicznego (D. Clark)",
             "Opis": "Skupienie na błędnej, katastroficznej interpretacji normalnych doznań z ciała.",
-            "Interwencje": "Reatrybucja doznań, hiperwentylacja (eksperyment), eliminacja zachowań zabezpieczających.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Wyzwalacz] --> B[Postrzegane zagrożenie]\n"
-                "B --> C[Lęk / Niepokój]\n"
-                "C --> D[Doznania somatyczne]\n"
-                "D --> E{Katastroficzna interpretacja}\n"
-                "E -- Błędne koło --> B\n"
-            )
+            "Wizualizacja": "graph TD\nA[Wyzwalacz] --> B[Zagrożenie]\nB --> C[Lęk]\nC --> D[Doznania z ciała]\nD --> E{Błędna interpretacja}\nE -- Błędne koło --> B"
         }
     ],
     "F32": [
         {
             "Model": "Triada Poznawcza Depresji (A. Beck)",
             "Opis": "Negatywna wizja siebie, świata i przyszłości.",
-            "Interwencje": "Tabela Becka, restrukturyzacja poznawcza, testowanie przekonań.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A((Negatywne myśli O SOBIE)) <--> B((Negatywne myśli O ŚWIECIE))\n"
-                "B <--> C((Negatywne myśli O PRZYSZŁOŚCI))\n"
-                "C <--> A\n"
-            )
+            "Wizualizacja": "graph TD\nA((O SOBIE)) <--> B((O ŚWIECIE))\nB <--> C((O PRZYSZŁOŚCI))\nC <--> A"
         },
         {
             "Model": "Aktywacja Behawioralna (C. Martell)",
-            "Opis": "Depresja jako wynik spadku wzmocnień pozytywnych. Bierność pogłębia obniżony nastrój.",
-            "Interwencje": "Monitorowanie aktywności, planowanie zadań 'przyjemność i mistrzostwo'.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Spadek wzmocnień] --> B[Obniżony nastrój]\n"
-                "B --> C[Wycofanie / Bierność]\n"
-                "C --> D[Brak okazji do poprawy nastroju]\n"
-                "D -- Błędne koło --> B\n"
-            )
+            "Opis": "Bierność pogłębia obniżony nastrój przez brak wzmocnień.",
+            "Wizualizacja": "graph TD\nA[Spadek wzmocnień] --> B[Obniżony nastrój]\nB --> C[Bierność]\nC --> D[Brak poprawy]\nD -- Koło bierności --> B"
         }
     ],
     "F40.1": [
         {
             "Model": "Model Lęku Społecznego (Clark i Wells)",
             "Opis": "Koncentracja uwagi na sobie i tworzenie negatywnego obrazu własnego 'ja'.",
-            "Interwencje": "Trening uwagi na zewnątrz, wideo-feedback, eksperymenty behawioralne.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Sytuacja społeczna] --> B[Zagrożenie społeczne]\n"
-                "B --> C[Skupienie uwagi na sobie]\n"
-                "C <--> D[Objawy somatyczne]\n"
-                "C <--> E[Zachowania zabezpieczające]\n"
-            )
+            "Wizualizacja": "graph TD\nA[Sytuacja] --> B[Zagrożenie]\nB --> C[Skupienie na sobie]\nC <--> D[Objawy]\nC <--> E[Zabezpieczenia]"
         }
     ]
 }
-slownik_modeli["F33"] = slownik_modeli["F32"]
 
-# --- BAZA ASYSTENTA ---
+# --- ASYSTENT LOGIKI ---
 baza_symptomow = [
     {
-        "slowa": ["serce", "panika", "umrę", "zawał", "duszno"],
+        "slowa": ["serce", "panika", "umrę", "zawał"],
         "diagnoza": "F41.0 Lęk paniczny",
-        "problemy": "LĘK PANICZNY:\n- Katastroficzne myśli o zdrowiu\n- Zachowania zabezpieczające",
-        "cele": "1. Redukcja napadów paniki.\n2. Rezygnacja z zachowań zabezpieczających.",
-        "uzasadnienie": "Praca nad reatrybucją doznań fizycznych i eksperymenty behawioralne."
+        "problemy": "POZNAWCZE: Katastrofizacja doznań fizycznych.\nBEHAWIORALNE: Zachowania zabezpieczające.",
+        "cele": "1. Redukcja napadów paniki.\n2. Rezygnacja z zachowań zabezpieczających."
     },
     {
-        "slowa": ["smutek", "brak sił", "beznadziejny", "leżę", "nic nie cieszy"],
+        "slowa": ["smutek", "brak sił", "beznadziejny", "leżę"],
         "diagnoza": "F32 Epizod depresyjny",
-        "problemy": "DEPRESJA:\n- Negatywna triada poznawcza\n- Bierność i wycofanie",
-        "cele": "1. Zwiększenie aktywności.\n2. Restrukturyzacja myśli automatycznych.",
-        "uzasadnienie": "Aktywacja behawioralna oraz praca nad zniekształceniami poznawczymi."
+        "problemy": "POZNAWCZE: Negatywna triada.\nBEHAWIORALNE: Bierność i wycofanie.",
+        "cele": "1. Zwiększenie aktywności.\n2. Restrukturyzacja myśli."
     }
 ]
 
 # --- STAN SESJI ---
-if 'dane' not in st.session_state:
-    st.session_state.dane = {"problemy": "", "cele": "", "uzasadnienie": "", "protokol": ""}
+if 'problemy' not in st.session_state: st.session_state.problemy = ""
+if 'cele' not in st.session_state: st.session_state.cele = ""
 
-# --- INTERFEJS ---
-st.sidebar.title("🛡️ Panel Terapeuty CBT")
-nawigacja = st.sidebar.radio("Przejdź do:", ["Konceptualizacja", "Plan Terapii", "Archiwum"])
+# --- UI ---
+st.title("🛡️ Profesjonalny Zapis Terapii CBT")
 
-if nawigacja == "Konceptualizacja":
-    st.title("I. Diagnoza i Konceptualizacja")
-    
-    with st.expander("🤖 Asystent Diagnozy", expanded=True):
-        skarga = st.text_area("Wpisz objawy pacjenta:")
-        if st.button("Generuj propozycję"):
+menu = st.sidebar.radio("Etap pracy:", ["Konceptualizacja", "Plan Terapii"])
+
+if menu == "Konceptualizacja":
+    with st.expander("🤖 Szybki Asystent (wpisz objawy)", expanded=True):
+        skarga = st.text_area("Co zgłasza pacjent?")
+        if st.button("Analizuj"):
             for item in baza_symptomow:
                 if any(s in skarga.lower() for s in item["slowa"]):
-                    st.session_state.dane["problemy"] = item["problemy"]
-                    st.session_state.dane["cele"] = item["cele"]
-                    st.session_state.dane["uzasadnienie"] = item["uzasadnienie"]
-                    st.success(f"Dopasowano do: {item['diagnoza']}")
+                    st.session_state.problemy = item["problemy"]
+                    st.session_state.cele = item["cele"]
+                    st.success(f"Dopasowano: {item['diagnoza']}")
 
-    c1, c2 = st.columns(2)
-    kod_icd = c1.selectbox("Kod ICD-10:", ["F32", "F33", "F41.0", "F40.1", "F42", "F43.1"])
+    col1, col2 = st.columns(2)
     
-    st.subheader("Modele CBT dla tego rozpoznania")
-    if kod_icd in slownik_modeli:
-        for m in slownik_modeli[kod_icd]:
-            st.info(f"**{m['Model']}**")
-            st.write(m['Opis'])
-            with st.expander("Zobacz diagram"):
-                st.mermaid(m['Wizualizacja'])
-    
+    with col1:
+        st.subheader("Dane kliniczne")
+        kod_icd = st.selectbox("Kod ICD-10:", ["F32", "F41.0", "F40.1", "F42", "F43.1"])
+        st.session_state.problemy = st.text_area("Lista problemów:", value=st.session_state.problemy, height=200)
+        st.session_state.cele = st.text_area("Cele SMART:", value=st.session_state.cele, height=150)
+
+    with col2:
+        st.subheader("Sugerowane Modele Pracy")
+        if kod_icd in slownik_modeli:
+            for m in slownik_modeli[kod_icd]:
+                with st.container(border=True):
+                    st.markdown(f"**{m['Model']}**")
+                    st.caption(m['Opis'])
+                    if st.checkbox(f"Pokaż schemat: {m['Model']}", key=m['Model']):
+                        st.markdown(f"```mermaid\n{m['Wizualizacja']}\n```")
+        else:
+            st.info("Brak szczegółowego modelu dla tego kodu w bazie.")
+
     st.divider()
-    st.session_state.dane["problemy"] = st.text_area("Lista problemów:", value=st.session_state.dane["problemy"], height=200)
-    st.session_state.dane["cele"] = st.text_area("Cele SMART:", value=st.session_state.dane["cele"])
+    st.subheader("Poziom 2 i 3 (Mechanizmy i Historia)")
+    st.text_area("Przekonania kluczowe i warunkowe:")
+    st.text_area("Historia uczenia się (czynniki rozwojowe):")
 
-    st.subheader("Konceptualizacja - Poziom 2 i 3")
-    st.text_area("Przekonania kluczowe (o sobie/świecie):")
-    st.text_area("Strategie kompensacyjne:")
-    st.text_area("Wydarzenia z dzieciństwa / Rozwojowe:")
-
-elif nawigacja == "Plan Terapii":
+elif menu == "Plan Terapii":
     st.title("II. Plan i Interwencje")
-    st.text_input("Wybrany protokół leczenia:", value=st.session_state.dane["protokol"])
-    st.session_state.dane["uzasadnienie"] = st.text_area("Uzasadnienie planu:", value=st.session_state.dane["uzasadnienie"], height=150)
+    st.text_input("Wybrany protokół:")
+    st.text_area("Uzasadnienie planu leczenia:", height=150)
     st.divider()
-    st.subheader("Rejestr sesji")
-    st.text_area("Notatki z przebiegu sesji:", height=300)
-
-elif nawigacja == "Archiwum":
-    st.title("Archiwum")
-    st.write("Lista pacjentów (w budowie)")
+    st.subheader("Notatki z sesji")
+    st.text_area("Przebieg sesji i zadania domowe:", height=300)
 
