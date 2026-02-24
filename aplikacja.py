@@ -41,7 +41,7 @@ slownik_modeli = {
         "Interwencje": "Trening uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty.",
         "Wizualizacja": (
             "graph TD\n"
-            "A[Sytuacja społeczna] --> B[Zagrożenie społeczzne]\n"
+            "A[Sytuacja społeczna] --> B[Zagrożenie społeczne]\n"
             "B --> C[Skupienie uwagi na sobie]\n"
             "C <--> D[Objawy somatyczne i poznawcze]\n"
             "C <--> E[Zachowania zabezpieczające]\n"
@@ -81,38 +81,14 @@ slownik_modeli = {
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
 
-# --- BAZA ASYSTENTA DIAGNOZY (Słowa kluczowe -> Diagnoza i Różnicowanie) ---
+# --- BAZA ASYSTENTA DIAGNOZY ---
 baza_symptomow = [
-    {
-        "slowa_kluczowe": ["lęk", "panika", "serce", "duszność", "umieranie", "zawał", "atak"],
-        "diagnoza": "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)",
-        "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne (np. arytmia), Nadczynność tarczycy."
-    },
-    {
-        "slowa_kluczowe": ["smutek", "brak energii", "płacz", "bezsenność", "myśli samobójcze", "beznadzieja", "brak apetytu", "męczliwość", "anhedonia", "depresja"],
-        "diagnoza": "F32 Epizod depresyjny / F33 Zaburzenia depresyjne nawracające",
-        "roznicowa": "Choroba afektywna dwubiegunowa - epizod depresyjny (F31), Dystymia (F34.1), Niedoczynność tarczycy, Zaburzenia adaptacyjne (F43.2)."
-    },
-    {
-        "slowa_kluczowe": ["natrętne myśli", "rytuały", "sprawdzanie", "mycie", "liczenie", "obsesje", "kompulsje", "zarazki", "brud"],
-        "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)",
-        "roznicowa": "Zaburzenie osobowości anankastycznej (OCPD - F60.5), Schizofrenia (F20), Tiki (F95), GAD (F41.1)."
-    },
-    {
-        "slowa_kluczowe": ["lęk przed oceną", "wystąpienia publiczne", "czerwienienie się", "drżenie rąk", "ludzie", "kompromitacja", "wstyd", "wzrok innych"],
-        "diagnoza": "F40.1 Fobie społeczne",
-        "roznicowa": "Osobowość lękliwa/unikająca (F60.6), Agorafobia (F40.0), Ciało dysmorficzne (F45.2)."
-    },
-    {
-        "slowa_kluczowe": ["zamartwianie się", "napięcie mięśniowe", "niepokój", "przyszłość", "niepewność", "najgorsze", "ciągły lęk"],
-        "diagnoza": "F41.1 Zaburzenie lękowe uogólnione (GAD)",
-        "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1), Hipochondria (F45.2), Depresja (F32)."
-    },
-    {
-        "slowa_kluczowe": ["wypadek", "trauma", "koszmary", "flashback", "unikanie", "stres", "uraz", "wspomnienia"],
-        "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)",
-        "roznicowa": "Ostra reakcja na stres (F43.0), Zaburzenia adaptacyjne (F43.2), Fobia specyficzna (F40.2)."
-    }
+    {"slowa_kluczowe": ["lęk", "panika", "serce", "duszność", "umieranie", "zawał", "atak"], "diagnoza": "F41.0 Zaburzenie lękowe z napadami lęku", "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne, Nadczynność tarczycy."},
+    {"slowa_kluczowe": ["smutek", "brak energii", "płacz", "bezsenność", "myśli samobójcze", "beznadzieja", "brak apetytu", "anhedonia", "depresja"], "diagnoza": "F32 Epizod depresyjny / F33 Zaburzenia depresyjne nawracające", "roznicowa": "ChAD - epizod depresyjny (F31), Dystymia (F34.1), Niedoczynność tarczycy."},
+    {"slowa_kluczowe": ["natrętne myśli", "rytuały", "sprawdzanie", "mycie", "liczenie", "obsesje", "kompulsje"], "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", "roznicowa": "Osobowość anankastyczna (F60.5), Schizofrenia (F20), Tiki (F95)."},
+    {"slowa_kluczowe": ["lęk przed oceną", "wystąpienia publiczne", "czerwienienie się", "kompromitacja", "wstyd", "wzrok innych"], "diagnoza": "F40.1 Fobie społeczne", "roznicowa": "Osobowość unikająca (F60.6), Agorafobia (F40.0)."},
+    {"slowa_kluczowe": ["zamartwianie się", "napięcie mięśniowe", "niepokój", "przyszłość", "niepewność", "ciągły lęk"], "diagnoza": "F41.1 Zaburzenie lękowe uogólnione (GAD)", "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1), Hipochondria (F45.2)."},
+    {"slowa_kluczowe": ["wypadek", "trauma", "koszmary", "flashback", "unikanie", "stres", "uraz"], "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)", "roznicowa": "Ostra reakcja na stres (F43.0), Zaburzenia adaptacyjne (F43.2)."}
 ]
 
 # --- PEŁNA BAZA ICD-10 ---
@@ -132,143 +108,147 @@ if 'baza_terapii' not in st.session_state:
     st.session_state.baza_terapii = []
 
 # --- MENU BOCZNE ---
-st.sidebar.title("🛡️ CBT System Pro")
-menu = st.sidebar.radio("Nawigacja:", [
-    "1. Metryczka i Diagnoza", 
-    "2. Konceptualizacja ABC", 
-    "3. Plan, Sesje i Podsumowanie",
+st.sidebar.title("🛡️ Zapis Terapii CBT")
+menu = st.sidebar.radio("Spis treści:", [
+    "I. Diagnoza i Konceptualizacja", 
+    "II. Plan i Interwencje", 
+    "III. Podsumowanie",
     "📂 Archiwum Diagnoz"
 ])
 st.sidebar.divider()
-st.sidebar.caption("Oparte na: Zapis przebiegu terapii CBT, A. Popiel i E. Pragłowska")
+st.sidebar.caption("Oparte na: Zapis przebiegu terapii CBT (A. Popiel, E. Pragłowska)")
 
-# --- MODUŁ 1: METRYCZKA I DIAGNOZA ---
-if menu == "1. Metryczka i Diagnoza":
-    st.header("I.1 Metryczka i Diagnoza Kliniczna")
+# ==========================================================
+# MODUŁ I: DIAGNOZA I KONCEPTUALIZACJA ZJAWISKA
+# ==========================================================
+if menu == "I. Diagnoza i Konceptualizacja":
+    st.title("I. Diagnoza i konceptualizacja zjawiska")
     
-    with st.expander("Dane pacjenta i autorefleksja", expanded=True):
-        col1, col2 = st.columns(2)
-        imie = col1.text_input("Pacjent (inicjały/imię)")
-        wiek = col2.number_input("Wiek", 0, 110)
-        terapeuta = col1.text_input("Terapeuta")
-        st.checkbox("Czy pacjent jest bezpieczny? (ryzyko samobójstwa)")
-        st.text_area("Moje własne ABC na myśl o pracy z pacjentem")
+    st.header("I.1. Metryczka")
+    col1, col2 = st.columns(2)
+    imie = col1.text_input("Pacjent (inicjały/kod)")
+    wiek = col2.number_input("Wiek", 0, 110)
+    terapeuta = col1.text_input("Terapeuta")
+    superwizor = col2.text_input("Superwizor")
+    st.checkbox("Czy pacjent jest bezpieczny? (ryzyko samobójstwa / heteroagresji)")
 
-    # NOWOŚĆ: ASYSTENT DIAGNOZY
-    with st.expander("🤖 Asystent Diagnozy (Podpowiedzi na podstawie objawów)", expanded=True):
-        st.write("Opisz krótko główne problemy pacjenta, a system zasugeruje diagnozę oraz diagnozę różnicową.")
-        objawy_input = st.text_area("Wpisz zgłaszane problemy (np. lęk, smutek, myśli samobójcze, bezsenność, zamartwianie się):")
-        
+    st.divider()
+    st.header("I.2. Diagnoza kliniczna")
+    with st.expander("🤖 Asystent Diagnozy (Podpowiedzi)", expanded=False):
+        objawy_input = st.text_area("Wpisz zgłaszane problemy (np. lęk, smutek):")
         if objawy_input:
-            znaleziono_dopasowanie = False
-            objawy_lower = objawy_input.lower()
-            
-            for element in baza_symptomow:
-                # Sprawdza czy którekolwiek ze słów kluczowych występuje w tekście użytkownika
-                if any(slowo in objawy_lower for slowo in element["slowa_kluczowe"]):
-                    st.success(f"**Sugerowana diagnoza:** {element['diagnoza']}")
-                    st.warning(f"**Zalecana diagnoza różnicowa:** {element['roznicowa']}")
-                    znaleziono_dopasowanie = True
-            
-            if not znaleziono_dopasowanie:
-                st.info("Nie znaleziono oczywistych słów kluczowych. Rozważ ręczny wybór diagnozy poniżej.")
+            znaleziono = False
+            for el in baza_symptomow:
+                if any(slowo in objawy_input.lower() for slowo in el["slowa_kluczowe"]):
+                    st.success(f"**Sugerowana diagnoza:** {el['diagnoza']}")
+                    st.warning(f"**Diagnoza różnicowa:** {el['roznicowa']}")
+                    znaleziono = True
+            if not znaleziono:
+                st.info("Brak oczywistych dopasowań. Wybierz kod ręcznie.")
 
-    with st.expander("Wybór Diagnozy ICD-10 (Ręczny)", expanded=True):
-        c1, c2 = st.columns(2)
-        kat_wybrana = c1.selectbox("Grupa ICD-10:", list(icd10_full.keys()))
-        pelna_diagnoza = c2.selectbox("Rozpoznanie główne:", icd10_full[kat_wybrana])
-        kod_icd = pelna_diagnoza.split(" ")[0]
-
-        # SILNIK WIEDZY EBM I DIAGRAMY
-        st.divider()
-        if kod_icd in slownik_modeli:
-            dane = slownik_modeli[kod_icd]
-            st.success(f"🧠 **Sugerowany protokół EBM dla: {kod_icd}**")
-            st.write(f"**Model:** {dane['Model']}")
-            st.write(f"**Mechanizm podtrzymujący:** {dane['Opis']}")
-            st.write(f"**Interwencje:** {dane['Interwencje']}")
-            
-            # WŁASNY MODUŁ HTML DO RENDEROWANIA (Bez potrójnych cudzysłowów)
-            if "Wizualizacja" in dane:
-                st.markdown("### Graficzny schemat mechanizmu:")
-                kod_html = (
-                    "<div class='mermaid' style='background-color: transparent; display: flex; justify-content: center;'>"
-                    + dane["Wizualizacja"] +
-                    "</div>"
-                    "<script type='module'>"
-                    "import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';"
-                    "mermaid.initialize({ startOnLoad: true, theme: 'dark' });"
-                    "</script>"
-                )
-                components.html(kod_html, height=450)
-        else:
-            st.info("💡 Dla wybranego kodu zaleca się stosowanie standardowego modelu poznawczego ABC.")
-
-    with st.expander("Ogólne funkcjonowanie"):
-        f_rodzina = st.text_area("Sfera rodzinna (funkcjonowanie i trudności)")
-        f_praca = st.text_area("Sfera zawodowa / szkolna (funkcjonowanie i trudności)")
-        f_spoleczna = st.text_area("Sfera społeczna (funkcjonowanie i trudności)")
-        
-    if st.button("💾 Zapisz Diagnozę w Archiwum"):
-        st.session_state.baza_terapii.append({
-            "Pacjent": imie, "Wiek": wiek, "Kod ICD": kod_icd, 
-            "Diagnoza": pelna_diagnoza, "Terapeuta": terapeuta
-        })
-        st.success("Zapisano pacjenta do bazy!")
-
-# --- MODUŁ 2: KONCEPTUALIZACJA ---
-elif menu == "2. Konceptualizacja ABC":
-    st.header("I.3 Konceptualizacja Problemu")
+    c1, c2 = st.columns(2)
+    kat_wybrana = c1.selectbox("Grupa ICD-10:", list(icd10_full.keys()))
+    pelna_diagnoza = c2.selectbox("Rozpoznanie główne:", icd10_full[kat_wybrana])
+    kod_icd = pelna_diagnoza.split(" ")[0]
     
-    st.subheader("Poziom Pierwszy (ABC)")
-    st.text_area("Sytuacja ilustrująca problem")
+    inne_rozpoznania = st.text_input("Inne rozpoznania (np. somatyczne, psychiatryczne współwystępujące):")
+
+    # WIEDZA EBM I SCHEMATY
+    if kod_icd in slownik_modeli:
+        dane = slownik_modeli[kod_icd]
+        st.success(f"🧠 **Sugerowany protokół EBM dla: {kod_icd}**")
+        st.write(f"**Model:** {dane['Model']} | **Mechanizm:** {dane['Opis']}")
+        if "Wizualizacja" in dane:
+            kod_html = (
+                "<div class='mermaid' style='display: flex; justify-content: center;'>"
+                + dane["Wizualizacja"] +
+                "</div><script type='module'>import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';mermaid.initialize({ startOnLoad: true, theme: 'dark' });</script>"
+            )
+            components.html(kod_html, height=450)
+
+    st.divider()
+    st.header("I.3. Konceptualizacja problemu")
+    
+    st.subheader("I.3.1. Lista problemów i cele terapii")
+    st.text_area("Lista problemów (w ujęciu poznawczo-behawioralnym)")
+    st.text_area("Cele terapii (zoperacjonalizowane, mierzalne, SMART)")
+
+    st.subheader("I.3.2. Poziom pierwszy (Sytuacja bieżąca - przekrój poprzeczny)")
+    st.text_area("Sytuacja (typowa sytuacja ilustrująca problem)")
+    c3, c4 = st.columns(2)
+    with c3:
+        st.text_area("Myśli automatyczne / Obrazy")
+        st.text_area("Emocje (rodzaj i nasilenie)")
+    with c4:
+        st.text_area("Doznania z ciała (fizjologiczne)")
+        st.text_area("Zachowanie (w tym zachowania zabezpieczające/unikające)")
+
+    st.subheader("I.3.3. Poziom drugi (Mechanizmy podtrzymujące i Przekonania)")
+    st.text_area("Przekonania kluczowe (o sobie, innych, świecie)")
+    st.text_area("Przekonania warunkowe (Założenia / Zasady / Postawy)")
+    st.text_area("Strategie radzenia sobie (kompensacyjne)")
+
+    st.subheader("I.3.4. Historia uczenia się (Profil rozwojowy)")
+    st.text_area("Wydarzenia z przeszłości i wczesne doświadczenia kształtujące schematy")
+    st.text_area("Zdarzenia wyzwalające (Czynniki spustowe wystąpienia obecnego epizodu)")
+
+    st.divider()
+    st.header("I.4. Zasoby pacjenta")
+    st.text_area("Mocne strony, wsparcie społeczne, umiejętności, inteligencja, motywacja itp.")
+
+    if st.button("💾 Zapisz Diagnozę i Konceptualizację"):
+        st.session_state.baza_terapii.append({"Pacjent": imie, "Wiek": wiek, "Kod ICD": kod_icd, "Diagnoza": pelna_diagnoza})
+        st.success("Zapisano do Archiwum!")
+
+# ==========================================================
+# MODUŁ II: PLAN TERAPII I INTERWENCJE
+# ==========================================================
+elif menu == "II. Plan i Interwencje":
+    st.title("II. Plan terapii i interwencje")
+    
+    st.header("II.1. Plan terapii")
+    st.text_area("Uzasadnienie poznawczo-behawioralne (dlaczego wybrano taki plan, jaki protokół EBM)", height=150)
+    
+    st.header("II.2. Zapis przebiegu poszczególnych sesji")
+    st.info("Tutaj dokumentuj krótko kolejne spotkania: datę, główne interwencje, zadania domowe i wnioski.")
+    st.text_area("Rejestr sesji (np. Sesja 1 [Data] - Psychoedukacja i BA...)", height=300)
+
+# ==========================================================
+# MODUŁ III: PODSUMOWANIE I EWALUACJA
+# ==========================================================
+elif menu == "III. Podsumowanie":
+    st.title("III. Podsumowanie i Ewaluacja Terapii")
+    
+    st.header("III.1. Osiągnięte cele terapii")
     col1, col2 = st.columns(2)
     with col1:
-        st.text_area("A – Czynnik wyzwalający")
-        st.text_area("B – Automatyczne myśli")
+        st.text_area("Według pacjenta")
     with col2:
-        st.text_area("C – Emocje")
-        st.text_area("C – Objawy fizjologiczne")
-    st.text_area("C – Zachowanie (w tym strategie zabezpieczające)")
-    
-    st.divider()
-    st.subheader("Poziom Drugi (Procesy i Schematy)")
-    st.text_area("Przekonania kluczowe (schematy poznawcze)")
-    st.text_area("Przekonania warunkowe (zasady)")
-    st.multiselect("Zidentyfikowane procesy transdiagnostyczne:", 
-                   ["Unikanie poznawcze", "Zamartwianie się", "Ruminacje", "Lęk przed lękiem", "Monitorowanie zagrożenia", "Perfekcjonizm"])
-    st.text_area("Profil rozwojowy (Historia uczenia się)")
+        st.text_area("Według terapeuty (odniesienie do celów z I.3.1)")
 
-# --- MODUŁ 3: PLAN I PODSUMOWANIE ---
-elif menu == "3. Plan, Sesje i Podsumowanie":
-    st.header("II. Etap Terapeutyczny")
-    st.text_area("Plan terapii (protokół EBM i uzasadnienie)")
-    st.text_area("Zapis przebiegu kolejnych sesji (metody, wnioski, zadania)")
-    
-    st.divider()
-    st.header("III. Etap Końcowy (Ewaluacja)")
-    col1, col2 = st.columns(2)
-    with col1:
-        st.text_area("Osiągnięte cele (wg pacjenta)")
-    with col2:
-        st.text_area("Osiągnięte cele (wg terapeuty)")
-    st.text_area("Zidentyfikowane mechanizmy zmiany i zapobieganie nawrotom")
-    st.text_area("IV. Literatura wykorzystana do pracy z pacjentem")
+    st.header("III.2. Zidentyfikowane mechanizmy zmiany")
+    st.text_area("Co dokładnie pomogło pacjentowi? (np. zmiana przekonania X, zaprzestanie unikania Y)")
 
-# --- MODUŁ 4: ARCHIWUM ---
+    st.header("III.3. Zapobieganie nawrotom")
+    st.text_area("Sygnały ostrzegawcze i plan radzenia sobie z nawrotem objawów")
+
+    st.header("III.4. Literatura")
+    st.text_area("Materiały, protokoły i książki wykorzystane do pracy z pacjentem")
+
+# ==========================================================
+# MODUŁ IV: ARCHIWUM
+# ==========================================================
 elif menu == "📂 Archiwum Diagnoz":
-    st.header("Baza Terapii i Filtrowanie")
+    st.title("Baza Terapii i Filtrowanie")
     
     if not st.session_state.baza_terapii:
-        st.warning("Baza jest pusta. Dodaj pacjenta w zakładce '1. Metryczka i Diagnoza'.")
+        st.warning("Baza jest pusta. Dodaj pacjenta w zakładce I.")
     else:
         df = pd.DataFrame(st.session_state.baza_terapii)
-        
         lista_diagnoz = ["Wszystkie"] + list(df['Kod ICD'].unique())
         wybrany_kod = st.selectbox("Filtruj bazę według diagnozy:", lista_diagnoz)
         
         if wybrany_kod != "Wszystkie":
             df = df[df['Kod ICD'] == wybrany_kod]
-            st.write(f"Znaleziono pacjentów dla kodu: **{wybrany_kod}**")
             
         st.dataframe(df, use_container_width=True)
