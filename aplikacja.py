@@ -1,91 +1,149 @@
 import streamlit as st
 import pandas as pd
 
-# Konfiguracja strony
-st.set_page_config(page_title="System CBT Pro - Modele EBM", layout="wide")
+# --- KONFIGURACJA STRONY ---
+st.set_page_config(page_title="Zapis Przebiegu Terapii CBT - System Pro", layout="wide")
 
-# --- BAZA WIEDZY: MODELE CBT DLA ICD-10 ---
+# --- BAZA WIEDZY: MODELE CBT DOPASOWANE PO KODACH ---
 slownik_modeli = {
-    "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)": {
-        "Model": "Model poznawczy lęku panicznego D. Clarka (1986)",
-        "Opis": "Skupienie na błędnej, katastroficznej interpretacji doznań z ciała (np. kołatanie serca = zawał).",
-        "Interwencje": "Reatrybucja doznań, eksperymenty behawioralne (indukcja objawów), eliminacja zachowań zabezpieczających."
+    "F41.0": {
+        "Model": "Model poznawczy lęku panicznego (D. Clark, 1986)",
+        "Opis": "Skupienie na błędnej, katastroficznej interpretacji normalnych doznań z ciała (np. kołatanie serca = zawał).",
+        "Interwencje": "Reatrybucja doznań, hiperwentylacja (eksperyment), eliminacja zachowań zabezpieczających."
     },
-    "F41.1 Zaburzenie lękowe uogólnione (GAD)": {
-        "Model": "Model Nietolerancji Niepewności (Dugas) lub Model Metapoznawczy (Wells)",
-        "Opis": "Zamartwianie się o samo martwienie (metaprzekonania) oraz unikanie poznawcze niepewności.",
-        "Interwencje": "Trening rozwiązywania problemów, ekspozycja na niepewność, restrukturyzacja metaprzekonań."
+    "F41.1": {
+        "Model": "Model Nietolerancji Niepewności (M. Dugas) / Model Metapoznawczy (A. Wells)",
+        "Opis": "Zamartwianie się o martwienie (metaprzekonania) oraz unikanie poznawcze niepewności w życiu.",
+        "Interwencje": "Trening rozwiązywania problemów, ekspozycja na wyobrażenia, restrukturyzacja metaprzekonań."
     },
-    "F40.1 Fobie społeczne": {
-        "Model": "Model Clarka i Wellsa (1995)",
-        "Opis": "Koncentracja uwagi na sobie, negatywny obraz siebie w oczach innych, zachowania zabezpieczające.",
-        "Interwencje": "Trening koncentracji uwagi na zewnątrz, wideo-feedback, eksperymenty behawioralne."
+    "F40.1": {
+        "Model": "Model Lęku Społecznego (Clark i Wells, 1995)",
+        "Opis": "Koncentracja uwagi na sobie, tworzenie negatywnego obrazu siebie w oczach innych, silne zachowania zabezpieczające.",
+        "Interwencje": "Trening przenoszenia uwagi na zewnątrz (task-concentration), wideo-feedback, eksperymenty w sytuacjach społecznych."
     },
-    "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)": {
-        "Model": "Model poznawczy Salkovskisa",
-        "Opis": "Przesadne poczucie odpowiedzialności i fuzja myśli z działaniem. Myśl natrętna = zagrożenie.",
-        "Interwencje": "ERP (Ekspozycja z powstrzymaniem reakcji), restrukturyzacja przekonań o odpowiedzialności."
+    "F42": {
+        "Model": "Model poznawczy OCD (P. Salkovskis)",
+        "Opis": "Przesadne poczucie odpowiedzialności (TAF - fuzja myśli z działaniem). Myśl natrętna jest interpretowana jako realne zagrożenie.",
+        "Interwencje": "ERP (Ekspozycja z powstrzymaniem reakcji), restrukturyzacja przekonań o odpowiedzialności, tarcze dwojga (pie chart)."
     },
-    "F32 Epizod depresyjny": {
-        "Model": "Triada Poznawcza Becka / Model Aktywacji Behawioralnej",
+    "F32": {
+        "Model": "Triada Poznawcza Becka / Model Aktywacji Behawioralnej (Martell)",
+        "Opis": "Negatywna wizja siebie, świata i przyszłości. Spadek wzmocnień pozytywnych z otoczenia i wzrost zachowań unikających.",
+        "Interwencje": "Monitorowanie aktywności, Aktywacja behawioralna (BA), identyfikacja i restrukturyzacja myśli automatycznych."
+    },
+    "F33": {
+        "Model": "Triada Poznawcza Becka / Model Aktywacji Behawioralnej (Martell)",
         "Opis": "Negatywna wizja siebie, świata i przyszłości. Spadek wzmocnień pozytywnych z otoczenia.",
-        "Interwencje": "Aktywacja behawioralna (BA), identyfikacja myśli automatycznych, zmiana schematów."
+        "Interwencje": "Aktywacja behawioralna (BA), profilaktyka nawrotów (MBCT - Mindfulness)."
     },
-    "F43.1 Zaburzenie stresowe pourazowe (PTSD)": {
-        "Model": "Model przetwarzania emocjonalnego Foa i Kozaka / Model Ehlers i Clarka",
+    "F43.1": {
+        "Model": "Model Przetwarzania Informacji (Foa i Kozak) / Model Ehlers i Clarka",
         "Opis": "Brak integracji wspomnienia traumatycznego z pamięcią autobiograficzną. Utrzymujące się poczucie bieżącego zagrożenia.",
-        "Interwencje": "Przedłużona ekspozycja (PE), przetwarzanie poznawcze wspomnienia, praca nad 'hotspots'."
+        "Interwencje": "Przedłużona ekspozycja (PE), przetwarzanie poznawcze wspomnienia (CPT), praca nad 'hotspots'."
+    },
+    "F50.0": {
+        "Model": "Transdiagnostyczny Model Zaburzeń Odżywiania (CBT-E, C. Fairburn)",
+        "Opis": "Nadwartościowe znaczenie nadawane figurze, wadze i kontroli nad nimi. Perfekcjonizm kliniczny.",
+        "Interwencje": "Regularne jedzenie, ważenie się w gabinecie, praca nad obrazem ciała i perfekcjonizmem."
+    },
+    "F50.2": {
+        "Model": "Transdiagnostyczny Model Zaburzeń Odżywiania (CBT-E, C. Fairburn)",
+        "Opis": "Błędne koło restrykcji dietetycznych, które prowadzą do napadów objadania się i zachowań kompensacyjnych.",
+        "Interwencje": "Dzienniczek żywieniowy, opóźnianie reakcji, analiza korzyści i strat kompensacji."
+    },
+    "F60.31": {
+        "Model": "Dialektyczna Terapia Behawioralna (DBT, M. Linehan) / Terapia Schematów (J. Young)",
+        "Opis": "Biologiczna podatność na dysregulację emocji połączona z unieważniającym środowiskiem. Aktywne, nieadaptacyjne schematy wczesnodziecięce.",
+        "Interwencje": "Trening umiejętności DBT (uważność, tolerancja na stres), praca z trybami schematów, reparenting."
+    },
+    "F51": {
+        "Model": "Poznawczo-Behawioralna Terapia Bezsenności (CBT-I, A. Spielman)",
+        "Opis": "Model 3P: czynniki predysponujące, wyzwalające i podtrzymujące (np. leżenie w łóżku bez snu, drzemki, lęk przed niespaniem).",
+        "Interwencje": "Technika kontroli bodźców, restrykcja snu, higiena snu, zmiana przekonań o potrzebie 8h snu."
+    },
+    "F45": {
+        "Model": "Model Lęku o Zdrowie / Hipochondrii (Salkovskis i Warwick)",
+        "Opis": "Błędna interpretacja łagodnych objawów somatycznych jako oznak ciężkiej choroby, połączona z ciągłym skanowaniem ciała.",
+        "Interwencje": "Eksperymenty behawioralne ze skanowaniem ciała, zapobieganie poszukiwaniu zapewnień (u lekarzy i w internecie)."
     }
 }
 
-# --- PEŁNA BAZA ICD-10 (Fragment dla przykładu, reszta kaskadowo) ---
+# --- BAZA ICD-10 (Fragmenty do nawigacji) ---
 icd10_full = {
-    "F40-F48 Zaburzenia nerwicowe": [
-        "F40.0 Agorafobia", "F40.1 Fobie społeczne", "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)",
-        "F41.1 Zaburzenie lękowe uogólnione (GAD)", "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)",
-        "F43.1 Zaburzenie stresowe pourazowe (PTSD)", "F43.2 Zaburzenia adaptacyjne"
+    "F30-F39 Zaburzenia nastroju (afektywne)": [
+        "F32 Epizod depresyjny", "F33 Zaburzenia depresyjne nawracające", "F34 Uporczywe zaburzenia nastroju (Dystymia)"
     ],
-    "F30-F39 Zaburzenia nastroju": ["F32 Epizod depresyjny", "F33 Zaburzenia depresyjne nawracające", "F34.1 Dystymia"],
-    "F60-F69 Zaburzenia osobowości": ["F60.31 Osobowość borderline", "F60.6 Osobowość unikająca"]
+    "F40-F48 Zaburzenia nerwicowe, lękowe i pod postacią somatyczną": [
+        "F40.0 Agorafobia", "F40.1 Fobie społeczne", "F41.0 Zaburzenie lękowe z napadami lęku",
+        "F41.1 Zaburzenie lękowe uogólnione (GAD)", "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)",
+        "F43.1 Zaburzenie stresowe pourazowe (PTSD)", "F43.2 Zaburzenia adaptacyjne", "F45 Zaburzenia pod postacią somatyczną"
+    ],
+    "F50-F59 Zespoły behawioralne związane z zaburzeniami fizjologicznymi": [
+        "F50.0 Jadłowstręt psychiczny (Anoreksja)", "F50.2 Żarłoczność psychiczna (Bulimia)", "F51 Nieorganiczne zaburzenia snu"
+    ],
+    "F60-F69 Zaburzenia osobowości": [
+        "F60.31 Osobowość chwiejna emocjonalnie typ borderline", "F60.6 Osobowość lękliwa (unikająca)"
+    ]
 }
 
-# --- UI ---
-st.sidebar.title("🧠 System Ekspercki CBT")
-menu = st.sidebar.radio("Nawigacja:", ["Nowa Karta", "Baza Wiedzy i Archiwum"])
+# --- UI GŁÓWNE ---
+st.title("ZAPIS PRZEBIEGU TERAPII 2021")
+st.caption("Arkusz A. Popiel, E. Pragłowskiej | Wzbogacony o EBM CBT")
 
-if menu == "Nowa Karta":
-    st.header("Zapis Przebiegu Terapii + Wsparcie EBM")
+# MENU
+menu = st.sidebar.radio("Nawigacja:", ["I. Diagnoza i Konceptualizacja", "II. Plan i Interwencje", "III. Podsumowanie"])
+
+if menu == "I. Diagnoza i Konceptualizacja":
+    st.header("I.1 Diagnoza Nozologiczna (ICD-10)")
     
-    with st.expander("I.1. DIAGNOZA NOZOLOGICZNA", expanded=True):
+    col1, col2 = st.columns(2)
+    with col1:
         kat_wybrana = st.selectbox("Wybierz grupę ICD-10:", list(icd10_full.keys()))
-        kod_wybrany = st.selectbox("Wybierz rozpoznanie:", icd10_full[kat_wybrana])
+    with col2:
+        pelna_nazwa_diagnozy = st.selectbox("Wybierz rozpoznanie:", icd10_full[kat_wybrana])
+    
+    # SILNIK WIEDZY (WYODRĘBNIANIE KODU)
+    kod_icd = pelna_nazwa_diagnozy.split(" ")[0]  # Pobiera samo "F41.0" z długiej nazwy
+    
+    # WYŚWIETLANIE MODELU
+    st.divider()
+    if kod_icd in slownik_modeli:
+        st.subheader(f"🧠 Sugerowany protokół EBM dla: {kod_icd}")
+        dane = slownik_modeli[kod_icd]
         
-        # --- DYNAMICZNA PODPOWIEDŹ MODELU ---
-        if kod_wybrany in slownik_modeli:
-            dane_modelu = slownik_modeli[kod_wybrany]
-            st.success(f"💡 **Sugerowany Model CBT:** {dane_modelu['Model']}")
-            st.info(f"**Mechanizm:** {dane_modelu['Opis']}")
-            st.warning(f"**Kluczowe interwencje:** {dane_modelu['Interwencje']}")
-        else:
-            st.write("Dla tego kodu brak specyficznego modelu w bazie podręcznej – stosuj ogólny protokół CBT.")
-
-    with st.expander("I.3. KONCEPTUALIZACJA"):
-        st.subheader("Wizualizacja modelu dla wybranego zaburzenia")
-        if kod_wybrany == "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)":
-             st.write("")
-        elif kod_wybrany == "F32 Epizod depresyjny":
-             st.write("[attachment_0](attachment)")
+        st.success(f"**Wytyczne i Model:** {dane['Model']}")
+        st.write(f"**Mechanizm podtrzymujący:** {dane['Opis']}")
+        st.write(f"**Sugerowane Interwencje:** {dane['Interwencje']}")
         
-        st.text_area("A - Sytuacja / Wyzwalacz")
-        st.text_area("B - Myśli (zgodnie z sugerowanym modelem)")
-        st.text_area("C - Reakcje i Zachowania")
+        # Wyzwalanie diagramów edukacyjnych
+        if kod_icd == "F41.0":
+            st.markdown("**(Wizualizacja):**")
+            
+        elif kod_icd in ["F32", "F33"]:
+            st.markdown("**(Wizualizacja):**")
+            [attachment_0](attachment)
+        elif kod_icd == "F40.1":
+            st.markdown("**(Wizualizacja):**")
+            
+        elif kod_icd == "F42":
+            st.markdown("**(Wizualizacja):**")
+            
 
-    with st.expander("II. PLAN TERAPII"):
-        if kod_wybrany in slownik_modeli:
-            st.write(f"**Uzasadnienie wyboru metody:** Zgodnie z modelem {slownik_modeli[kod_wybrany]['Model']}...")
-        st.text_area("Szczegółowy plan interwencji")
+    else:
+        st.info("💡 Dla wybranego kodu zaleca się stosowanie standardowego modelu poznawczego ABC i ogólnych technik CBT.")
+    
+    st.divider()
+    st.header("I.3 Konceptualizacja Poziom I")
+    st.text_area("A - Wyzwalacz")
+    st.text_area("B - Myśli Automatyczne")
+    st.text_area("C - Emocje, Fizjologia, Zachowanie")
 
-# --- ARCHIWUM ---
-elif menu == "Baza Wiedzy i Archiwum":
-    st.header("Archiwum i Przegląd Modeli")
-    st.write("Tu możesz przeglądać wszystkich pacjentów leczonych danym modelem.")
+elif menu == "II. Plan i Interwencje":
+    st.header("II. Plan Terapii")
+    st.text_area("Zaplanowane techniki i uzasadnienie ich wyboru w oparciu o model CBT")
+    st.text_area("Zapis przebiegu kolejnych sesji")
+
+elif menu == "III. Podsumowanie":
+    st.header("Ewaluacja Terapii")
+    st.text_area("Osiągnięte cele terapii")
+    st.text_area("Zidentyfikowany mechanizm zmiany")
