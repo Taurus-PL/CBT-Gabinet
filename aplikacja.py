@@ -32,11 +32,12 @@ slownik_modeli = {
 slownik_modeli["F33"] = slownik_modeli["F32"]
 slownik_modeli["F50.0"] = slownik_modeli["F50.2"]
 
-# --- NOWA BAZA ASYSTENTA DIAGNOZY (MODEL CBT + SYTUACJA) ---
+# --- NOWA BAZA ASYSTENTA DIAGNOZY (MODEL 5 ELEMENTÓW + CZASOWNIKI) ---
 baza_symptomow = [
     {
         "diagnoza": "F50.2 Żarłoczność psychiczna (Bulimia)",
         "roznicowa": "Anoreksja (F50.0), BED, Depresja.",
+        "akcje_czasowniki": ["jadł", "żar", "zjad", "wyjad", "wymiot", "rzyg", "przeczyszcz", "ćwicz", "bieg", "głod", "pochłan", "objad", "chud", "tyj", "waż", "płak"],
         "profil_cbt": {
             "SYTUACJA (Wyzwalacz)": {
                 "slowa": ["wieczór", "samotn", "stres", "kłótni", "imprez", "restauracj", "sklep", "wadze", "lustrz"],
@@ -66,6 +67,7 @@ baza_symptomow = [
     {
         "diagnoza": "F32 Epizod depresyjny",
         "roznicowa": "ChAD, Dystymia, Niedoczynność tarczycy.",
+        "akcje_czasowniki": ["leż", "płacz", "śpi", "zaniedb", "unik", "wegetuj", "izoluj", "zostaw", "odpuśc"],
         "profil_cbt": {
             "SYTUACJA (Wyzwalacz)": {
                 "slowa": ["rano", "wsta", "prac", "obowiąz", "ludz", "problem", "poranek"],
@@ -95,6 +97,7 @@ baza_symptomow = [
     {
         "diagnoza": "F41.0 Lęk paniczny",
         "roznicowa": "Agorafobia, Zaburzenia kardiologiczne.",
+        "akcje_czasowniki": ["uciek", "mdle", "dusz", "umier", "dzwon", "biegn", "chow", "unik", "bior"],
         "profil_cbt": {
             "SYTUACJA (Wyzwalacz)": {
                 "slowa": ["tłum", "sklep", "kolejk", "autobus", "kawi", "wysił", "zadu", "samochód"],
@@ -160,23 +163,30 @@ if menu == "I. Diagnoza i Konceptualizacja":
         if st.button("🔍 Analizuj i przygotuj konceptualizację CBT"):
             if objawy_input:
                 input_do_analizy = objawy_input.lower()
-                # Wyciągamy listę wszystkich pełnych słów pacjenta (bez kropek i przecinków)
                 slowa_z_tekstu = re.findall(r'\b\w+\b', input_do_analizy)
                 
                 najlepsze_dopasowanie = None
                 najwyzszy_wynik = 0
                 wygenerowana_lista_problemow = ""
                 
-                # Algorytm sprawdzający model CBT dla każdej diagnozy
                 for choroba in baza_symptomow:
                     wynik_choroby = 0
                     tymczasowa_lista = f"WSTĘPNA KONCEPTUALIZACJA ({choroba['diagnoza']}):\n"
                     
-                    # Dzięki użyciu .items(), słowniki Pythona zachowają kolejność:
-                    # 1. Sytuacja, 2. Myśli, 3. Emocje, 4. Ciało, 5. Zachowanie
+                    # 1. Wyciąganie czasowników/akcji
+                    znalezione_akcje = []
+                    for rdzen in choroba["akcje_czasowniki"]:
+                        for slowo_pacjenta in slowa_z_tekstu:
+                            if rdzen in slowo_pacjenta and slowo_pacjenta not in znalezione_akcje:
+                                znalezione_akcje.append(slowo_pacjenta)
+                    
+                    if znalezione_akcje:
+                        tymczasowa_lista += f"\n🏃‍♂️ WYKRYTE AKCJE / CZASOWNIKI:\n- {', '.join(znalezione_akcje)}\n"
+                        wynik_choroby += len(znalezione_akcje) # Dodatkowe punkty za wykrycie akcji
+                    
+                    # 2. Tworzenie profilu CBT
                     for sfera, dane_sfery in choroba["profil_cbt"].items():
                         znalezione_pelne_slowa = []
-                        # Szukamy, czy rdzenie ukrywają się w pełnych słowach pacjenta
                         for rdzen in dane_sfery["slowa"]:
                             for slowo_pacjenta in slowa_z_tekstu:
                                 if rdzen in slowo_pacjenta and slowo_pacjenta not in znalezione_pelne_slowa:
@@ -211,7 +221,7 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.divider()
     st.header("I.3. Konceptualizacja problemu")
     
-    st.text_area("Lista problemów (Tłumaczenie na model CBT)", key="ui_problemy", on_change=sync_problemy, height=350)
+    st.text_area("Lista problemów (Tłumaczenie na model CBT)", key="ui_problemy", on_change=sync_problemy, height=450)
     st.text_area("Cele terapii (SMART)", key="ui_cele", on_change=sync_cele, height=150)
     
     if st.session_state.ui_protokol:
