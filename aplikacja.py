@@ -10,7 +10,7 @@ slownik_modeli = {
     "F41.0": [
         {
             "Model": "Model poznawczy lęku panicznego (D. Clark)",
-            "Opis": "Skupienie na błędnej, katastroficznej interpretacji normalnych doznań z ciała (np. kołatanie serca = zawał).",
+            "Opis": "Skupienie na błędnej, katastroficznej interpretacji normalnych doznań z ciała.",
             "Interwencje": "Reatrybucja doznań, hiperwentylacja (eksperyment), eliminacja zachowań zabezpieczających.",
             "Wizualizacja": "graph TD\nA[Wewnętrzny lub zewn. wyzwalacz] --> B[Postrzegane zagrożenie]\nB --> C[Lęk / Niepokój]\nC --> D[Doznania somatyczne np. serce]\nD --> E{Katastroficzna interpretacja}\nE -- Błędne koło paniki --> B\nstyle E fill:#4d0000,stroke:#ff3333,stroke-width:2px,color:#fff\n"
         }
@@ -35,27 +35,57 @@ slownik_modeli = {
 slownik_modeli["F33"] = slownik_modeli["F32"]
 slownik_modeli["F50.0"] = slownik_modeli["F50.2"]
 
-# --- NOWA BAZA: JĘZYK KLINICZNY + ROZBICIE NA I.3.2. ---
+# --- BAZA SYMPTOMÓW: KRYTERIA ICD-10 + MODEL CBT ---
 baza_symptomow = [
     {
         "diagnoza": "F50.2 Żarłoczność psychiczna (Bulimia)",
         "roznicowa": "Anoreksja (F50.0), BED, Depresja nietypowa.",
-        "problemy_kliniczne": "KLINICZNA LISTA PROBLEMÓW (Kryteria Diagnostyczne CBT):\n1. Nawracające epizody przejadania się (spożywanie obiektywnie dużej ilości jedzenia z poczuciem utraty kontroli).\n2. Powtarzające się, nieodpowiednie zachowania kompensacyjne w celu zapobieżenia przyrostowi masy ciała (np. prowokowanie wymiotów, nadużywanie leków przeczyszczających, intensywne ćwiczenia fizyczne).\n3. Samoocena nadmiernie wyznaczana przez kształt i masę ciała (współwystępujące zniekształcenia poznawcze).\n4. Błędne koło restrykcji i objadania się prowadzące do wyczerpania fizjologicznego i chwiejności afektu.",
+        "icd10_kryteria": {
+            "Kryterium A: Zaabsorbowanie jedzeniem i napady objadania": {
+                "opis": "Ciągłe zaabsorbowanie jedzeniem i niepowstrzymane pragnienie jedzenia; epizody przejadania się (spożywanie obiektywnie dużej ilości jedzenia w krótkim czasie).",
+                "slowa": ["napad", "obżarst", "popłyn", "ciąg", "lodówk", "pochłan", "zjadł", "żar", "wyjad"]
+            },
+            "Kryterium B: Zachowania kompensacyjne": {
+                "opis": "Próby przeciwdziałania tuczącym skutkom pokarmów przez: prowokowanie wymiotów, nadużywanie leków przeczyszczających, okresowe głodówki lub intensywne ćwiczenia.",
+                "slowa": ["wymiot", "rzyg", "przeczyszcz", "senes", "ćwicz", "siłown", "głodów", "tablet"]
+            },
+            "Kryterium C: Przecenianie znaczenia wagi": {
+                "opis": "Chorobliwa obawa przed otyłością; samoocena nadmiernie wyznaczana przez kształt i masę ciała.",
+                "slowa": ["grub", "śmieć", "nienawidz", "brzydz", "obsesj", "wag", "lustr", "schudn", "diet", "wstyd"]
+            }
+        },
         "cele_smart": "1. Wprowadzenie regularnego planu posiłków (3 główne, 2 przekąski).\n2. Zmniejszenie częstotliwości napadów/wymiotów do 1/tydz w ciągu miesiąca.",
         "protokol_nazwa": "CBT-E wg C. Fairburna",
-        "uzasadnienie_planu": "1) Psychoedukacja (błędne koło). 2) Dzienniczek myśli i reakcji. 3) Restrukturyzacja poznawcza i zmiana oceny własnej wartości.",
+        "uzasadnienie_planu": "1) Psychoedukacja (błędne koło). 2) Dzienniczek myśli i reakcji. 3) Restrukturyzacja poznawcza i zmiana bazy samooceny.",
         "profil_cbt": {
-            "SYTUACJA": {"slowa": ["wieczór", "samotn", "stres", "kłótni", "imprez", "restauracj", "sklep", "wadze", "lustrz"], "tlumaczenie": "Sytuacje napięcia emocjonalnego (stres, samotność) lub ekspozycja na bodźce (lustro, waga)."},
-            "MYŚLI": {"slowa": ["grub", "śmieć", "nienawidz", "brzydz", "obsesj", "wag", "lustr", "schudn", "diet", "nigdy", "zawsze", "muszę", "nie dam rady"], "tlumaczenie": "Nadmierne uzależnienie samooceny od wagi/sylwetki, myślenie dychotomiczne, silna samokrytyka."},
+            "SYTUACJA": {"slowa": ["wieczór", "samotn", "stres", "kłótni", "imprez", "restauracj", "sklep", "wadze", "lustrz"], "tlumaczenie": "Sytuacje napięcia emocjonalnego lub ekspozycja na bodźce (lustro, waga)."},
+            "MYŚLI": {"slowa": ["grub", "śmieć", "nienawidz", "brzydz", "obsesj", "wag", "lustr", "schudn", "diet", "nigdy", "zawsze", "muszę", "nie dam rady"], "tlumaczenie": "Nadmierne uzależnienie samooceny od wagi/sylwetki, myślenie dychotomiczne."},
             "EMOCJE": {"slowa": ["wstyd", "wyrzut", "win", "lęk", "boję", "stres", "napięc"], "tlumaczenie": "Głębokie poczucie winy, wstyd po napadzie, silny lęk przed przytyciem."},
-            "CIAŁO": {"slowa": ["zmęcz", "słab", "mdł", "zimn", "brzuch", "gardł", "opuch"], "tlumaczenie": "Wyczerpanie fizyczne, uczucie przepełnienia, możliwe powikłania gastryczne."},
+            "CIAŁO": {"slowa": ["zmęcz", "słab", "mdł", "zimn", "brzuch", "gardł", "opuch"], "tlumaczenie": "Wyczerpanie fizyczne, uczucie przepełnienia, dolegliwości gastryczne."},
             "ZACHOWANIE": {"slowa": ["napad", "obżarst", "popłyn", "ciąg", "lodówk", "pochłan", "wymiot", "rzyg", "przeczyszcz", "senes", "ćwicz", "siłown", "głodów"], "tlumaczenie": "Napady objadania się (utrata kontroli), po których następują zachowania kompensacyjne."}
         }
     },
     {
         "diagnoza": "F32 Epizod depresyjny",
         "roznicowa": "ChAD, Dystymia, Niedoczynność tarczycy.",
-        "problemy_kliniczne": "KLINICZNA LISTA PROBLEMÓW (Kryteria Diagnostyczne CBT):\n1. Obniżony nastrój występujący przez większą część dnia, niemal codziennie.\n2. Wyraźna utrata zainteresowań i odczuwania przyjemności we wszystkich lub prawie wszystkich aktywnościach (anhedonia).\n3. Spadek energii i wzmożona męczliwość.\n4. Deficyty poznawcze: negatywna triada Becka (negatywne postrzeganie siebie, świata i przyszłości).\n5. Wycofanie społeczne i bierność behawioralna prowadząca do drastycznego spadku wzmocnień pozytywnych ze środowiska.",
+        "icd10_kryteria": {
+            "Kryterium Główne 1: Obniżony nastrój": {
+                "opis": "Obniżony nastrój, utrzymujący się przez większą część dnia, niemal codziennie, niezależny od bieżących wydarzeń.",
+                "slowa": ["smut", "przygnęb", "płacz", "pust", "dół"]
+            },
+            "Kryterium Główne 2: Anhedonia i brak motywacji": {
+                "opis": "Wyraźna utrata zainteresowań i zdolności odczuwania radości w stosunku do aktywności, które zwykle sprawiały przyjemność.",
+                "slowa": ["bez sensu", "nic nie czuj", "nie chce mi się", "wegetuj", "zaniedb"]
+            },
+            "Kryterium Dodatkowe: Brak energii i objawy somatyczne": {
+                "opis": "Zmniejszona energia, wzmożona męczliwość, zaburzenia snu i/lub apetytu.",
+                "slowa": ["zmęcz", "brak sił", "budzę się", "apetyt", "ociężał", "spać", "leżę"]
+            },
+            "Kryterium Dodatkowe: Negatywne oceny poznawcze": {
+                "opis": "Spadek zaufania i szacunku do siebie, nieracjonalne poczucie winy, czarne widzenie przyszłości.",
+                "slowa": ["beznadziej", "nikim", "ciężar", "nie uda", "głup", "win", "czarn", "nigdy"]
+            }
+        },
         "cele_smart": "1. Zwiększenie aktywności celowej (min. 3x w tyg).\n2. Zapisywanie myśli w arkuszu samooceny (Tabela Becka).",
         "protokol_nazwa": "Aktywacja Behawioralna / Terapia Poznawcza Depresji",
         "uzasadnienie_planu": "Monitorowanie aktywności i nastroju, planowanie dnia (mistrzostwo i przyjemność), testowanie myśli automatycznych.",
@@ -70,7 +100,20 @@ baza_symptomow = [
     {
         "diagnoza": "F41.0 Lęk paniczny",
         "roznicowa": "Agorafobia, Zaburzenia kardiologiczne.",
-        "problemy_kliniczne": "KLINICZNA LISTA PROBLEMÓW (Kryteria Diagnostyczne CBT):\n1. Nawracające, nieoczekiwane napady paniki z silnym pobudzeniem autonomicznym i somatycznym.\n2. Katastroficzna interpretacja normalnych doznań płynących z ciała (np. szybkie bicie serca interpretowane jako zawał).\n3. Uporczywa obawa przed wystąpieniem kolejnych napadów (lęk antycypacyjny) trwająca min. 1 miesiąc.\n4. Istotna, niekorzystna zmiana zachowania związana z napadami, w tym stosowanie zachowań zabezpieczających i unikanie wysiłku fizycznego.",
+        "icd10_kryteria": {
+            "Kryterium A: Nawracające napady paniki": {
+                "opis": "Nawracające napady ciężkiego lęku (paniki), które nie są ograniczone do żadnej szczególnej sytuacji, w związku z czym są nieprzewidywalne.",
+                "slowa": ["panik", "przeraż", "strach", "nagle", "atak"]
+            },
+            "Kryterium B: Objawy wegetatywne": {
+                "opis": "Nagłe wystąpienie takich objawów jak: palpitacje serca, bóle w klatce piersiowej, uczucie duszności, zawroty głowy, pocenie się.",
+                "slowa": ["serce", "wali", "tchu", "duszno", "kłuci", "drż", "pocę", "miękną"]
+            },
+            "Kryterium C: Wtórne objawy poznawcze/behawioralne": {
+                "opis": "Wtórny lęk przed śmiercią, utratą kontroli nad sobą lub zwariowaniem oraz unikanie sytuacji (zachowania zabezpieczające).",
+                "slowa": ["umrę", "uduszę", "zawał", "zwariuję", "kontrol", "zemdlej", "uciekam", "unikam", "karetk", "sor"]
+            }
+        },
         "cele_smart": "1. Zmniejszenie częstotliwości napadów paniki do 0 w skali miesiąca.\n2. Rozpoznanie i eliminacja min. 2 głównych zachowań zabezpieczających.",
         "protokol_nazwa": "Terapia Lęku Panicznego wg D. Clarka",
         "uzasadnienie_planu": "Reatrybucja doznań fizjologicznych (eksperymenty behawioralne np. hiperwentylacja), odrzucenie zachowań zabezpieczających.",
@@ -124,11 +167,11 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.divider()
     st.header("I.2. Diagnoza kliniczna")
 
-    with st.expander("🤖 Asystent Diagnozy (Analiza potocznej wypowiedzi pacjenta)", expanded=True):
-        st.write("Wpisz skargę pacjenta. Algorytm wygeneruje kliniczną Listę Problemów, a słowa pacjenta rozdzieli do odpowiednich okienek w sekcji I.3.2. (Przekrój poprzeczny).")
+    with st.expander("🤖 Asystent Diagnozy (Tłumacz z potocznego na ICD-10)", expanded=True):
+        st.write("Wpisz skargę pacjenta. Algorytm sprawdzi spełnienie kryteriów ICD-10, a słowa pacjenta rozdzieli do Modelu 5 Elementów CBT.")
         objawy_input = st.text_area("Wpisz swobodną skargę pacjenta:")
         
-        if st.button("🔍 Analizuj i przetwórz do formularza"):
+        if st.button("🔍 Przetłumacz na diagnozę kliniczną"):
             if objawy_input:
                 input_do_analizy = objawy_input.lower()
                 slowa_z_tekstu = re.findall(r'\b\w+\b', input_do_analizy)
@@ -136,17 +179,13 @@ if menu == "I. Diagnoza i Konceptualizacja":
                 najlepsze_dopasowanie = None
                 najwyzszy_wynik = 0
                 
-                # Zmienne tymczasowe dla I.3.2
-                temp_sytuacja = ""
-                temp_mysli = ""
-                temp_emocje = ""
-                temp_cialo = ""
-                temp_zachowanie = ""
+                # Zmienne tymczasowe dla I.3.2 (Model CBT)
+                temp_sytuacja, temp_mysli, temp_emocje, temp_cialo, temp_zachowanie = "", "", "", "", ""
                 
                 for choroba in baza_symptomow:
                     wynik_choroby = 0
                     
-                    # Sprawdzanie poszczególnych sfer w modelu 5 elementów
+                    # 1. Sprawdzanie modelu CBT (Do sekcji I.3.2)
                     for sfera, dane_sfery in choroba["profil_cbt"].items():
                         znalezione_slowa = []
                         for rdzen in dane_sfery["slowa"]:
@@ -169,16 +208,30 @@ if menu == "I. Diagnoza i Konceptualizacja":
                         najlepsze_dopasowanie = choroba
 
                 if najlepsze_dopasowanie:
-                    st.success(f"🎯 Rozpoznano: {najlepsze_dopasowanie['diagnoza']}")
+                    st.success(f"🎯 Rozpoznano główny wzorzec: {najlepsze_dopasowanie['diagnoza']}")
+                    st.warning(f"⚖️ Diagnoza różnicowa (do wykluczenia): {najlepsze_dopasowanie['roznicowa']}")
                     
-                    # Wypełniamy listę problemów językiem KLINICZNYM
-                    st.session_state.ui_problemy = najlepsze_dopasowanie['problemy_kliniczne']
+                    # 2. Generowanie Listy Problemów (Kryteria ICD-10)
+                    lista_icd10 = "SPEŁNIONE KRYTERIA DIAGNOSTYCZNE ICD-10:\n\n"
+                    for nazwa_kryterium, dane_kryterium in najlepsze_dopasowanie["icd10_kryteria"].items():
+                        znalezione_kryteria = []
+                        for rdzen in dane_kryterium["slowa"]:
+                            for slowo_pacjenta in slowa_z_tekstu:
+                                if rdzen in slowo_pacjenta and slowo_pacjenta not in znalezione_kryteria:
+                                    znalezione_kryteria.append(slowo_pacjenta)
+                        
+                        if znalezione_kryteria:
+                            lista_icd10 += f"✅ {nazwa_kryterium}\n   Zgłaszane objawy kliniczne: {dane_kryterium['opis']}\n   👉 (Na podstawie słów pacjenta: '{', '.join(znalezione_kryteria)}')\n\n"
+                        else:
+                            lista_icd10 += f"❌ {nazwa_kryterium}\n   Zgłaszane objawy kliniczne: {dane_kryterium['opis']}\n   👉 (Brak wyraźnego wskaźnika w obecnej skardze. Wymaga dopytania podczas wywiadu.)\n\n"
+
+                    st.session_state.ui_problemy = lista_icd10
                     st.session_state.ui_cele = najlepsze_dopasowanie['cele_smart']
                     st.session_state.ui_protokol = najlepsze_dopasowanie['protokol_nazwa']
                     st.session_state.ui_uzasadnienie = najlepsze_dopasowanie['uzasadnienie_planu']
                     
-                    # Rozdzielamy słowa pacjenta do sekcji I.3.2
-                    st.session_state.ui_sytuacja = temp_sytuacja if temp_sytuacja else "Brak wyraźnego wyzwalacza w wypowiedzi pacjenta."
+                    # Wypełnianie modelu CBT (I.3.2)
+                    st.session_state.ui_sytuacja = temp_sytuacja if temp_sytuacja else "Brak wyraźnego wyzwalacza."
                     st.session_state.ui_mysli = temp_mysli if temp_mysli else "Brak zidentyfikowanych myśli automatycznych."
                     st.session_state.ui_emocje = temp_emocje if temp_emocje else "Brak zidentyfikowanych emocji."
                     st.session_state.ui_cialo = temp_cialo if temp_cialo else "Brak zidentyfikowanych doznań somatycznych."
@@ -209,11 +262,12 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.header("I.3. Konceptualizacja problemu")
     
     st.subheader("I.3.1. Lista problemów i cele terapii")
-    st.text_area("Lista problemów (Kliniczne Kryteria Diagnostyczne CBT)", key="ui_problemy", height=200)
+    st.info("Ta sekcja tłumaczy potoczne słowa pacjenta na twarde kryteria diagnostyczne zgodne z ICD-10.")
+    st.text_area("Lista problemów (Kryteria Diagnostyczne ICD-10)", key="ui_problemy", height=350)
     st.text_area("Cele terapii (SMART)", key="ui_cele", height=100)
 
     st.subheader("I.3.2. Poziom pierwszy (Sytuacja bieżąca - przekrój poprzeczny)")
-    st.info("Poniższe pola zostały automatycznie uzupełnione potocznym językiem pacjenta wyodrębnionym ze skargi głównej.")
+    st.info("Ta sekcja porządkuje potoczny język pacjenta wg Modelu 5 Elementów (Arkusz Samooceny CBT).")
     
     st.text_area("Sytuacja (typowa sytuacja ilustrująca problem)", key="ui_sytuacja")
     c3, c4 = st.columns(2)
