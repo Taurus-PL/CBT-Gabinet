@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import re  # <--- Nowa biblioteka do wyciągania pełnych słów z tekstu
+import re
 
 # --- KONFIGURACJA STRONY ---
 st.set_page_config(page_title="Zapis Przebiegu Terapii CBT", layout="wide")
@@ -32,12 +32,16 @@ slownik_modeli = {
 slownik_modeli["F33"] = slownik_modeli["F32"]
 slownik_modeli["F50.0"] = slownik_modeli["F50.2"]
 
-# --- NOWA BAZA ASYSTENTA DIAGNOZY (MODEL CBT) ---
+# --- NOWA BAZA ASYSTENTA DIAGNOZY (MODEL CBT + SYTUACJA) ---
 baza_symptomow = [
     {
         "diagnoza": "F50.2 Żarłoczność psychiczna (Bulimia)",
         "roznicowa": "Anoreksja (F50.0), BED, Depresja.",
         "profil_cbt": {
+            "SYTUACJA (Wyzwalacz)": {
+                "slowa": ["wieczór", "samotn", "stres", "kłótni", "imprez", "restauracj", "sklep", "wadze", "lustrz"],
+                "tlumaczenie": "Sytuacje napięcia emocjonalnego (stres, samotność) lub ekspozycja na bodźce związane z jedzeniem/sylwetką."
+            },
             "MYŚLI (Sfera poznawcza)": {
                 "slowa": ["grub", "śmieć", "nienawidz", "brzydz", "obsesj", "wag", "lustr", "schudn", "diet"],
                 "tlumaczenie": "Nadmierne uzależnienie samooceny od wagi/sylwetki, myślenie dychotomiczne ('wszystko albo nic'), silna samokrytyka."
@@ -63,6 +67,10 @@ baza_symptomow = [
         "diagnoza": "F32 Epizod depresyjny",
         "roznicowa": "ChAD, Dystymia, Niedoczynność tarczycy.",
         "profil_cbt": {
+            "SYTUACJA (Wyzwalacz)": {
+                "slowa": ["rano", "wsta", "prac", "obowiąz", "ludz", "problem", "poranek"],
+                "tlumaczenie": "Konieczność podjęcia aktywności, przebudzenie (często gorsze samopoczucie rano), sytuacje wymagające interakcji."
+            },
             "MYŚLI (Sfera poznawcza)": {
                 "slowa": ["beznadziej", "bez sensu", "nikim", "ciężar", "nie uda", "głup", "win", "czarn"],
                 "tlumaczenie": "Negatywna triada Becka (negatywne myśli o sobie, świecie i przyszłości), generalizacja, katastrofizacja."
@@ -88,6 +96,10 @@ baza_symptomow = [
         "diagnoza": "F41.0 Lęk paniczny",
         "roznicowa": "Agorafobia, Zaburzenia kardiologiczne.",
         "profil_cbt": {
+            "SYTUACJA (Wyzwalacz)": {
+                "slowa": ["tłum", "sklep", "kolejk", "autobus", "kawi", "wysił", "zadu", "samochód"],
+                "tlumaczenie": "Miejsca zatłoczone, zamknięte przestrzenie, wysiłek fizyczny lub sytuacje przypominające poprzednie napady."
+            },
             "MYŚLI (Sfera poznawcza)": {
                 "slowa": ["umrę", "uduszę", "zawał", "zwariuję", "tracę kontrol", "zemdlej", "to koniec"],
                 "tlumaczenie": "Katastroficzna interpretacja normalnych doznań płynących z ciała (np. szybkie bicie serca = zawał)."
@@ -141,7 +153,7 @@ st.sidebar.divider()
 if menu == "I. Diagnoza i Konceptualizacja":
     st.title("I. Diagnoza i konceptualizacja zjawiska")
     
-    with st.expander("🤖 Asystent Diagnozy CBT (Model: Myśli-Emocje-Ciało-Zachowanie)", expanded=True):
+    with st.expander("🤖 Asystent Diagnozy CBT (Model 5 Elementów)", expanded=True):
         st.write("Wpisz swobodną wypowiedź pacjenta. Algorytm wychwyci słowa-klucze, przetłumaczy je na język poznawczo-behawioralny i stworzy listę problemów.")
         objawy_input = st.text_area("Cytaty pacjenta / Skarga główna:")
         
@@ -160,6 +172,8 @@ if menu == "I. Diagnoza i Konceptualizacja":
                     wynik_choroby = 0
                     tymczasowa_lista = f"WSTĘPNA KONCEPTUALIZACJA ({choroba['diagnoza']}):\n"
                     
+                    # Dzięki użyciu .items(), słowniki Pythona zachowają kolejność:
+                    # 1. Sytuacja, 2. Myśli, 3. Emocje, 4. Ciało, 5. Zachowanie
                     for sfera, dane_sfery in choroba["profil_cbt"].items():
                         znalezione_pelne_slowa = []
                         # Szukamy, czy rdzenie ukrywają się w pełnych słowach pacjenta
