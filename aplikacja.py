@@ -71,7 +71,7 @@ baza_symptomow = [
         "icd10_kryteria": {
             "Kryterium Główne 1: Obniżony nastrój": {
                 "opis": "Obniżony nastrój, utrzymujący się przez większą część dnia, niemal codziennie, niezależny od bieżących wydarzeń.",
-                "slowa": ["smut", "przygnęb", "płacz", "pust", "dół"]
+                "slowa": ["smut", "przygnęb", "płacz", "pust", "dół", "płaka"]
             },
             "Kryterium Główne 2: Anhedonia i brak motywacji": {
                 "opis": "Wyraźna utrata zainteresowań i zdolności odczuwania radości w stosunku do aktywności, które zwykle sprawiały przyjemność.",
@@ -92,7 +92,7 @@ baza_symptomow = [
         "profil_cbt": {
             "SYTUACJA": {"slowa": ["rano", "wsta", "prac", "obowiąz", "ludz", "problem", "poranek"], "tlumaczenie": "Konieczność podjęcia aktywności, wyzwania dnia codziennego."},
             "MYŚLI": {"slowa": ["beznadziej", "bez sensu", "nikim", "ciężar", "nie uda", "głup", "win", "czarn", "nigdy", "zawsze"], "tlumaczenie": "Negatywna triada Becka, generalizacja, katastrofizacja."},
-            "EMOCJE": {"slowa": ["smut", "przygnęb", "płacz", "pust", "nic nie czuj", "znieczul"], "tlumaczenie": "Obniżony nastrój, anhedonia, apatia, znieczulenie emocjonalne."},
+            "EMOCJE": {"slowa": ["smut", "przygnęb", "płacz", "pust", "nic nie czuj", "znieczul", "płaka"], "tlumaczenie": "Obniżony nastrój, anhedonia, apatia, znieczulenie emocjonalne."},
             "CIAŁO": {"slowa": ["spać", "zmęcz", "brak sił", "budzę się", "apetyt", "ociężał"], "tlumaczenie": "Spadek energii, zaburzenia snu i apetytu, spowolnienie psychoruchowe."},
             "ZACHOWANIE": {"slowa": ["nie chce mi się", "leżę", "wegetuj", "izoluj", "nie wychodz", "zamkn", "zaniedb"], "tlumaczenie": "Wycofanie z relacji społecznych, bierność behawioralna, pogłębienie izolacji."}
         }
@@ -136,7 +136,7 @@ icd10_full = {
 
 # --- STANY APLIKACJI W PAMIĘCI ---
 if 'baza_terapii' not in st.session_state: st.session_state.baza_terapii = []
-if 'ui_problemy' not in st.session_state: st.session_state.ui_problemy = ""
+if 'ui_problemy_html' not in st.session_state: st.session_state.ui_problemy_html = ""
 if 'ui_cele' not in st.session_state: st.session_state.ui_cele = ""
 if 'ui_protokol' not in st.session_state: st.session_state.ui_protokol = ""
 if 'ui_uzasadnienie' not in st.session_state: st.session_state.ui_uzasadnienie = ""
@@ -147,6 +147,10 @@ if 'ui_mysli' not in st.session_state: st.session_state.ui_mysli = ""
 if 'ui_emocje' not in st.session_state: st.session_state.ui_emocje = ""
 if 'ui_cialo' not in st.session_state: st.session_state.ui_cialo = ""
 if 'ui_zachowanie' not in st.session_state: st.session_state.ui_zachowanie = ""
+
+def sync_cele(): st.session_state.cele_terapii = st.session_state.ui_cele
+def sync_protokol(): st.session_state.wybrany_protokol = st.session_state.ui_protokol
+def sync_uzasadnienie(): st.session_state.uzasadnienie_planu = st.session_state.ui_uzasadnienie
 
 # --- MENU BOCZNE ---
 st.sidebar.title("🛡️ Zapis Terapii CBT")
@@ -168,7 +172,7 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.header("I.2. Diagnoza kliniczna")
 
     with st.expander("🤖 Asystent Diagnozy (Tłumacz z potocznego na ICD-10)", expanded=True):
-        st.write("Wpisz skargę pacjenta. Algorytm sprawdzi spełnienie kryteriów ICD-10, a słowa pacjenta rozdzieli do Modelu 5 Elementów CBT.")
+        st.write("Wpisz skargę pacjenta. Algorytm wygeneruje kolorowy raport kryteriów ICD-10, a słowa pacjenta rozdzieli do Modelu 5 Elementów CBT.")
         objawy_input = st.text_area("Wpisz swobodną skargę pacjenta:")
         
         if st.button("🔍 Przetłumacz na diagnozę kliniczną"):
@@ -211,8 +215,9 @@ if menu == "I. Diagnoza i Konceptualizacja":
                     st.success(f"🎯 Rozpoznano główny wzorzec: {najlepsze_dopasowanie['diagnoza']}")
                     st.warning(f"⚖️ Diagnoza różnicowa (do wykluczenia): {najlepsze_dopasowanie['roznicowa']}")
                     
-                    # 2. Generowanie Listy Problemów (Kryteria ICD-10)
-                    lista_icd10 = "SPEŁNIONE KRYTERIA DIAGNOSTYCZNE ICD-10:\n\n"
+                    # 2. Generowanie KODU HTML dla Listy Problemów (Zielony / Czerwony)
+                    html_raport = "<h4>Analiza kryteriów diagnostycznych (ICD-10):</h4>"
+                    
                     for nazwa_kryterium, dane_kryterium in najlepsze_dopasowanie["icd10_kryteria"].items():
                         znalezione_kryteria = []
                         for rdzen in dane_kryterium["slowa"]:
@@ -221,11 +226,29 @@ if menu == "I. Diagnoza i Konceptualizacja":
                                     znalezione_kryteria.append(slowo_pacjenta)
                         
                         if znalezione_kryteria:
-                            lista_icd10 += f"✅ {nazwa_kryterium}\n   Zgłaszane objawy kliniczne: {dane_kryterium['opis']}\n   👉 (Na podstawie słów pacjenta: '{', '.join(znalezione_kryteria)}')\n\n"
+                            # ZIELONY BLOK - Kryterium Spełnione
+                            html_raport += f"""
+                            <div style='border-left: 5px solid #28a745; padding: 15px; background-color: #eafaf1; margin-bottom: 12px; border-radius: 5px; color: #155724;'>
+                                <strong>✅ SPEŁNIONE: {nazwa_kryterium}</strong><br>
+                                <span style='font-size: 0.9em;'>Opis kliniczny: {dane_kryterium['opis']}</span><br>
+                                <div style='margin-top: 8px; font-style: italic; color: #28a745;'>
+                                    👉 Zidentyfikowano na podstawie słów pacjenta: <b>"{', '.join(znalezione_kryteria)}"</b>
+                                </div>
+                            </div>
+                            """
                         else:
-                            lista_icd10 += f"❌ {nazwa_kryterium}\n   Zgłaszane objawy kliniczne: {dane_kryterium['opis']}\n   👉 (Brak wyraźnego wskaźnika w obecnej skardze. Wymaga dopytania podczas wywiadu.)\n\n"
+                            # CZERWONY BLOK - Kryterium Niespełnione (do dopytania)
+                            html_raport += f"""
+                            <div style='border-left: 5px solid #dc3545; padding: 15px; background-color: #fdf2f2; margin-bottom: 12px; border-radius: 5px; color: #721c24;'>
+                                <strong>❌ NIEPOTWIERDZONE W WYWIADZIE: {nazwa_kryterium}</strong><br>
+                                <span style='font-size: 0.9em;'>Opis kliniczny: {dane_kryterium['opis']}</span><br>
+                                <div style='margin-top: 8px; font-style: italic; color: #dc3545;'>
+                                    👉 Brak wyraźnych danych w skardze. Kryterium wymaga dopytania podczas wywiadu.
+                                </div>
+                            </div>
+                            """
 
-                    st.session_state.ui_problemy = lista_icd10
+                    st.session_state.ui_problemy_html = html_raport
                     st.session_state.ui_cele = najlepsze_dopasowanie['cele_smart']
                     st.session_state.ui_protokol = najlepsze_dopasowanie['protokol_nazwa']
                     st.session_state.ui_uzasadnienie = najlepsze_dopasowanie['uzasadnienie_planu']
@@ -262,21 +285,27 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.header("I.3. Konceptualizacja problemu")
     
     st.subheader("I.3.1. Lista problemów i cele terapii")
-    st.info("Ta sekcja tłumaczy potoczne słowa pacjenta na twarde kryteria diagnostyczne zgodne z ICD-10.")
-    st.text_area("Lista problemów (Kryteria Diagnostyczne ICD-10)", key="ui_problemy", height=350)
-    st.text_area("Cele terapii (SMART)", key="ui_cele", height=100)
+    st.info("Ta sekcja sprawdza spełnienie oficjalnych kryteriów ICD-10 na podstawie języka pacjenta.")
+    
+    # WYŚWIETLANIE KOLOROWEGO HTML
+    if st.session_state.ui_problemy_html:
+        st.markdown(st.session_state.ui_problemy_html, unsafe_allow_html=True)
+    else:
+        st.text_area("Lista problemów (Oczekiwanie na analizę...)", disabled=True)
+        
+    st.text_area("Cele terapii (SMART)", key="ui_cele", on_change=sync_cele, height=100)
 
     st.subheader("I.3.2. Poziom pierwszy (Sytuacja bieżąca - przekrój poprzeczny)")
     st.info("Ta sekcja porządkuje potoczny język pacjenta wg Modelu 5 Elementów (Arkusz Samooceny CBT).")
     
-    st.text_area("Sytuacja (typowa sytuacja ilustrująca problem)", key="ui_sytuacja")
+    st.text_area("Sytuacja (Co działo się? Gdzie? Kiedy? Z kim?)", key="ui_sytuacja")
     c3, c4 = st.columns(2)
     with c3:
-        st.text_area("Myśli automatyczne / Obrazy", key="ui_mysli")
-        st.text_area("Emocje (rodzaj i nasilenie)", key="ui_emocje")
+        st.text_area("Myśli (Co przyszło Ci do głowy?)", key="ui_mysli")
+        st.text_area("Emocje (Co czułeś?)", key="ui_emocje")
     with c4:
-        st.text_area("Doznania z ciała (fizjologiczne)", key="ui_cialo")
-        st.text_area("Zachowanie (w tym zabezpieczające/unikające)", key="ui_zachowanie")
+        st.text_area("Ciało (Objawy fizyczne)", key="ui_cialo")
+        st.text_area("Zachowanie (Co zrobiłeś? Reakcje)", key="ui_zachowanie")
 
     st.subheader("I.3.3. Poziom drugi (Mechanizmy podtrzymujące i Przekonania)")
     st.text_area("Przekonania kluczowe (o sobie, innych, świecie)")
@@ -298,8 +327,8 @@ if menu == "I. Diagnoza i Konceptualizacja":
 elif menu == "II. Plan i Interwencje":
     st.title("II. Plan terapii i interwencje")
     st.header("II.1. Plan terapii (Uzasadnienie EBM)")
-    st.text_input("Protokół (EBM):", key="ui_protokol")
-    st.text_area("Uzasadnienie interwencji:", key="ui_uzasadnienie", height=150)
+    st.text_input("Protokół (EBM):", key="ui_protokol", on_change=sync_protokol)
+    st.text_area("Uzasadnienie interwencji:", key="ui_uzasadnienie", on_change=sync_uzasadnienie, height=150)
     st.divider()
     st.header("II.2. Zapis przebiegu poszczególnych sesji")
     st.text_area("Rejestr sesji (np. Sesja 1 [Data] - Psychoedukacja i BA...)", height=300)
