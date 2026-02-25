@@ -53,15 +53,15 @@ baza_symptomow = [
             },
             "Kryterium B: Przymus jedzenia": {
                 "icd10": "Stałe zaabsorbowanie jedzeniem i silne pragnienie lub poczucie przymusu jedzenia.",
-                "slowa": ["musz", "przymus", "głód", "ochot", "kontro", "obsesj"]
+                "slowa": ["musz", "przymus", "głód", "ochot", "kontro", "obsesj", "pilnuj"]
             },
             "Kryterium C: Zachowania kompensacyjne": {
                 "icd10": "Pacjent usiłuje przeciwdziałać tuczącym skutkom pokarmów przez wymioty, przeczyszczanie, głodówki, ćwiczenia.",
-                "slowa": ["wymiot", "rzyg", "przeczyszcz", "senes", "ćwicz", "siłown", "głodów", "tablet", "kibel"]
+                "slowa": ["wymiot", "rzyg", "przeczyszcz", "senes", "ćwicz", "siłown", "głodów", "tablet", "kibel", "odkręcić"]
             },
             "Kryterium D: Zniekształcona samoocena": {
                 "icd10": "Chorobliwa obawa przed otyłością; samoocena nadmiernie wyznaczana przez kształt i masę ciała.",
-                "slowa": ["grub", "śmieć", "nienawidz", "brzydz", "waga", "wagę", "wagi", "lustr", "schudn", "diet", "wstyd", "wygląd"]
+                "slowa": ["grub", "śmieć", "nienawidz", "brzydz", "waga", "wagę", "wagi", "lustr", "schudn", "diet", "wstyd", "wygląd", "ciało", "ocenę"]
             }
         },
         "cele_smart": "1. Wprowadzenie regularnego planu posiłków (3 główne, 2 przekąski).\n2. Zmniejszenie częstotliwości napadów/wymiotów do 1/tydz.",
@@ -69,10 +69,10 @@ baza_symptomow = [
         "uzasadnienie_planu": "1) Psychoedukacja (błędne koło). 2) Dzienniczek myśli i reakcji. 3) Restrukturyzacja poznawcza i zmiana bazy samooceny.",
         "profil_cbt": {
             "SYTUACJA": {"slowa": ["wieczór", "samotn", "stres", "kłótni", "imprez", "restauracj", "sklep", "wadze", "lustrz"], "tlumaczenie": "Sytuacje napięcia emocjonalnego (stres, samotność) lub ekspozycja na bodźce (lustro, waga)."},
-            "MYŚLI": {"slowa": ["grub", "śmieć", "nienawidz", "brzydz", "waga", "wagę", "wagi", "lustr", "schudn", "diet", "nigdy", "zawsze", "muszę", "nie dam rady"], "tlumaczenie": "Nadmierne uzależnienie samooceny od wagi/sylwetki, myślenie dychotomiczne ('wszystko albo nic')."},
-            "EMOCJE": {"slowa": ["wstyd", "wyrzut", "win", "lęk", "boję", "stres", "napięc"], "tlumaczenie": "Głębokie poczucie winy, wstyd po napadzie, silny lęk przed przytyciem."},
+            "MYŚLI": {"slowa": ["grub", "śmieć", "nienawidz", "brzydz", "waga", "wagę", "wagi", "lustr", "schudn", "diet", "nigdy", "zawsze", "muszę", "nie dam rady", "zasady"], "tlumaczenie": "Nadmierne uzależnienie samooceny od wagi/sylwetki, myślenie dychotomiczne ('wszystko albo nic')."},
+            "EMOCJE": {"slowa": ["wstyd", "wyrzut", "win", "lęk", "boję", "stres", "napięc", "panik"], "tlumaczenie": "Głębokie poczucie winy, wstyd po napadzie, silny lęk przed przytyciem."},
             "CIAŁO": {"slowa": ["zmęcz", "słab", "mdł", "zimn", "brzuch", "gardł", "opuch"], "tlumaczenie": "Wyczerpanie fizyczne, uczucie przepełnienia, możliwe powikłania gastryczne."},
-            "ZACHOWANIE": {"slowa": ["napad", "obżarst", "popłyn", "ciąg", "lodówk", "pochłan", "wymiot", "rzyg", "przeczyszcz", "senes", "ćwicz", "siłown", "głodów"], "tlumaczenie": "Napady objadania się (utrata kontroli), po których następują zachowania kompensacyjne."}
+            "ZACHOWANIE": {"slowa": ["napad", "obżarst", "popłyn", "ciąg", "lodówk", "pochłan", "wymiot", "rzyg", "przeczyszcz", "senes", "ćwicz", "siłown", "głodów", "ograniczam"], "tlumaczenie": "Napady objadania się (utrata kontroli), po których następują zachowania kompensacyjne."}
         }
     },
     {
@@ -160,7 +160,6 @@ if 'ui_cele' not in st.session_state: st.session_state.ui_cele = ""
 if 'ui_protokol' not in st.session_state: st.session_state.ui_protokol = ""
 if 'ui_uzasadnienie' not in st.session_state: st.session_state.ui_uzasadnienie = ""
 
-# ZMIENNE DLA FORMULARZY CBT
 for key in ['ui_sytuacja', 'ui_mysli', 'ui_emocje', 'ui_cialo', 'ui_zachowanie']:
     if key not in st.session_state: st.session_state[key] = ""
 
@@ -178,9 +177,6 @@ menu = st.sidebar.radio("Spis treści:", [
 ])
 st.sidebar.divider()
 
-# ==========================================================
-# MODUŁ I: DIAGNOZA I KONCEPTUALIZACJA
-# ==========================================================
 if menu == "I. Diagnoza i Konceptualizacja":
     st.title("I. Diagnoza i konceptualizacja zjawiska")
     
@@ -196,63 +192,54 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.header("I.2. Diagnoza kliniczna")
 
     with st.expander("🤖 Asystent Diagnozy (Analiza Kryteriów ICD-10)", expanded=True):
-        st.write("Wpisz skargę pacjenta. Algorytm wygeneruje kolorowy raport ICD-10 oparty na cytatach z wywiadu i wypełni model CBT.")
+        st.write("Wpisz skargę pacjenta. Algorytm wygeneruje kolorowy raport ICD-10 oparty na cytatach z wywiadu.")
         objawy_input = st.text_area("Wpisz swobodną skargę pacjenta:")
         
         if st.button("🔍 Przetłumacz na kryteria kliniczne"):
             if objawy_input:
                 input_lower = objawy_input.lower()
                 
-                # Ulepszony podział na pełne zdania, by wyciągać kontekst pacjenta
+                # Ulepszony podział na pełne zdania
                 zdania_pacjenta = [z.strip() + "." for z in re.split(r'[.!?\n]+', objawy_input) if len(z.strip()) > 2]
                 
                 najlepsze_dopasowanie = None
                 najwyzszy_wynik = 0
                 najlepszy_html = ""
                 
-                # Globalne zmienne, do których zapiszemy wynik tylko TEJ WYGRANEJ choroby
                 final_sytuacja = final_mysli = final_emocje = final_cialo = final_zachowanie = ""
                 
                 for choroba in baza_symptomow:
                     wynik_choroby = 0
                     
-                    # 1. SPRAWDZANIE KRYTERIÓW ICD-10
-                    html_raport = f"<h4 style='color: #2c3e50;'>Analiza dla: {choroba['diagnoza']}</h4>"
+                    html_raport = f"<h4 style='color: #2c3e50;'>Analiza dla: {choroba['diagnoza']}</h4>\n"
                     
                     for nazwa_kryterium, dane_kryterium in choroba["icd10_kryteria"].items():
                         znalezione_dowody = [] 
                         
                         for rdzen in dane_kryterium["slowa"]:
                             for zdanie in zdania_pacjenta:
-                                # Używamy prostego 'in', bez restrykcyjnego \b, ale ze starannie dobranymi słownikami
                                 if rdzen.lower() in zdanie.lower() and zdanie not in znalezione_dowody:
                                     znalezione_dowody.append(zdanie)
                         
                         if znalezione_dowody:
-                            wynik_choroby += len(znalezione_dowody) * 3  # Mocno punktujemy spełnione kryteria
+                            wynik_choroby += len(znalezione_dowody) * 3 
                             dowody_html = "<br>".join([f"👉 <i>„{d}”</i>" for d in znalezione_dowody])
                             
-                            html_raport += f"""
-                            <div style='border-left: 5px solid #28a745; padding: 12px; background-color: #f0fdf4; margin-bottom: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'>
-                                <h5 style='color: #155724; margin-top: 0;'>✅ SPEŁNIONE: {nazwa_kryterium}</h5>
-                                <p style='font-size: 0.9em; color: #333; margin-bottom: 8px;'><b>Definicja ICD-10:</b> {dane_kryterium['icd10']}</p>
-                                <div style='padding: 8px; background-color: #d1e7dd; border-radius: 4px; color: #0f5132;'>
-                                    <b>Materiał dowodowy z wywiadu:</b><br>{dowody_html}
-                                </div>
-                            </div>
-                            """
+                            # Użyto zapisu zapobiegającego błędowi formatowania (brak wcięć na początku linijek HTML)
+                            html_raport += "<div style='border-left: 5px solid #28a745; padding: 12px; background-color: #f0fdf4; margin-bottom: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'>\n"
+                            html_raport += f"<h5 style='color: #155724; margin-top: 0;'>✅ SPEŁNIONE: {nazwa_kryterium}</h5>\n"
+                            html_raport += f"<p style='font-size: 0.9em; color: #333; margin-bottom: 8px;'><b>Definicja ICD-10:</b> {dane_kryterium['icd10']}</p>\n"
+                            html_raport += "<div style='padding: 8px; background-color: #d1e7dd; border-radius: 4px; color: #0f5132;'>\n"
+                            html_raport += f"<b>Materiał dowodowy z wywiadu:</b><br>{dowody_html}\n"
+                            html_raport += "</div></div>\n"
                         else:
-                            html_raport += f"""
-                            <div style='border-left: 5px solid #dc3545; padding: 12px; background-color: #fdf2f2; margin-bottom: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'>
-                                <h5 style='color: #721c24; margin-top: 0;'>❌ BRAK DANYCH: {nazwa_kryterium}</h5>
-                                <p style='font-size: 0.9em; color: #333; margin-bottom: 8px;'><b>Definicja ICD-10:</b> {dane_kryterium['icd10']}</p>
-                                <div style='padding: 8px; background-color: #f8d7da; border-radius: 4px; color: #842029;'>
-                                    <i>Kryterium nieobecne w skardze. Wymaga dopytania podczas wywiadu (badanie różnicowe).</i>
-                                </div>
-                            </div>
-                            """
+                            html_raport += "<div style='border-left: 5px solid #dc3545; padding: 12px; background-color: #fdf2f2; margin-bottom: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'>\n"
+                            html_raport += f"<h5 style='color: #721c24; margin-top: 0;'>❌ BRAK DANYCH: {nazwa_kryterium}</h5>\n"
+                            html_raport += f"<p style='font-size: 0.9em; color: #333; margin-bottom: 8px;'><b>Definicja ICD-10:</b> {dane_kryterium['icd10']}</p>\n"
+                            html_raport += "<div style='padding: 8px; background-color: #f8d7da; border-radius: 4px; color: #842029;'>\n"
+                            html_raport += "<i>Kryterium nieobecne w skardze. Wymaga dopytania podczas wywiadu.</i>\n"
+                            html_raport += "</div></div>\n"
 
-                    # 2. WYPEŁNIANIE MODELU CBT (Słowa do okienek)
                     temp_sytuacja = temp_mysli = temp_emocje = temp_cialo = temp_zachowanie = ""
                     
                     slowa_z_tekstu = re.findall(r'\b\w+\b', input_lower)
@@ -272,7 +259,6 @@ if menu == "I. Diagnoza i Konceptualizacja":
                             elif sfera == "CIAŁO": temp_cialo = format_tekstu
                             elif sfera == "ZACHOWANIE": temp_zachowanie = format_tekstu
 
-                    # Zapisujemy najlepszy wynik
                     if wynik_choroby > najwyzszy_wynik:
                         najwyzszy_wynik = wynik_choroby
                         najlepsze_dopasowanie = choroba
@@ -284,7 +270,6 @@ if menu == "I. Diagnoza i Konceptualizacja":
                         final_cialo = temp_cialo
                         final_zachowanie = temp_zachowanie
 
-                # --- AKTUALIZACJA INTERFEJSU ---
                 if najlepsze_dopasowanie and najwyzszy_wynik > 0:
                     st.success(f"🎯 Zidentyfikowano profil kliniczny: {najlepsze_dopasowanie['diagnoza']}")
                     st.warning(f"⚖️ Diagnoza różnicowa (do wykluczenia): {najlepsze_dopasowanie['roznicowa']}")
@@ -342,7 +327,6 @@ if menu == "I. Diagnoza i Konceptualizacja":
         st.text_area("Ciało (Objawy fizjologiczne)", key="ui_cialo")
         st.text_area("Zachowanie", key="ui_zachowanie")
 
-    # ----- SEKCJE, KTÓRE WCZEŚNIEJ ZOSTAŁY PRZEZE MNIE POMINIĘTE -----
     st.subheader("I.3.3. Poziom drugi (Mechanizmy podtrzymujące i Przekonania)")
     st.text_area("Przekonania kluczowe (o sobie, innych, świecie)")
     st.text_area("Przekonania warunkowe (Założenia / Zasady / Postawy)")
@@ -355,7 +339,6 @@ if menu == "I. Diagnoza i Konceptualizacja":
     st.divider()
     st.header("I.4. Zasoby pacjenta")
     st.text_area("Mocne strony, wsparcie społeczne, umiejętności itp.")
-    # ----------------------------------------------------------------
 
     if st.button("💾 Zapisz Diagnozę do Archiwum"):
         st.session_state.baza_terapii.append({
@@ -366,9 +349,6 @@ if menu == "I. Diagnoza i Konceptualizacja":
         })
         st.success("Zapisano do bazy!")
 
-# ==========================================================
-# MODUŁ II: PLAN TERAPII I INTERWENCJE
-# ==========================================================
 elif menu == "II. Plan i Interwencje":
     st.title("II. Plan terapii i interwencje")
     st.header("II.1. Plan terapii (Uzasadnienie EBM)")
@@ -378,9 +358,6 @@ elif menu == "II. Plan i Interwencje":
     st.header("II.2. Zapis przebiegu poszczególnych sesji")
     st.text_area("Rejestr sesji (np. Sesja 1 [Data] - Psychoedukacja i BA...)", height=300)
 
-# ==========================================================
-# MODUŁ III: PODSUMOWANIE
-# ==========================================================
 elif menu == "III. Podsumowanie":
     st.title("III. Podsumowanie i Ewaluacja")
     st.header("III.1. Osiągnięte cele terapii")
@@ -393,16 +370,12 @@ elif menu == "III. Podsumowanie":
     st.header("III.2. Zidentyfikowane mechanizmy zmiany")
     st.text_area("Co dokładnie pomogło pacjentowi?")
     
-    # ----- SEKCJE, KTÓRE WCZEŚNIEJ ZOSTAŁY PRZEZE MNIE POMINIĘTE -----
     st.header("III.3. Zapobieganie nawrotom")
     st.text_area("Sygnały ostrzegawcze i plan radzenia sobie")
+    
     st.header("III.4. Literatura")
     st.text_area("Materiały, protokoły wykorzystane do pracy")
-    # ----------------------------------------------------------------
 
-# ==========================================================
-# MODUŁ IV: ARCHIWUM DIAGNOZ
-# ==========================================================
 elif menu == "📂 Archiwum Diagnoz":
     st.title("Baza Terapii")
     if not st.session_state.baza_terapii:
