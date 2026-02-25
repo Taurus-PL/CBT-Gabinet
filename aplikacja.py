@@ -172,7 +172,7 @@ slownik_modeli["F50.0"] = slownik_modeli["F50.2"]
 # --- BAZA ASYSTENTA DIAGNOZY ---
 baza_symptomow = [
     {
-        "slowa_kluczowe": ["serce mi wali", "zaraz umrę", "uduszę się", "brakuje mi tchu", "zawał", "tracę kontrolę", "zwariuję", "kłucie w klatce", "duszno", "miękną mi nogi", "nagle mnie łapie", "atak paniki", "myślałem że to zawał"], 
+        "slowa_kluczowe": ["serce mi wali", "zaraz umrę", "uduszę", "brakuje mi tchu", "zawał", "tracę kontrolę", "zwariuję", "kłuci", "duszno", "miękną", "nagle mnie łapie", "paniki", "zawał"], 
         "diagnoza": "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)", 
         "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne.",
         "cbt_problemy": "LĘK PANICZNY:\n- Poznawcze: Katastroficzna interpretacja normalnych doznań płynących z ciała.\n- Emocjonalne: Napady nagłego lęku.\n- Fizjologiczne: Silne pobudzenie wegetatywne.\n- Behawioralne: Unikanie sytuacji wyzwalających.",
@@ -181,7 +181,7 @@ baza_symptomow = [
         "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Psychoedukację.\n2) Reatrybucję poznawczą doznań z ciała (eksperymenty behawioralne).\n3) Ekspozycję na bodźce interoceptywne."
     },
     {
-        "slowa_kluczowe": ["nie mam siły", "nic mnie nie cieszy", "nie chce mi się żyć", "budzę się w nocy", "płaczę bez powodu", "jestem beznadziejny", "nie mam apetytu", "wszystko jest bez sensu", "ciągle chce mi się spać", "wegetuję", "czarna dziura"], 
+        "slowa_kluczowe": ["nie mam siły", "nie ciesz", "nie chce mi się żyć", "budzę się w nocy", "płacz", "beznadziej", "apetyt", "bez sensu", "spać", "wegetuj", "czarna dziura", "smut", "przygnęb"], 
         "diagnoza": "F32 Epizod depresyjny / F33 Zab. depresyjne nawracające", 
         "roznicowa": "ChAD - epizod depresyjny (F31), Dystymia (F34.1), Niedoczynność tarczycy.",
         "cbt_problemy": "ZESPÓŁ DEPRESYJNY:\n- Poznawcze: Negatywna triada Becka.\n- Emocjonalne: Obniżony nastrój, anhedonia.\n- Fizjologiczne: Spadek energii, zaburzenia snu.\n- Behawioralne: Wycofanie z relacji społecznych, bierność.",
@@ -190,7 +190,7 @@ baza_symptomow = [
         "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Monitorowanie aktywności.\n2) Planowanie aktywności (przyjemność i mistrzostwo).\n3) Restrukturyzację poznawczą."
     },
     {
-        "slowa_kluczowe": ["muszę to sprawdzić", "ciągle myję", "głupie myśli", "nie mogę przestać o tym myśleć", "muszę policzyć", "mam wrażenie że coś się stanie", "rytuał", "robię to żeby nie zapeszyć"], 
+        "slowa_kluczowe": ["sprawdz", "myję", "głupie myśli", "nie mogę przestać", "policz", "coś się stanie", "rytuał", "zapesz", "natrętn"], 
         "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", 
         "roznicowa": "Osobowość anankastyczna (F60.5), Schizofrenia (F20).",
         "cbt_problemy": "ZABURZENIE OBSESYJNO-KOMPULSYJNE:\n- Poznawcze: Myśli natrętne, fuzja myśli z działaniem (TAF).\n- Emocjonalne: Silny lęk po intruzji.\n- Fizjologiczne: Napięcie.\n- Behawioralne: Rytuały (kompulsje).",
@@ -199,7 +199,7 @@ baza_symptomow = [
         "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Hierarchię lęku i ekspozycję.\n2) Powstrzymywanie reakcji kompulsywnych.\n3) Restrukturyzację poznawczą."
     },
     {
-        "slowa_kluczowe": ["boję się odezwać", "wszyscy na mnie patrzą", "spalę się ze wstydu", "wyśmieją mnie", "robię się czerwony", "boję się ludzi", "kompromitacja"], 
+        "slowa_kluczowe": ["odezwa", "patrzą", "wstyd", "wyśmiej", "czerwon", "ludzi", "kompromit", "ocen", "zbłaźni"], 
         "diagnoza": "F40.1 Fobia społeczna", 
         "roznicowa": "Osobowość unikająca (F60.6).",
         "cbt_problemy": "LĘK SPOŁECZNY:\n- Poznawcze: Skupienie uwagi na sobie.\n- Emocjonalne: Ostry lęk przed i w trakcie ekspozycji.\n- Fizjologiczne: Czerwienienie się, drżenie.\n- Behawioralne: Unikanie lub znoszenie z lękiem sytuacji społecznych.",
@@ -208,7 +208,7 @@ baza_symptomow = [
         "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Trening koncentracji zadaniowej.\n2) Eksperymenty behawioralne.\n3) Wideo-feedback."
     },
     {
-        "slowa_kluczowe": ["ciągle się martwię", "co będzie jak", "nie mogę się rozluźnić", "mam spięte mięśnie", "najgorsze scenariusze", "a co jeśli", "boli mnie kark", "wieczne napięcie"], 
+        "slowa_kluczowe": ["martwi", "co będzie jak", "rozluźni", "napię", "scenariusz", "a co jeśli", "kark", "stres"], 
         "diagnoza": "F41.1 Zaburzenie lękowe uogólnione (GAD)", 
         "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1).",
         "cbt_problemy": "LĘK UOGÓLNIONY (ZAMARTWIANIE SIĘ):\n- Poznawcze: Nietolerancja niepewności, czarne scenariusze.\n- Emocjonalne: Wolnopłynący lęk.\n- Fizjologiczne: Uporczywe napięcie mięśniowe.\n- Behawioralne: Poszukiwanie zapewnień, overplanning.",
@@ -217,7 +217,7 @@ baza_symptomow = [
         "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Trening odraczania martwienia się.\n2) Zmianę przekonań na temat martwienia.\n3) Rozwiązywanie problemów."
     },
     {
-        "slowa_kluczowe": ["ciągle mi się to śni", "wspomnienia wracają", "mam przed oczami", "unikam miejsc", "budzę się z krzykiem", "flashbacki", "trauma"], 
+        "slowa_kluczowe": ["śni", "wspomnien", "przed oczami", "unikam", "krzyk", "flashback", "traum", "wypad", "gwałt"], 
         "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)", 
         "roznicowa": "Ostra reakcja na stres (F43.0).",
         "cbt_problemy": "ZABURZENIE POTRAUMATYCZNE:\n- Poznawcze: Poczucie aktualnego zagrożenia.\n- Emocjonalne: Przerażenie, odrętwienie.\n- Fizjologiczne: Chroniczna hiperreaktywność.\n- Behawioralne: Unikanie myśli, emocji i wyzwalaczy.",
@@ -226,7 +226,7 @@ baza_symptomow = [
         "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Ekspozycję wyobrażeniową.\n2) Ekspozycję in vivo.\n3) Restrukturyzację punktów zapalnych."
     },
     {
-        "slowa_kluczowe": ["ciągle się badam", "szukam objawów w internecie", "lekarze się mylą", "to na pewno rak", "dr Google", "boję się że zachoruję"],
+        "slowa_kluczowe": ["badam", "internet", "lekarz", "rak", "dr google", "zachoruj", "guz", "chorob"],
         "diagnoza": "F45.2 Hipochondria (Zaburzenie z lękiem o zdrowie)",
         "roznicowa": "Lęk paniczny (F41.0), Zaburzenia somatyzacyjne (F45.0).",
         "cbt_problemy": "LĘK O ZDROWIE:\n- Poznawcze: Katastroficzna interpretacja normalnych sygnałów z ciała.\n- Emocjonalne: Lęk, frustracja.\n- Fizjologiczne: Objawy somatyczne nasilone przez stres.\n- Behawioralne: Skanowanie ciała, poszukiwanie zapewnień u lekarzy.",
@@ -235,7 +235,7 @@ baza_symptomow = [
         "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Eksperymenty behawioralne ze skanowaniem.\n2) Zablokowanie zachowań zabezpieczających.\n3) Restrukturyzację poznawczą."
     },
     {
-        "slowa_kluczowe": ["nie mogę spać", "budzę się w nocy", "leżę i myślę", "przewracam się z boku na bok", "płytki sen", "wybudzam się", "nie mogę zasnąć", "zmęczenie rano", "śpię w dzień", "boję się że nie zasnę", "patrzę w sufit", "liczę barany", "tabletki nasenne"],
+        "slowa_kluczowe": ["nie mogę spać", "budzę się", "leżę i myślę", "płytki sen", "wybudzam", "zasnąć", "zmęczeni", "drzemk", "sufit", "tabletki nasenne", "bezsen"],
         "diagnoza": "F51 Nieorganiczne zaburzenia snu (Bezsenność)",
         "roznicowa": "Depresja (F32), GAD (F41.1), Bezsenność organiczna, Bezdech senny.",
         "cbt_problemy": "BEZSENNOŚĆ:\n- Poznawcze: Lęk przed bezsennością ('jak nie zasnę, to jutro zawalę w pracy'), ciągłe monitorowanie snu.\n- Emocjonalne: Frustracja, złość, lęk związany ze zbliżającą się porą snu.\n- Fizjologiczne: Zmęczenie, brak koncentracji w ciągu dnia, nadmierne wzbudzenie układu nerwowego wieczorem.\n- Behawioralne: Spędzanie nadmiernej ilości czasu w łóżku, drzemki w ciągu dnia, używanie łóżka do innych aktywności (TV, praca).",
@@ -245,16 +245,15 @@ baza_symptomow = [
     },
     {
         "slowa_kluczowe": [
-            "napad", "popłynęłam", "wpadłam w ciąg", "zjadłam pół lodówki", 
-            "pochłaniam", "nie mogłam przestać jeść", "straciłam kontrolę", 
-            "zajadam stres", "wilczy głód", "zjadłam wszystko", "rzucam się na jedzenie",
-            "wymiotuję", "rzygam", "zwracam", "musiałam to z siebie wyrzucić", 
-            "wsadzam palce do gardła", "przeczyszczam się", "biorę tabletki na przeczyszczenie", 
-            "piję senes", "ćwiczę do upadłego", "katuje się na siłowni", "od jutra głodówka",
-            "jestem gruba", "nienawidzę swojego ciała", "brzydzę się sobą", 
-            "czuję się jak śmieć po jedzeniu", "wstydzę się", "mam wyrzuty sumienia", 
-            "boję się przytyć", "obsesja na punkcie wagi", "boję się wejść na wagę", 
-            "patrzę w lustro i płaczę", "wylewa mi się", "muszę schudnąć"
+            "napad", "obżarst", "popłyn", "ciąg", "lodówk", 
+            "pochłan", "kontrol", "zajad", "wilcz", 
+            "wymiot", "rzyg", "zwraca", "wyrzuc", 
+            "gardł", "przeczyszcz", "tablet", 
+            "senes", "ćwicz", "siłown", "głodów",
+            "grub", "nienawidz", "brzydz", 
+            "śmieć", "wstyd", "wyrzut", 
+            "przyty", "obsesj", "wag", 
+            "lustr", "schudn", "jedzen"
         ],
         "diagnoza": "F50.2 Żarłoczność psychiczna (Bulimia)",
         "roznicowa": "Anoreksja z napadami objadania (F50.0), Zaburzenie z napadami objadania się (BED), Depresja nietypowa.",
