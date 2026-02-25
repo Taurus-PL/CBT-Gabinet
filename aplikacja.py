@@ -195,6 +195,23 @@ slownik_modeli = {
                 "style D fill:#660000,stroke:#990000,color:#fff\n"
             )
         }
+    ],
+    "F45.2": [
+        {
+            "Model": "Poznawczy model lęku o zdrowie (Salkovskis i Warwick)",
+            "Opis": "Błędna interpretacja łagodnych, normalnych objawów płynących z ciała jako bezspornego dowodu na poważną, zagrażającą życiu chorobę.",
+            "Interwencje": "Reatrybucja poznawcza, eksperymenty ze skanowaniem ciała, powstrzymanie poszukiwania zapewnień (np. u lekarzy, w internecie).",
+            "Wizualizacja": (
+                "graph TD\n"
+                "A[Wyzwalacz np. informacja / doznanie] --> B[Zauważenie objawu z ciała]\n"
+                "B --> C{Katastroficzna interpretacja: To rak!}\n"
+                "C --> D[Silny lęk o własne życie i zdrowie]\n"
+                "D --> E[Skanowanie ciała / Dr Google / Lekarze]\n"
+                "E --> F[Chwilowa ulga i upewnienie]\n"
+                "F -. Zwiększa czujność i lęk .-> B\n"
+                "style C fill:#800040,stroke:#cc0066,color:#fff\n"
+            )
+        }
     ]
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
@@ -254,6 +271,15 @@ baza_symptomow = [
         "cele_smart": "1. Odtworzenie pełnej narracji traumatycznej i codzienne jej odsłuchiwanie/czytanie (Ekspozycja Wyobrażeniowa) aż do spadku lęku poniżej 4/10.\n2. Odwiedzenie 2 obiektywnie bezpiecznych, a dotąd unikanych miejsc (związanych z wydarzeniem) w ciągu miesiąca.\n3. Urealnienie min. 1 skrajnego przekonania wygenerowanego przez traumę (np. 'nigdzie nie jestem bezpieczny') na bardziej wyważone.",
         "protokol_nazwa": "Przedłużona Ekspozycja (PE) E. Foa / Model Ehlers i Clarka",
         "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Przeprowadzenie ekspozycji wyobrażeniowej (relacjonowanie traumy w czasie teraźniejszym), co doprowadzi do habituacji i przetworzenia śladów pamięciowych.\n2) Zaplanowaną ekspozycję in vivo na bezpieczne, ale unikane dotąd bodźce, miejsca i sytuacje (wygaszanie reakcji warunkowej).\n3) Restrukturyzację poznawczą 'punktów zapalnych' traumy i zmianę negatywnych przekonań utrzymujących poczucie aktualnego zagrożenia."
+    },
+    {
+        "slowa_kluczowe": ["ciągle się badam", "szukam objawów w internecie", "lekarze się mylą", "to na pewno rak", "czytam o chorobach", "sprawdzam węzły chłonne", "mierzę ciśnienie", "dr Google", "boję się że zachoruję", "wsłuchuję się w organizm", "każde ukłucie to", "mam guza", "panikuję na myśl o chorobie", "wyniki są dobre ale"],
+        "diagnoza": "F45.2 Hipochondria (Zaburzenie z lękiem o zdrowie)",
+        "roznicowa": "Lęk paniczny (F41.0), GAD (F41.1), Zaburzenia somatyzacyjne (F45.0), Rzeczywista choroba somatyczna.",
+        "cbt_problemy": "LĘK O ZDROWIE:\n- Poznawcze: Katastroficzna interpretacja normalnych sygnałów z ciała, błędy poznawcze (np. wyolbrzymianie prawdopodobieństwa choroby).\n- Emocjonalne: Znaczny lęk, niepokój, frustracja (gdy lekarze 'nie potrafią pomóc').\n- Fizjologiczne: Objawy somatyczne nasilone przez stres i ciągłe skanowanie ciała (np. napięcie mięśni, przyspieszone tętno).\n- Behawioralne: Ciągłe sprawdzanie ciała, poszukiwanie zapewnień (rodzina, lekarze), 'Doktor Google' lub przeciwnie - skrajne unikanie lekarzy i informacji o chorobach.",
+        "cele_smart": "1. Całkowite powstrzymanie się od sprawdzania objawów w internecie ('Dr Google') w ciągu najbliższych 2 tygodni.\n2. Zmniejszenie częstotliwości skanowania własnego ciała z 10 razy dziennie do 2 razy dziennie w ciągu miesiąca.\n3. Ograniczenie mówienia o swoich dolegliwościach fizycznych bliskim (poszukiwanie upewnień) do max. 15 minut dziennie.",
+        "protokol_nazwa": "Poznawczo-Behawioralna Terapia Lęku o Zdrowie wg Salkovskisa i Warwick",
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Zastosowanie eksperymentów behawioralnych (np. celowe skupienie uwagi na danej części ciała), aby dowieść, że skanowanie nasila objawy.\n2) Zablokowanie zachowań zabezpieczających (nadmierne wizyty lekarskie, internet), co umożliwi habituację lęku.\n3) Restrukturyzację poznawczą: przeformułowanie katastroficznych interpretacji doznań na wyjaśnienia łagodne i fizjologiczne."
     }
 ]
 
