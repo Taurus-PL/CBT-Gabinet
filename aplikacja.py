@@ -49,46 +49,6 @@ slownik_modeli = {
                 "D -- Błędne koło --> B\n"
                 "style C fill:#333333,stroke:#666666,color:#fff\n"
             )
-        },
-        {
-            "Model": "Model Wyuczonej Bezradności (M. Seligman)",
-            "Opis": "Depresja jako skutek poczucia braku wpływu na negatywne zdarzenia oraz przypisywania im wewnętrznych, stałych i globalnych przyczyn (pesymistyczny styl atrybucyjny).",
-            "Interwencje": "Zmiana stylu atrybucyjnego, budowanie poczucia sprawstwa (empowerment), eksperymenty przywracające kontrolę nad otoczeniem.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Negatywne zdarzenie] --> B{Brak poczucia kontroli}\n"
-                "B --> C[Styl atrybucyjny: Wewnętrzny, Stały, Globalny]\n"
-                "C --> D[Poczucie bezradności i beznadziei]\n"
-                "D --> E[Objawy depresyjne: Bierność, Rezygnacja]\n"
-                "style C fill:#4d4d4d,stroke:#808080,color:#fff\n"
-            )
-        },
-        {
-            "Model": "Model poznawczy oparty na uważności - MBCT (Segal, Williams, Teasdale)",
-            "Opis": "Nawroty depresji wynikają z reaktywacji starych wzorców myślenia przez drobne wahania nastroju. Pacjent wpada w ruminacje i zautomatyzowany 'tryb działania'.",
-            "Interwencje": "Trening uważności (mindfulness), decentracja (oddzielenie od myśli), świadome przejście z trybu 'działania' do trybu 'bycia'.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Początkowy spadek nastroju] --> B[Zautomatyzowane negatywne myślenie]\n"
-                "B --> C[Ruminacje / Próba myślowego 'naprawienia' nastroju]\n"
-                "C --> D[Pogłębienie i utrwalenie depresji]\n"
-                "D -- Sprzężenie zwrotne --> B\n"
-                "style C fill:#336699,stroke:#6699cc,color:#fff\n"
-            )
-        },
-        {
-            "Model": "Model Elastyczności Psychologicznej - ACT (S. Hayes)",
-            "Opis": "Cierpienie depresyjne wynika z unikania trudnych emocji (unikanie doświadczania) oraz utknięcia w dosłownym traktowaniu własnych myśli (fuzja poznawcza).",
-            "Interwencje": "Defuzja poznawcza, akceptacja, ugruntowanie w chwili obecnej, klaryfikacja wartości i zaangażowane działanie.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Trudne myśli i emocje] --> B[Unikanie doświadczania]\n"
-                "A --> C[Fuzja poznawcza - myśli traktowane jako fakty]\n"
-                "B --> D[Oderwanie od życiowych wartości]\n"
-                "C --> D\n"
-                "D --> E[Bierność i Epizod Depresyjny]\n"
-                "style D fill:#660033,stroke:#99004d,color:#fff\n"
-            )
         }
     ],
     "F40.1": [
@@ -122,19 +82,6 @@ slownik_modeli = {
                 "F -. Wzmocnia wiarę w odpowiedzialność .-> C\n"
                 "style C fill:#4d004d,stroke:#cc00cc,color:#fff\n"
             )
-        },
-        {
-            "Model": "Model habituacyjny OCD / ERP (E. Foa)",
-            "Opis": "Mechanizm warunkowania strachu. Kompulsje zapobiegają naturalnemu wygasaniu lęku (habituacji).",
-            "Interwencje": "Ekspozycja z powstrzymaniem reakcji (ERP), hierarchia lęku, przedłużony kontakt z bodźcem.",
-            "Wizualizacja": (
-                "graph LR\n"
-                "A[Ekspozycja na wyzwalacz] --> B[Wzrost Lęku]\n"
-                "B --> C[Powstrzymanie Kompulsji]\n"
-                "C --> D[Naturalna Habituacja Lęku]\n"
-                "D --> E[Nowe uczenie się]\n"
-                "style C fill:#006600,stroke:#009900,color:#fff\n"
-            )
         }
     ],
     "F41.1": [
@@ -150,19 +97,6 @@ slownik_modeli = {
                 "C --> E[Spadek umiejętności rozwiązywania problemów]\n"
                 "style B fill:#4d4d00,stroke:#cccc00,color:#fff\n"
             )
-        },
-        {
-            "Model": "Model Metapoznawczy - MCT (A. Wells)",
-            "Opis": "Skupienie na metaprzekonaniach. Pozytywnych ('martwienie mnie chroni') i negatywnych ('stracę kontrolę nad martwieniem').",
-            "Interwencje": "Odraczanie martwienia się, testowanie przekonań o utracie kontroli, trening odłączania uwagi (Detached Mindfulness).",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Wyzwalacz: A co jeśli...] --> B[Pozytywne metaprzekonania]\n"
-                "B --> C[ZAMARTWIANIE SIĘ TYPU 1]\n"
-                "C --> D[Negatywne metaprzekonania - Typ 2]\n"
-                "D --> E[Lęk, emocje, nieskuteczne unikanie]\n"
-                "style D fill:#993300,stroke:#cc3300,color:#fff\n"
-            )
         }
     ],
     "F43.1": [
@@ -177,22 +111,6 @@ slownik_modeli = {
                 "C --> D[Brak przetwarzania emocjonalnego]\n"
                 "D -- Podtrzymanie lęku --> B\n"
                 "style C fill:#003366,stroke:#006699,color:#fff\n"
-            )
-        },
-        {
-            "Model": "Model poznawczy PTSD (Ehlers i Clark)",
-            "Opis": "Poczucie ciągłego zagrożenia 'tu i teraz' przez negatywną ocenę traumy i zaburzenia pamięci autobiograficznej.",
-            "Interwencje": "Aktualizacja pamięci traumy, restrukturyzacja punktów zapalnych, porzucenie zachowań zabezpieczających.",
-            "Wizualizacja": (
-                "graph TD\n"
-                "A[Trauma] --> B[Negatywna ocena traumy/siebie]\n"
-                "A --> C[Pamięć oparta na zmysłach - brak kontekstu]\n"
-                "B --> D[Poczucie AKTUALNEGO zagrożenia]\n"
-                "C --> D\n"
-                "D --> E[Intruzje / Pobudzenie]\n"
-                "E --> F[Unikanie]\n"
-                "F -- Utrudnia zmianę --> B\n"
-                "style D fill:#660000,stroke:#990000,color:#fff\n"
             )
         }
     ],
@@ -212,74 +130,127 @@ slownik_modeli = {
                 "style C fill:#800040,stroke:#cc0066,color:#fff\n"
             )
         }
+    ],
+    "F51": [
+        {
+            "Model": "Model 3P Bezsenności (A. Spielman)",
+            "Opis": "Bezsenność pojawia się i utrzymuje przez 3 grupy czynników: Predysponujące (np. lękowa osobowość), Wyzwalające (stres) i Podtrzymujące (złe nawyki senne).",
+            "Interwencje": "Restrykcja snu, kontrola bodźców, higiena snu, techniki relaksacyjne.",
+            "Wizualizacja": (
+                "graph TD\n"
+                "A[Czynniki Predysponujące np. geny, skłonność do lęku] --> B[Czynniki Wyzwalające np. stres w pracy]\n"
+                "B --> C[Ostra Bezsenność]\n"
+                "C --> D[Czynniki Podtrzymujące np. drzemki, leżenie w łóżku bez snu, zamartwianie się]\n"
+                "D --> E[Przewlekła Bezsenność]\n"
+                "E -- Błędne koło --> D\n"
+                "style D fill:#1a1a1a,stroke:#4d4d4d,color:#fff\n"
+            )
+        }
+    ],
+    "F50.2": [
+        {
+            "Model": "Transdiagnostyczny model zaburzeń odżywiania (C. Fairburn)",
+            "Opis": "Rdzeniem zaburzenia jest nadmierne uzależnienie samooceny od wagi i sylwetki, co prowadzi do drastycznych restrykcji, a w konsekwencji do napadów objadania się i zachowań kompensacyjnych.",
+            "Interwencje": "Monitorowanie odżywiania, planowanie regularnych posiłków, restrukturyzacja przekonań o ciele i wadze, praca nad samooceną.",
+            "Wizualizacja": (
+                "graph TD\n"
+                "A[Nadmierna koncentracja na sylwetce i wadze] --> B[Restrykcyjne zasady dietetyczne]\n"
+                "B --> C[Złamanie zasad / Narastające napięcie]\n"
+                "C --> D[Napad objadania się]\n"
+                "D --> E[Zachowania kompensacyjne np. wymioty, przeczyszczanie]\n"
+                "D --> F[Poczucie winy i lęk przed tyciem]\n"
+                "E --> F\n"
+                "F -- Wzmacnia kontrolę --> A\n"
+                "style A fill:#004d40,stroke:#00695c,color:#fff\n"
+            )
+        }
     ]
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
+slownik_modeli["F50.0"] = slownik_modeli["F50.2"] # Opcjonalne zrównanie dla anoreksji
 
 # --- BAZA ASYSTENTA DIAGNOZY ---
 baza_symptomow = [
     {
-        "slowa_kluczowe": ["serce mi wali", "zaraz umrę", "uduszę się", "brakuje mi tchu", "zawał", "tracę kontrolę", "zwariuję", "kłucie w klatce", "duszno", "miękną mi nogi", "nagle mnie łapie", "atak paniki", "myślałem że to zawał", "nogi z waty", "zaraz zemdleję", "ścisk w gardle", "jakbym był obok siebie", "odrealnienie", "nagle robi mi się słabo", "uderzenie gorąca"], 
+        "slowa_kluczowe": ["serce mi wali", "zaraz umrę", "uduszę się", "brakuje mi tchu", "zawał", "tracę kontrolę", "zwariuję", "kłucie w klatce", "duszno", "miękną mi nogi", "nagle mnie łapie", "atak paniki", "myślałem że to zawał"], 
         "diagnoza": "F41.0 Zaburzenie lękowe z napadami lęku (Lęk paniczny)", 
-        "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne, Nadczynność tarczycy.",
-        "cbt_problemy": "LĘK PANICZNY:\n- Poznawcze: Katastroficzna interpretacja normalnych doznań płynących z ciała (np. 'mam zawał', 'uduszę się', 'zwariuję').\n- Emocjonalne: Napady nagłego, obezwładniającego lęku (panika).\n- Fizjologiczne: Silne pobudzenie wegetatywne (tachykardia, duszności, zawroty głowy, hiperwentylacja).\n- Behawioralne: Unikanie sytuacji wyzwalających, stosowanie zachowań zabezpieczających (np. noszenie leków, ciągłe sprawdzanie pulsu).",
-        "cele_smart": "1. Zmniejszenie częstotliwości napadów paniki do 0 w skali miesiąca.\n2. Identyfikacja i eliminacja min. 2 głównych zachowań zabezpieczających (np. noszenie przy sobie wody/leków uspokajających) w ciągu 4 tygodni.\n3. Obniżenie subiektywnego poziomu lęku przed objawami somatycznymi (np. kołatanie serca) z 9/10 do 3/10 w sytuacjach spoczynkowych.",
-        "protokol_nazwa": "Terapia Poznawcza lęku panicznego wg D. Clarka / Panic Control Treatment (PCT) D. Barlowa",
-        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Psychoedukację dot. błędnego koła paniki w celu redukcji początkowego lęku przed objawami.\n2) Reatrybucję poznawczą doznań z ciała wspartą eksperymentami behawioralnymi (np. celowa hiperwentylacja), aby dowieść, że doznania nie prowadzą do zawału/uduszenia.\n3) Ekspozycję na bodźce interoceptywne przy jednoczesnej stopniowej eliminacji zachowań zabezpieczających."
+        "roznicowa": "Agorafobia (F40.0), PTSD (F43.1), Zaburzenia kardiologiczne.",
+        "cbt_problemy": "LĘK PANICZNY:\n- Poznawcze: Katastroficzna interpretacja normalnych doznań płynących z ciała.\n- Emocjonalne: Napady nagłego lęku.\n- Fizjologiczne: Silne pobudzenie wegetatywne.\n- Behawioralne: Unikanie sytuacji wyzwalających.",
+        "cele_smart": "1. Zmniejszenie częstotliwości napadów paniki do 0 w skali miesiąca.\n2. Identyfikacja i eliminacja min. 2 głównych zachowań zabezpieczających.",
+        "protokol_nazwa": "Terapia Poznawcza lęku panicznego wg D. Clarka",
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Psychoedukację.\n2) Reatrybucję poznawczą doznań z ciała (eksperymenty behawioralne).\n3) Ekspozycję na bodźce interoceptywne."
     },
     {
-        "slowa_kluczowe": ["nie mam siły", "nic mnie nie cieszy", "nie chce mi się żyć", "budzę się w nocy", "płaczę bez powodu", "jestem beznadziejny", "nie mam apetytu", "wszystko jest bez sensu", "ciągle chce mi się spać", "zmuszam się do", "nic nie ma sensu", "poczucie winy", "smutek", "zrezygnowany", "przytłumione", "po co w ogóle wstawać", "ciało jest ciężkie", "mokry koc", "ponad siły", "jestem do niczego", "zawsze tak będzie", "radość gdzieś za szybą", "nie mam energii udawać", "rozsypuje się", "wegetuję", "czarna dziura", "pustka", "robię minimum"], 
+        "slowa_kluczowe": ["nie mam siły", "nic mnie nie cieszy", "nie chce mi się żyć", "budzę się w nocy", "płaczę bez powodu", "jestem beznadziejny", "nie mam apetytu", "wszystko jest bez sensu", "ciągle chce mi się spać", "wegetuję", "czarna dziura"], 
         "diagnoza": "F32 Epizod depresyjny / F33 Zab. depresyjne nawracające", 
         "roznicowa": "ChAD - epizod depresyjny (F31), Dystymia (F34.1), Niedoczynność tarczycy.",
-        "cbt_problemy": "ZESPÓŁ DEPRESYJNY:\n- Poznawcze: Negatywna triada Becka (pesymistyczne przekonania o sobie: 'jestem do niczego', o świecie: 'nikt mnie nie rozumie' i o przyszłości: 'zawsze tak będzie'), nadmierne ruminacje.\n- Emocjonalne: Utrzymujący się obniżony nastrój, anhedonia (brak zdolności odczuwania radości), poczucie winy, odrętwienie.\n- Fizjologiczne: Wyraźny spadek energii ('ciało jak mokry koc'), zaburzenia snu (np. wczesne wybudzanie), zmiany apetytu, ociężałość psychomotoryczna.\n- Behawioralne: Zaniechanie aktywności celowej, wycofanie z relacji społecznych, bierność (pozostawanie w łóżku/domu).",
-        "cele_smart": "1. Zwiększenie aktywności celowej i sprawiającej przyjemność (np. spacer, hobby) z 0 do min. 3 razy w tygodniu (czas trwania: 30 min).\n2. Redukcja czasu spędzanego bezproduktywnie w łóżku w ciągu dnia z [aktualna ilość] do max. 1 godziny na dobę.\n3. Identyfikacja i zapisywanie min. 2 negatywnych myśli automatycznych dziennie w dzienniku myśli (Tabela Becka) przez najbliższe 2 tygodnie.",
-        "protokol_nazwa": "Aktywacja Behawioralna (BA) wg C. Martella / Terapia Poznawcza Depresji A. Becka",
-        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Monitorowanie aktywności i nastroju, co pozwoli zidentyfikować deficyt wzmocnień pozytywnych w środowisku.\n2) Planowanie aktywności z naciskiem na działania dające poczucie przyjemności i mistrzostwa (przerwanie cyklu 'działanie na podstawie obniżonego nastroju').\n3) Restrukturyzację poznawczą: wyłapywanie NMA i błędów poznawczych w celu podważenia pesymistycznej triady Becka."
+        "cbt_problemy": "ZESPÓŁ DEPRESYJNY:\n- Poznawcze: Negatywna triada Becka.\n- Emocjonalne: Obniżony nastrój, anhedonia.\n- Fizjologiczne: Spadek energii, zaburzenia snu.\n- Behawioralne: Wycofanie z relacji społecznych, bierność.",
+        "cele_smart": "1. Zwiększenie aktywności celowej i sprawiającej przyjemność do min. 3 razy w tygodniu.\n2. Zapisywanie min. 2 myśli dziennie w Tabeli Becka.",
+        "protokol_nazwa": "Aktywacja Behawioralna (BA) / Terapia Poznawcza Depresji A. Becka",
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Monitorowanie aktywności.\n2) Planowanie aktywności (przyjemność i mistrzostwo).\n3) Restrukturyzację poznawczą."
     },
     {
-        "slowa_kluczowe": ["muszę to sprawdzić", "ciągle myję", "głupie myśli", "nie mogę przestać o tym myśleć", "muszę policzyć", "mam wrażenie że coś się stanie", "natrętne", "rytuał", "robię to żeby nie zapeszyć", "ciągle wraca ta myśl", "czuję brud", "układam", "muszę ułożyć", "inaczej zwariuję", "zarazki", "coś złego się stanie jak", "odliczam w myślach", "magiczne myślenie", "czuję że muszę", "chore myśli", "muszę mieć pewność"], 
+        "slowa_kluczowe": ["muszę to sprawdzić", "ciągle myję", "głupie myśli", "nie mogę przestać o tym myśleć", "muszę policzyć", "mam wrażenie że coś się stanie", "rytuał", "robię to żeby nie zapeszyć"], 
         "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", 
-        "roznicowa": "Osobowość anankastyczna (F60.5), Schizofrenia (F20), Tiki (F95).",
-        "cbt_problemy": "ZABURZENIE OBSESYJNO-KOMPULSYJNE:\n- Poznawcze: Występowanie myśli/obrazów natrętnych (obsesji), fuzja myśli z działaniem (TAF), wyolbrzymione poczucie odpowiedzialności za zapobieganie szkodzie.\n- Emocjonalne: Silny lęk i napięcie po pojawieniu się intruzji, poczucie winy, czasem obrzydzenie.\n- Fizjologiczne: Pobudzenie wegetatywne będące reakcją na wyzwalacz/obsesję.\n- Behawioralne: Rytuały jawne i ukryte (kompulsje) mające na celu redukcję lęku, ciągłe poszukiwanie zapewnień ze strony innych, unikanie bodźców.",
-        "cele_smart": "1. Stopniowe wydłużanie czasu powstrzymywania się od rytuału (kompulsji) po wystąpieniu intruzji z 0 do min. 30 minut w ciągu 2 tygodni.\n2. Całkowita redukcja zachowań upewniających się (pytanie bliskich 'czy na pewno nic się nie stało?') do zera w perspektywie miesiąca.\n3. Przeprowadzenie 3 udanych eksperymentów ERP (Ekspozycja i Powstrzymanie Reakcji) w tygodniu z zapisanym spadkiem lęku na skali SUDs.",
-        "protokol_nazwa": "Ekspozycja z Powstrzymaniem Reakcji (ERP) z elementami poznawczymi wg P. Salkovskisa",
-        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Stworzenie hierarchii lęku i stopniową, zaplanowaną ekspozycję na bodźce wyzwalające intruzje/obsesje.\n2) Konsekwentne powstrzymywanie reakcji kompulsywnych (rytuałów i uników), co pozwoli na habituację lęku i zerwanie sprzężenia zwrotnego.\n3) Restrukturyzację poznawczą ukierunkowaną na zniekształcenia takie jak fuzja myśl-działanie (TAF) i nadmierna odpowiedzialność."
+        "roznicowa": "Osobowość anankastyczna (F60.5), Schizofrenia (F20).",
+        "cbt_problemy": "ZABURZENIE OBSESYJNO-KOMPULSYJNE:\n- Poznawcze: Myśli natrętne, fuzja myśli z działaniem (TAF).\n- Emocjonalne: Silny lęk po intruzji.\n- Fizjologiczne: Napięcie.\n- Behawioralne: Rytuały (kompulsje).",
+        "cele_smart": "1. Stopniowe wydłużanie czasu powstrzymywania się od rytuału po wystąpieniu intruzji.\n2. Przeprowadzenie 3 eksperymentów ERP w tygodniu.",
+        "protokol_nazwa": "Ekspozycja z Powstrzymaniem Reakcji (ERP)",
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Hierarchię lęku i ekspozycję.\n2) Powstrzymywanie reakcji kompulsywnych.\n3) Restrukturyzację poznawczą."
     },
     {
-        "slowa_kluczowe": ["boję się odezwać", "wszyscy na mnie patrzą", "spalę się ze wstydu", "wyśmieją mnie", "robię się czerwony", "boję się ludzi", "trzęsą mi się ręce jak", "kompromitacja", "boję się co pomyślą", "wypaść głupio", "wzrok innych", "wystąpienia publiczne", "zrobię z siebie pośmiewisko", "zablokuje mnie", "pustka w głowie jak", "nie wiem gdzie podziać ręce", "boję się oceny", "wymsknie mi się coś głupiego", "głos mi drży", "czuję że mnie oceniają"], 
+        "slowa_kluczowe": ["boję się odezwać", "wszyscy na mnie patrzą", "spalę się ze wstydu", "wyśmieją mnie", "robię się czerwony", "boję się ludzi", "kompromitacja"], 
         "diagnoza": "F40.1 Fobia społeczna", 
-        "roznicowa": "Osobowość unikająca (F60.6), Agorafobia (F40.0).",
-        "cbt_problemy": "LĘK SPOŁECZNY:\n- Poznawcze: Skupienie uwagi na sobie (tworzenie i monitorowanie negatywnego obrazu własnego 'ja'), przewidywanie negatywnej oceny przez otoczenie ('wyśmieją mnie').\n- Emocjonalne: Ostry lęk przed i w trakcie ekspozycji społecznej, poczucie wstydu i zakłopotania.\n- Fizjologiczne: Czerwienienie się, drżenie rąk/głosu, nadmierna potliwość, suchość w ustach, tachykardia.\n- Behawioralne: Unikanie (izolacja) lub znoszenie z silnym lękiem sytuacji społecznych, zachowania zabezpieczające (np. brak kontaktu wzrokowego, zaciskanie rąk, chowanie się w tle).",
-        "cele_smart": "1. Inicjowanie krótkiej (min. 2 minuty) rozmowy na tematy codzienne z wybraną osobą min. 2x w tygodniu.\n2. Świadome porzucenie 1 zachowania zabezpieczającego (np. ciągłego sprawdzania telefonu w sytuacjach społecznych) w trakcie ekspozycji.\n3. Przeniesienie uwagi z analizowania siebie na bodźce zewnętrzne (trening koncentracji zadaniowej) w 3 trudnych sytuacjach w tygodniu.",
+        "roznicowa": "Osobowość unikająca (F60.6).",
+        "cbt_problemy": "LĘK SPOŁECZNY:\n- Poznawcze: Skupienie uwagi na sobie.\n- Emocjonalne: Ostry lęk przed i w trakcie ekspozycji.\n- Fizjologiczne: Czerwienienie się, drżenie.\n- Behawioralne: Unikanie lub znoszenie z lękiem sytuacji społecznych.",
+        "cele_smart": "1. Inicjowanie krótkiej rozmowy min. 2x w tygodniu.\n2. Porzucenie 1 zachowania zabezpieczającego.",
         "protokol_nazwa": "Terapia Poznawcza Lęku Społecznego wg Clarka i Wellsa",
-        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Trening przesunięcia uwagi (Task Concentration Training) z bolesnej samoobserwacji na otoczenie zewnętrzne.\n2) Eksperymenty behawioralne w sytuacjach społecznych (z porzuceniem zachowań zabezpieczających), mające na celu falsyfikację przekonań o kompromitacji.\n3) Zastosowanie wideo-feedbacku w celu urealnienia wewnętrznego, wyolbrzymionego obrazu własnego lęku (np. nagranie wystąpienia i obiektywna ocena widoczności objawów)."
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Trening koncentracji zadaniowej.\n2) Eksperymenty behawioralne.\n3) Wideo-feedback."
     },
     {
-        "slowa_kluczowe": ["ciągle się martwię", "co będzie jak", "nie mogę się rozluźnić", "mam spięte mięśnie", "najgorsze scenariusze", "a co jeśli", "boli mnie kark", "niepokój", "czuję takie napięcie", "nie umiem przestać myśleć o problemach", "martwię się o zdrowie", "martwię się o bliskich", "czarne scenariusze", "nie potrafię odpuścić", "ścisk w żołądku ze stresu", "głowa mi pęka od myślenia", "myśli krążą", "zawsze muszę być przygotowany", "wieczne napięcie", "jak na szpilkach", "natłok myśli"], 
+        "slowa_kluczowe": ["ciągle się martwię", "co będzie jak", "nie mogę się rozluźnić", "mam spięte mięśnie", "najgorsze scenariusze", "a co jeśli", "boli mnie kark", "wieczne napięcie"], 
         "diagnoza": "F41.1 Zaburzenie lękowe uogólnione (GAD)", 
-        "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1), Hipochondria (F45.2).",
-        "cbt_problemy": "LĘK UOGÓLNIONY (ZAMARTWIANIE SIĘ):\n- Poznawcze: Chroniczne zamartwianie się ('a co jeśli...'), nietolerancja niepewności, tworzenie czarnych scenariuszy, dodatnie i ujemne przekonania o martwieniu się.\n- Emocjonalne: Wolnopłynący lęk, chroniczne poczucie niepokoju, drażliwość.\n- Fizjologiczne: Uporczywe napięcie mięśniowe (np. bóle karku), uczucie 'bycia na krawędzi', ścisk w żołądku, trudności z koncentracją i snem.\n- Behawioralne: Nadmierne poszukiwanie informacji/zapewnień, overplanning (przesadne planowanie w celu redukcji niepewności), unikanie delegowania zadań innym.",
-        "cele_smart": "1. Ograniczenie martwienia się do wyznaczonego „czasu na martwienie” (max 20 minut dziennie o stałej porze) przy użyciu techniki odraczania.\n2. Zmniejszenie uśrednionego poziomu napięcia wolnopłynącego z 8/10 do 4/10 w skali tygodnia poprzez trening relaksacji mięśniowej (PMR).\n3. Rezygnacja z pytania bliskich o zdanie (poszukiwanie upewnień) przy podejmowaniu 3 codziennych, drobnych decyzji w tygodniu.",
-        "protokol_nazwa": "Protokół Nietolerancji Niepewności (M. Dugas) / Terapia Metapoznawcza (MCT) A. Wellsa",
-        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Trening odraczania martwienia się w celu odzyskania poczucia kontroli nad tym procesem.\n2) Restrukturyzację poznawczą metaprzekonań na temat martwienia się (zarówno dodatnich, np. 'martwienie mnie chroni', jak i ujemnych, np. 'od tego zwariuję').\n3) Ekspozycję wyobrażeniową na najgorsze scenariusze (rozwijanie skryptów) oraz trening rozwiązywania realnych problemów."
+        "roznicowa": "Lęk paniczny (F41.0), Fobia społeczna (F40.1).",
+        "cbt_problemy": "LĘK UOGÓLNIONY (ZAMARTWIANIE SIĘ):\n- Poznawcze: Nietolerancja niepewności, czarne scenariusze.\n- Emocjonalne: Wolnopłynący lęk.\n- Fizjologiczne: Uporczywe napięcie mięśniowe.\n- Behawioralne: Poszukiwanie zapewnień, overplanning.",
+        "cele_smart": "1. Ograniczenie martwienia się do czasu na martwienie (max 20 min dziennie).\n2. Zmniejszenie uśrednionego napięcia poprzez relaksację.",
+        "protokol_nazwa": "Protokół Nietolerancji Niepewności / MCT",
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Trening odraczania martwienia się.\n2) Zmianę przekonań na temat martwienia.\n3) Rozwiązywanie problemów."
     },
     {
-        "slowa_kluczowe": ["ciągle mi się to śni", "wspomnienia wracają", "mam przed oczami", "unikam miejsc", "budzę się z krzykiem", "odkąd zdarzył się ten wypadek", "flashbacki", "czuję jakby to działo się znowu", "od tamtej pory", "trauma", "wraca jak bumerang", "koszmary z tamtego", "wystarczy jeden dźwięk", "ciągle na krawędzi", "unikam wszystkiego co", "nie czuję się już bezpiecznie", "odrętwienie", "czuję że to znowu się dzieje"], 
+        "slowa_kluczowe": ["ciągle mi się to śni", "wspomnienia wracają", "mam przed oczami", "unikam miejsc", "budzę się z krzykiem", "flashbacki", "trauma"], 
         "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)", 
-        "roznicowa": "Ostra reakcja na stres (F43.0), Zaburzenia adaptacyjne (F43.2).",
-        "cbt_problemy": "ZABURZENIE POTRAUMATYCZNE:\n- Poznawcze: Poczucie ciągłego, aktualnego zagrożenia pomimo ustania bodźca, natrętne wspomnienia (intruzje/flashbacki), negatywne przekonania o świecie i własnej skuteczności.\n- Emocjonalne: Przerażenie w reakcji na triggery, silny gniew, poczucie winy, odrętwienie emocjonalne.\n- Fizjologiczne: Chroniczna hiperreaktywność, wzmożony odruch orientacyjny, zaburzenia snu i koszmary.\n- Behawioralne: Unikanie myśli, emocji i rozmów związanych z traumą, unikanie zewnętrznych wyzwalaczy (ludzi, miejsc, dźwięków), nadmierna czujność.",
-        "cele_smart": "1. Odtworzenie pełnej narracji traumatycznej i codzienne jej odsłuchiwanie/czytanie (Ekspozycja Wyobrażeniowa) aż do spadku lęku poniżej 4/10.\n2. Odwiedzenie 2 obiektywnie bezpiecznych, a dotąd unikanych miejsc (związanych z wydarzeniem) w ciągu miesiąca.\n3. Urealnienie min. 1 skrajnego przekonania wygenerowanego przez traumę (np. 'nigdzie nie jestem bezpieczny') na bardziej wyważone.",
-        "protokol_nazwa": "Przedłużona Ekspozycja (PE) E. Foa / Model Ehlers i Clarka",
-        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Przeprowadzenie ekspozycji wyobrażeniowej (relacjonowanie traumy w czasie teraźniejszym), co doprowadzi do habituacji i przetworzenia śladów pamięciowych.\n2) Zaplanowaną ekspozycję in vivo na bezpieczne, ale unikane dotąd bodźce, miejsca i sytuacje (wygaszanie reakcji warunkowej).\n3) Restrukturyzację poznawczą 'punktów zapalnych' traumy i zmianę negatywnych przekonań utrzymujących poczucie aktualnego zagrożenia."
+        "roznicowa": "Ostra reakcja na stres (F43.0).",
+        "cbt_problemy": "ZABURZENIE POTRAUMATYCZNE:\n- Poznawcze: Poczucie aktualnego zagrożenia.\n- Emocjonalne: Przerażenie, odrętwienie.\n- Fizjologiczne: Chroniczna hiperreaktywność.\n- Behawioralne: Unikanie myśli, emocji i wyzwalaczy.",
+        "cele_smart": "1. Odsłuchiwanie narracji traumatycznej aż do spadku lęku.\n2. Odwiedzenie 2 unikanych, bezpiecznych miejsc w ciągu miesiąca.",
+        "protokol_nazwa": "Przedłużona Ekspozycja (PE)",
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Ekspozycję wyobrażeniową.\n2) Ekspozycję in vivo.\n3) Restrukturyzację punktów zapalnych."
     },
     {
-        "slowa_kluczowe": ["ciągle się badam", "szukam objawów w internecie", "lekarze się mylą", "to na pewno rak", "czytam o chorobach", "sprawdzam węzły chłonne", "mierzę ciśnienie", "dr Google", "boję się że zachoruję", "wsłuchuję się w organizm", "każde ukłucie to", "mam guza", "panikuję na myśl o chorobie", "wyniki są dobre ale"],
+        "slowa_kluczowe": ["ciągle się badam", "szukam objawów w internecie", "lekarze się mylą", "to na pewno rak", "dr Google", "boję się że zachoruję"],
         "diagnoza": "F45.2 Hipochondria (Zaburzenie z lękiem o zdrowie)",
-        "roznicowa": "Lęk paniczny (F41.0), GAD (F41.1), Zaburzenia somatyzacyjne (F45.0), Rzeczywista choroba somatyczna.",
-        "cbt_problemy": "LĘK O ZDROWIE:\n- Poznawcze: Katastroficzna interpretacja normalnych sygnałów z ciała, błędy poznawcze (np. wyolbrzymianie prawdopodobieństwa choroby).\n- Emocjonalne: Znaczny lęk, niepokój, frustracja (gdy lekarze 'nie potrafią pomóc').\n- Fizjologiczne: Objawy somatyczne nasilone przez stres i ciągłe skanowanie ciała (np. napięcie mięśni, przyspieszone tętno).\n- Behawioralne: Ciągłe sprawdzanie ciała, poszukiwanie zapewnień (rodzina, lekarze), 'Doktor Google' lub przeciwnie - skrajne unikanie lekarzy i informacji o chorobach.",
-        "cele_smart": "1. Całkowite powstrzymanie się od sprawdzania objawów w internecie ('Dr Google') w ciągu najbliższych 2 tygodni.\n2. Zmniejszenie częstotliwości skanowania własnego ciała z 10 razy dziennie do 2 razy dziennie w ciągu miesiąca.\n3. Ograniczenie mówienia o swoich dolegliwościach fizycznych bliskim (poszukiwanie upewnień) do max. 15 minut dziennie.",
-        "protokol_nazwa": "Poznawczo-Behawioralna Terapia Lęku o Zdrowie wg Salkovskisa i Warwick",
-        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Zastosowanie eksperymentów behawioralnych (np. celowe skupienie uwagi na danej części ciała), aby dowieść, że skanowanie nasila objawy.\n2) Zablokowanie zachowań zabezpieczających (nadmierne wizyty lekarskie, internet), co umożliwi habituację lęku.\n3) Restrukturyzację poznawczą: przeformułowanie katastroficznych interpretacji doznań na wyjaśnienia łagodne i fizjologiczne."
+        "roznicowa": "Lęk paniczny (F41.0), Zaburzenia somatyzacyjne (F45.0).",
+        "cbt_problemy": "LĘK O ZDROWIE:\n- Poznawcze: Katastroficzna interpretacja normalnych sygnałów z ciała.\n- Emocjonalne: Lęk, frustracja.\n- Fizjologiczne: Objawy somatyczne nasilone przez stres.\n- Behawioralne: Skanowanie ciała, poszukiwanie zapewnień u lekarzy.",
+        "cele_smart": "1. Całkowite powstrzymanie się od sprawdzania objawów w internecie.\n2. Zmniejszenie skanowania ciała do 2x dziennie.",
+        "protokol_nazwa": "CBT Lęku o Zdrowie wg Salkovskisa",
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Eksperymenty behawioralne ze skanowaniem.\n2) Zablokowanie zachowań zabezpieczających.\n3) Restrukturyzację poznawczą."
+    },
+    {
+        "slowa_kluczowe": ["nie mogę spać", "budzę się w nocy", "leżę i myślę", "przewracam się z boku na bok", "płytki sen", "wybudzam się", "nie mogę zasnąć", "zmęczenie rano", "śpię w dzień", "boję się że nie zasnę", "patrzę w sufit", "liczę barany", "tabletki nasenne"],
+        "diagnoza": "F51 Nieorganiczne zaburzenia snu (Bezsenność)",
+        "roznicowa": "Depresja (F32), GAD (F41.1), Bezsenność organiczna, Bezdech senny.",
+        "cbt_problemy": "BEZSENNOŚĆ:\n- Poznawcze: Lęk przed bezsennością ('jak nie zasnę, to jutro zawalę w pracy'), ciągłe monitorowanie snu.\n- Emocjonalne: Frustracja, złość, lęk związany ze zbliżającą się porą snu.\n- Fizjologiczne: Zmęczenie, brak koncentracji w ciągu dnia, nadmierne wzbudzenie układu nerwowego wieczorem.\n- Behawioralne: Spędzanie nadmiernej ilości czasu w łóżku, drzemki w ciągu dnia, używanie łóżka do innych aktywności (TV, praca).",
+        "cele_smart": "1. Zwiększenie wydajności snu (Sleep Efficiency) do min. 85% w ciągu 4 tygodni.\n2. Zmniejszenie czasu zasypiania (SOL) do poniżej 30 minut.\n3. Eliminacja drzemek w ciągu dnia całkowicie w ciągu 1 tygodnia.",
+        "protokol_nazwa": "Poznawczo-Behawioralna Terapia Bezsenności (CBT-I)",
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Zastosowanie techniki restrykcji snu (skrócenie czasu spędzanego w łóżku do faktycznego czasu snu).\n2) Kontrolę bodźców (łóżko służy tylko do snu i seksu, wstawanie z łóżka w przypadku braku snu przez 20 min).\n3) Restrukturyzację poznawczą dysfunkcjonalnych przekonań dotyczących snu i jego braku."
+    },
+    {
+        "slowa_kluczowe": ["napad obżarstwa", "wymiotuję", "znowu się najadłam", "straciłam kontrolę nad jedzeniem", "boję się przytyć", "od jutra dieta", "przeczyszczam się", "głodówka", "nienawidzę swojego ciała", "zjadłam wszystko co było", "poczułam winę po jedzeniu", "wypijam litry wody", "waże się codziennie"],
+        "diagnoza": "F50.2 Żarłoczność psychiczna (Bulimia)",
+        "roznicowa": "Anoreksja z napadami objadania (F50.0), Zaburzenie z napadami objadania się (BED), Depresja nietypowa.",
+        "cbt_problemy": "ZABURZENIA ODŻYWIANIA:\n- Poznawcze: Uzależnienie samooceny od wagi i sylwetki, myślenie dychotomiczne ('wszystko albo nic' w diecie).\n- Emocjonalne: Wstyd, poczucie winy, lęk przed przytyciem.\n- Fizjologiczne: Zaburzenia elektrolitowe, wahania wagi, uszkodzenia szkliwa (przy wymiotach).\n- Behawioralne: Restrykcje dietetyczne, napady objadania się (utrata kontroli), zachowania kompensacyjne (wymioty, środki przeczyszczające, intensywne ćwiczenia).",
+        "cele_smart": "1. Wprowadzenie regularnego planu posiłków (3 główne, 2 przekąski) od najbliższego tygodnia.\n2. Zmniejszenie częstotliwości napadów objadania się z [aktualna] do 1 na tydzień w ciągu pierwszego miesiąca.\n3. Ograniczenie ważenia się do maksymalnie 1 razu w tygodniu.",
+        "protokol_nazwa": "Transdiagnostyczna Terapia CBT Zaburzeń Odżywiania (CBT-E) wg C. Fairburna",
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Psychoedukację na temat fizjologicznych skutków restrykcji (błędne koło restrykcje -> objadanie się).\n2) Bieżące monitorowanie spożywanych posiłków, napadów i zachowań kompensacyjnych (dzienniczek).\n3) Restrukturyzację poznawczą nakierowaną na poszerzenie bazy do budowania samooceny (oderwanie jej wyłącznie od wagi/sylwetki)."
     }
 ]
 
