@@ -32,12 +32,46 @@ slownik_modeli = {
     "F50.2": [
         {
             "Model": "Transdiagnostyczny model zaburzeń odżywiania (C. Fairburn)",
-            "Opis": "Rdzeniem zaburzenia jest nadmierne uzależnienie samooceny od wagi i sylwetki, co prowadzi do drastycznych restrykcji, napadów objadania się i zachowań kompensacyjnych.",
+            "Opis": "Rdzeniem zaburzenia jest nadmierne uzależnienie samooceny od wagi i sylwetki, co prowadzi do restrykcji, napadów i kompensacji.",
             "Interwencje": "Monitorowanie odżywiania, planowanie regularnych posiłków, restrukturyzacja przekonań o ciele i wadze.",
             "Wizualizacja": "graph TD\nA[Koncentracja na sylwetce i wadze] --> B[Restrykcje dietetyczne]\nB --> C[Złamanie zasad / Narastające napięcie]\nC --> D[Napad objadania się]\nD --> E[Zachowania kompensacyjne np. wymioty]\nD --> F[Poczucie winy i lęk przed tyciem]\nE --> F\nF -- Wzmacnia kontrolę --> A\nstyle A fill:#004d40,stroke:#00695c,color:#fff\n"
         }
+    ],
+    "F40.1": [
+        {
+            "Model": "Model poznawczy fobii społecznej (Clark i Wells)",
+            "Opis": "Lęk przed negatywną oceną prowadzi do skupienia uwagi na sobie (self-focus) i stosowania zachowań zabezpieczających, które paradoksalnie pogarszają funkcjonowanie.",
+            "Interwencje": "Przenoszenie uwagi na zewnątrz, eksperymenty behawioralne (celowe 'robienie z siebie głupka'), rezygnacja z zachowań zabezpieczających.",
+            "Wizualizacja": "graph TD\nA[Sytuacja społeczna] --> B[Aktywacja założeń 'Wyśmieją mnie']\nB --> C[Postrzegane niebezpieczeństwo społeczne]\nC --> D[Skupienie uwagi na sobie]\nC --> E[Objawy somatyczne np. czerwienienie się]\nC --> F[Zachowania zabezpieczające]\nD --> C\nE --> C\nF --> C\nstyle C fill:#4d0000,stroke:#ff3333,stroke-width:2px,color:#fff\n"
+        }
+    ],
+    "F42": [
+        {
+            "Model": "Model poznawczy OCD (P. Salkovskis)",
+            "Opis": "Kluczem nie jest sama myśl intruzowa (która jest normalna), ale nadanie jej katastroficznego znaczenia (przesadne poczucie odpowiedzialności). Kompulsje przynoszą ulgę, ale podtrzymują lęk.",
+            "Interwencje": "Ekspozycja z powstrzymaniem reakcji (ERP), restrukturyzacja przekonań o odpowiedzialności, praca z fuzją myśli-działanie.",
+            "Wizualizacja": "graph TD\nA[Myśl intruzowa / Wyobrażenie] --> B[Błędna interpretacja / Hiperodpowiedzialność]\nB --> C[Silny Lęk / Dyskomfort]\nC --> D[Kompulsje / Rytuały / Unikanie]\nD -- Przynosi krótką ulgę i podtrzymuje lęk --> A\nstyle B fill:#004d40,stroke:#00695c,color:#fff\n"
+        }
+    ],
+    "F43.1": [
+        {
+            "Model": "Model poznawczy PTSD (Ehlers i Clark)",
+            "Opis": "Utrzymujące się poczucie aktualnego zagrożenia wynika z negatywnej oceny traumy i jej konsekwencji oraz z niezintegrowanej pamięci o zdarzeniu.",
+            "Interwencje": "Przedłużona ekspozycja (PE), praca z punktami węzłowymi traumy (hotspots), restrukturyzacja znaczenia traumy.",
+            "Wizualizacja": "graph TD\nA[Traumatyczne zdarzenie] --> B[Niezintegrowana pamięć o traumie]\nA --> C[Negatywna ocena traumy np. 'To moja wina']\nB --> D[Poczucie AKTUALNEGO zagrożenia]\nC --> D\nD --> E[Intruzje / Pobudzenie]\nD --> F[Strategie radzenia sobie / Unikanie]\nF -- Uniemożliwia przetwarzanie --> B\nF -- Wzmacnia oceny --> C\nstyle D fill:#4d0000,stroke:#ff3333,color:#fff\n"
+        }
+    ],
+    "F51": [
+        {
+            "Model": "Model 3P Bezsenności (A. Spielman)",
+            "Opis": "Bezsenność jest wynikiem 3 czynników: Predysponujących (podatność), Wyzwalających (stresor) i Podtrzymujących (złe nawyki snu po minięciu stresora).",
+            "Interwencje": "CBT-I: Restrykcja czasu snu, kontrola bodźców (łóżko=sen), higiena snu, praca z lękiem przed niespaniem.",
+            "Wizualizacja": "graph TD\nA[Czynniki Predysponujące] --> B[Czynniki Wyzwalające np. stres]\nB --> C[Ostra bezsenność]\nC --> D[Czynniki Podtrzymujące np. drzemki, leżenie w łóżku]\nD --> E[Przewlekła bezsenność]\nE -- Lęk przed nocą --> D\nstyle D fill:#002b5e,stroke:#3399ff,color:#fff\n"
+        }
     ]
 }
+
+# Mapowanie dla pokrewnych diagnoz
 slownik_modeli["F33"] = slownik_modeli["F32"]
 slownik_modeli["F50.0"] = slownik_modeli["F50.2"]
 
@@ -64,79 +98,191 @@ baza_symptomow = [
                 "slowa": ["grub", "śmieć", "nienawidz", "brzydz", "waga", "wagę", "wagi", "lustr", "schudn", "diet", "wstyd", "wygląd", "ciało", "ocenę"]
             }
         },
-        "cele_smart": "1. Wprowadzenie regularnego planu posiłków (3 główne, 2 przekąski).\n2. Zmniejszenie częstotliwości napadów/wymiotów do 1/tydz.",
+        "cele_smart": "1. Wprowadzenie regularnego planu posiłków.\n2. Zmniejszenie częstotliwości napadów/wymiotów do 1/tydz.",
         "protokol_nazwa": "CBT-E wg C. Fairburna",
-        "uzasadnienie_planu": "1) Psychoedukacja (błędne koło). 2) Dzienniczek myśli i reakcji. 3) Restrukturyzacja poznawcza i zmiana bazy samooceny.",
+        "uzasadnienie_planu": "Psychoedukacja, dzienniczek myśli i reakcji, restrukturyzacja poznawcza i zmiana bazy samooceny.",
         "profil_cbt": {
-            "SYTUACJA": {"slowa": ["wieczór", "samotn", "stres", "kłótni", "imprez", "restauracj", "sklep", "wadze", "lustrz"], "tlumaczenie": "Sytuacje napięcia emocjonalnego (stres, samotność) lub ekspozycja na bodźce (lustro, waga)."},
-            "MYŚLI": {"slowa": ["grub", "śmieć", "nienawidz", "brzydz", "waga", "wagę", "wagi", "lustr", "schudn", "diet", "nigdy", "zawsze", "muszę", "nie dam rady", "zasady"], "tlumaczenie": "Nadmierne uzależnienie samooceny od wagi/sylwetki, myślenie dychotomiczne ('wszystko albo nic')."},
-            "EMOCJE": {"slowa": ["wstyd", "wyrzut", "win", "lęk", "boję", "stres", "napięc", "panik"], "tlumaczenie": "Głębokie poczucie winy, wstyd po napadzie, silny lęk przed przytyciem."},
-            "CIAŁO": {"slowa": ["zmęcz", "słab", "mdł", "zimn", "brzuch", "gardł", "opuch"], "tlumaczenie": "Wyczerpanie fizyczne, uczucie przepełnienia, możliwe powikłania gastryczne."},
-            "ZACHOWANIE": {"slowa": ["napad", "obżarst", "popłyn", "ciąg", "lodówk", "pochłan", "wymiot", "rzyg", "przeczyszcz", "senes", "ćwicz", "siłown", "głodów", "ograniczam"], "tlumaczenie": "Napady objadania się (utrata kontroli), po których następują zachowania kompensacyjne."}
+            "SYTUACJA": {"slowa": ["wieczór", "samotn", "stres", "kłótni", "imprez", "lustrz"], "tlumaczenie": "Napięcie emocjonalne lub ekspozycja na bodźce (lustro, waga)."},
+            "MYŚLI": {"slowa": ["grub", "śmieć", "nienawidz", "waga", "lustr", "schudn", "diet", "nigdy", "muszę", "nie dam rady", "zasady"], "tlumaczenie": "Uzależnienie samooceny od wagi, myślenie dychotomiczne."},
+            "EMOCJE": {"slowa": ["wstyd", "wyrzut", "win", "lęk", "boję", "stres", "napięc"], "tlumaczenie": "Poczucie winy, wstyd po napadzie, silny lęk przed przytyciem."},
+            "CIAŁO": {"slowa": ["zmęcz", "słab", "mdł", "zimn", "brzuch", "opuch"], "tlumaczenie": "Wyczerpanie fizyczne, dolegliwości gastryczne."},
+            "ZACHOWANIE": {"slowa": ["napad", "obżarst", "lodówk", "pochłan", "wymiot", "rzyg", "przeczyszcz", "senes", "ćwicz", "głodów", "ograniczam"], "tlumaczenie": "Napady objadania się i zachowania kompensacyjne."}
         }
     },
     {
         "diagnoza": "F32 Epizod depresyjny",
         "roznicowa": "ChAD, Dystymia, Niedoczynność tarczycy.",
         "icd10_kryteria": {
-            "Kryterium Podstawowe 1: Obniżony nastrój": {
+            "Kryterium 1: Obniżony nastrój": {
                 "icd10": "Obniżony nastrój, utrzymujący się przez większą część dnia, niemal codziennie, niepodlegający wpływowi wydarzeń zewnętrznych.",
                 "slowa": ["smut", "przygnęb", "płacz", "pust", "dół", "płaka", "źle"]
             },
-            "Kryterium Podstawowe 2: Anhedonia": {
+            "Kryterium 2: Anhedonia": {
                 "icd10": "Wyraźna utrata zainteresowań i zdolności odczuwania radości w stosunku do aktywności, które zwykle sprawiały przyjemność.",
                 "slowa": ["bez sensu", "nic nie czuj", "nie chce mi", "wegetuj", "zaniedb", "obojętn", "nie cieszy"]
             },
-            "Kryterium Podstawowe 3: Brak energii": {
-                "icd10": "Zmniejszona energia, szybsze męczenie się i spadek aktywności. Wzmożona męczliwość po minimalnym wysiłku.",
+            "Kryterium 3: Brak energii": {
+                "icd10": "Zmniejszona energia, szybsze męczenie się i spadek aktywności.",
                 "slowa": ["zmęcz", "brak sił", "ociężał", "słab", "wyczerp", "leżę"]
             },
-            "Kryterium Dodatkowe A: Zaburzenia poznawcze (Samoocena)": {
-                "icd10": "Spadek zaufania do siebie oraz szacunku do siebie. Nieracjonalne poczucie winy i bezwartościowości.",
+            "Kryterium 4: Zaburzenia poznawcze": {
+                "icd10": "Spadek zaufania do siebie. Nieracjonalne poczucie winy i bezwartościowości.",
                 "slowa": ["beznadziej", "nikim", "ciężar", "nie uda", "głup", "win", "przeze mnie"]
             },
-            "Kryterium Dodatkowe B: Objawy somatyczne (Sen/Apetyt)": {
-                "icd10": "Zaburzenia snu wszelkiego typu (najczęściej wczesne wybudzanie) lub wyraźne zmiany apetytu.",
+            "Kryterium 5: Objawy somatyczne": {
+                "icd10": "Zaburzenia snu wszelkiego typu (najczęściej wczesne wybudzanie) lub zmiany apetytu.",
                 "slowa": [" spię", " śpię", " spać", " sen", " snu", "budz", "bezsenn", "apetyt"]
             }
         },
-        "cele_smart": "1. Zwiększenie aktywności celowej (min. 3x w tyg).\n2. Zapisywanie myśli w arkuszu samooceny (Tabela Becka).",
+        "cele_smart": "1. Zwiększenie aktywności celowej (min. 3x w tyg).\n2. Zapisywanie myśli w Tabeli Becka.",
         "protokol_nazwa": "Aktywacja Behawioralna / Terapia Poznawcza Depresji",
-        "uzasadnienie_planu": "Monitorowanie aktywności i nastroju, planowanie dnia (mistrzostwo i przyjemność), testowanie myśli automatycznych.",
+        "uzasadnienie_planu": "Monitorowanie aktywności, testowanie myśli automatycznych.",
         "profil_cbt": {
-            "SYTUACJA": {"slowa": ["rano", "wsta", "prac", "obowiąz", "ludz", "problem", "poranek"], "tlumaczenie": "Konieczność podjęcia aktywności, wyzwania dnia codziennego."},
-            "MYŚLI": {"slowa": ["beznadziej", "bez sensu", "nikim", "ciężar", "nie uda", "głup", "win", "czarn", "nigdy", "zawsze"], "tlumaczenie": "Negatywna triada Becka, generalizacja, katastrofizacja."},
-            "EMOCJE": {"slowa": ["smut", "przygnęb", "płacz", "pust", "nic nie czuj", "znieczul", "płaka"], "tlumaczenie": "Obniżony nastrój, anhedonia, apatia, znieczulenie emocjonalne."},
-            "CIAŁO": {"slowa": [" spać", "zmęcz", "brak sił", "budzę się", "apetyt", "ociężał"], "tlumaczenie": "Spadek energii, zaburzenia snu i apetytu, spowolnienie psychoruchowe."},
-            "ZACHOWANIE": {"slowa": ["nie chce mi się", "leżę", "wegetuj", "izoluj", "nie wychodz", "zamkn", "zaniedb"], "tlumaczenie": "Wycofanie z relacji społecznych, bierność behawioralna, pogłębienie izolacji."}
+            "SYTUACJA": {"slowa": ["rano", "wsta", "prac", "obowiąz", "problem", "poranek"], "tlumaczenie": "Konieczność podjęcia aktywności, wyzwania dnia codziennego."},
+            "MYŚLI": {"slowa": ["beznadziej", "bez sensu", "nikim", "ciężar", "głup", "win", "czarn", "nigdy", "zawsze"], "tlumaczenie": "Negatywna triada Becka, generalizacja."},
+            "EMOCJE": {"slowa": ["smut", "przygnęb", "płacz", "pust", "nic nie czuj", "znieczul", "płaka"], "tlumaczenie": "Obniżony nastrój, anhedonia, apatia."},
+            "CIAŁO": {"slowa": [" spać", "zmęcz", "brak sił", "budzę", "apetyt", "ociężał"], "tlumaczenie": "Spadek energii, zaburzenia snu/apetytu."},
+            "ZACHOWANIE": {"slowa": ["nie chce mi", "leżę", "wegetuj", "izoluj", "nie wychodz", "zaniedb"], "tlumaczenie": "Wycofanie, bierność behawioralna."}
         }
     },
     {
         "diagnoza": "F41.0 Lęk paniczny",
         "roznicowa": "Agorafobia, Zaburzenia kardiologiczne.",
         "icd10_kryteria": {
-            "Kryterium A: Nawracające napady paniki": {
-                "icd10": "Nawracające napady ciężkiego lęku (paniki), które nie są ograniczone do żadnej szczególnej sytuacji, w związku z czym są nieprzewidywalne.",
+            "Kryterium A: Napady paniki": {
+                "icd10": "Nawracające napady ciężkiego lęku (paniki), nieprzewidywalne.",
                 "slowa": ["panik", "przeraż", "strach", "nagle", "atak"]
             },
             "Kryterium B: Objawy wegetatywne": {
-                "icd10": "Nagłe wystąpienie takich objawów jak: palpitacje serca, bóle w klatce piersiowej, uczucie duszności, zawroty głowy, pocenie się.",
+                "icd10": "Nagłe wystąpienie objawów: palpitacje, duszności, zawroty głowy, poty.",
                 "slowa": ["serce", "wali", "tchu", "duszno", "kłuci", "drż", "pocę", "miękną"]
             },
-            "Kryterium C: Wtórne objawy poznawcze/behawioralne": {
-                "icd10": "Wtórny lęk przed śmiercią, utratą kontroli nad sobą lub zwariowaniem oraz unikanie sytuacji (zachowania zabezpieczające).",
+            "Kryterium C: Wtórny lęk": {
+                "icd10": "Wtórny lęk przed śmiercią lub utratą kontroli nad sobą oraz unikanie sytuacji.",
                 "slowa": ["umrę", "uduszę", "zawał", "zwariuję", "kontrol", "zemdlej", "uciekam", "unikam", "karetk", "sor"]
             }
         },
-        "cele_smart": "1. Zmniejszenie częstotliwości napadów paniki do 0 w skali miesiąca.\n2. Rozpoznanie i eliminacja min. 2 głównych zachowań zabezpieczających.",
+        "cele_smart": "1. Zmniejszenie częstotliwości napadów paniki do 0/m-c.\n2. Eliminacja zachowań zabezpieczających.",
         "protokol_nazwa": "Terapia Lęku Panicznego wg D. Clarka",
-        "uzasadnienie_planu": "Reatrybucja doznań fizjologicznych (eksperymenty behawioralne np. hiperwentylacja), odrzucenie zachowań zabezpieczających.",
+        "uzasadnienie_planu": "Reatrybucja doznań fizjologicznych, ekspozycja, eliminacja zachowań zabezpieczających.",
         "profil_cbt": {
-            "SYTUACJA": {"slowa": ["tłum", "sklep", "kolejk", "autobus", "kawi", "wysił", "zadu", "samochód"], "tlumaczenie": "Miejsca zatłoczone, zamknięte przestrzenie, wysiłek fizyczny."},
-            "MYŚLI": {"slowa": ["umrę", "uduszę", "zawał", "zwariuję", "tracę kontrol", "zemdlej", "to koniec"], "tlumaczenie": "Katastroficzna interpretacja normalnych doznań płynących z ciała."},
-            "EMOCJE": {"slowa": ["panik", "przeraż", "strach", "lęk"], "tlumaczenie": "Nagły, nieprzewidywalny silny lęk, przerażenie."},
-            "CIAŁO": {"slowa": ["serce", "wali", "brakuje mi tchu", "duszno", "kłuci", "drż", "pocę", "miękną nogi"], "tlumaczenie": "Silne pobudzenie wegetatywne (tachykardia, duszności, zawroty głowy)."},
-            "ZACHOWANIE": {"slowa": ["uciekam", "unikam", "karetk", "sor", "lekarz", "tablet", "muszę usiąść", "woda"], "tlumaczenie": "Ucieczka z sytuacji, unikanie bodźców interoceptywnych, stosowanie zachowań zabezpieczających."}
+            "SYTUACJA": {"slowa": ["tłum", "sklep", "kolejk", "autobus", "wysił", "samochód"], "tlumaczenie": "Miejsca zatłoczone, zamknięte przestrzenie."},
+            "MYŚLI": {"slowa": ["umrę", "uduszę", "zawał", "zwariuję", "tracę kontrol", "zemdlej"], "tlumaczenie": "Katastroficzna interpretacja doznań z ciała."},
+            "EMOCJE": {"slowa": ["panik", "przeraż", "strach", "lęk"], "tlumaczenie": "Nagły, silny lęk."},
+            "CIAŁO": {"slowa": ["serce", "wali", "tchu", "duszno", "kłuci", "drż", "pocę", "miękną"], "tlumaczenie": "Silne pobudzenie wegetatywne."},
+            "ZACHOWANIE": {"slowa": ["uciekam", "unikam", "karetk", "sor", "lekarz", "tablet", "woda"], "tlumaczenie": "Ucieczka z sytuacji, zachowania zabezpieczające."}
+        }
+    },
+    {
+        "diagnoza": "F40.1 Fobia społeczna",
+        "roznicowa": "Lęk paniczny, Unikające zaburzenie osobowości, Depresja.",
+        "icd10_kryteria": {
+            "Kryterium A: Lęk przed oceną": {
+                "icd10": "Wyraźna obawa przed znalezieniem się w centrum uwagi lub strach przed kompromitującym zachowaniem.",
+                "slowa": ["oceni", "wyśmiej", "głupio", "wstyd", "patrzą", "krytyk", "zbłaźn", "kompromit", "uwagi"]
+            },
+            "Kryterium B: Unikanie sytuacji": {
+                "icd10": "Unikanie sytuacji ekspozycji społecznej (np. jedzenie, przemawianie, spotkania towarzyskie).",
+                "slowa": ["unikam", "imprez", "spotkań", "ludzi", "wyjści", "wystąpień", "nie chodz", "odwoł"]
+            },
+            "Kryterium C: Objawy lęku w sytuacjach społ.": {
+                "icd10": "Pojawienie się objawów lęku w obawianych sytuacjach, często zaczerwienienie twarzy, drżenie, obawa przed wymiotami.",
+                "slowa": ["czerwieni", "drż", "jąka", "pocę", "głos", "gorąc", "serce"]
+            }
+        },
+        "cele_smart": "1. Rezygnacja z zachowań zabezpieczających podczas rozmowy.\n2. Wykonanie 3 eksperymentów behawioralnych (ekspozycji).",
+        "protokol_nazwa": "Terapia Poznawcza Fobii Społecznej wg Clarka i Wellsa",
+        "uzasadnienie_planu": "Przenoszenie uwagi z wewnątrz na zewnątrz, eksperymenty, restrukturyzacja założeń.",
+        "profil_cbt": {
+            "SYTUACJA": {"slowa": ["imprez", "ludzi", "spotka", "wystąp", "rozmow", "prezentacj", "sklep"], "tlumaczenie": "Sytuacje ekspozycji na ocenę innych."},
+            "MYŚLI": {"slowa": ["oceni", "wyśmiej", "głupio", "nudn", "dziwn", "zbłaźnię", "widzą", "zauważ"], "tlumaczenie": "Antycypacja negatywnej oceny, czytanie w myślach."},
+            "EMOCJE": {"slowa": ["lęk", "wstyd", "stres", "spięt", "niepokój"], "tlumaczenie": "Lęk społeczny, zakłopotanie."},
+            "CIAŁO": {"slowa": ["czerwieni", "drż", "pocę", "gorąc", "jąka", "głos", "serce"], "tlumaczenie": "Pobudzenie współczulne, widoczne objawy lęku."},
+            "ZACHOWANIE": {"slowa": ["unikam", "odwoł", "nie odzyw", "telefon", "patrzę w dół", "uciekam"], "tlumaczenie": "Unikanie, zachowania zabezpieczające (np. sprawdzanie telefonu)."}
+        }
+    },
+    {
+        "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)",
+        "roznicowa": "Zaburzenia lękowe uogólnione, Schizofrenia, Zaburzenie osobowości anankastycznej.",
+        "icd10_kryteria": {
+            "Kryterium A: Obsesje (myśli intruzowe)": {
+                "icd10": "Występowanie obsesji (nawracających, nieprzyjemnych myśli, wyobrażeń, impulsów), które są uznawane za własne, ale przeszkadzające.",
+                "slowa": ["myśli", "obraz", "narzuc", "wbrew", "głowie", "zaraz", "brud", "zrobię krzywdę", "bluźnier"]
+            },
+            "Kryterium B: Kompulsje (czynności natrętne)": {
+                "icd10": "Obecność kompulsji (rytuałów) - stereotypowych, wielokrotnie powtarzanych zachowań lub czynności umysłowych.",
+                "slowa": ["myję", "sprawdz", "liczę", "rytuał", "muszę", "powtarz", "układ", "kilka razy"]
+            },
+            "Kryterium C: Redukcja napięcia": {
+                "icd10": "Wykonywanie kompulsji nie jest przyjemne, ale służy zapobieżeniu mało prawdopodobnemu wydarzeniu lub redukcji lęku.",
+                "slowa": ["ulg", "spokój", "przesta", "żeby nic", "zabezpiecz", "obaw", "inaczej"]
+            }
+        },
+        "cele_smart": "1. Ograniczenie czasu rytuałów do X minut dziennie.\n2. Wykonanie ekspozycji bez reakcji zabezpieczającej.",
+        "protokol_nazwa": "Ekspozycja z Powstrzymaniem Reakcji (ERP) / Model Salkovskisa",
+        "uzasadnienie_planu": "ERP, edukacja o powszechności myśli intruzowych, praca z nadmierną odpowiedzialnością.",
+        "profil_cbt": {
+            "SYTUACJA": {"slowa": ["klamk", "brud", "nóż", "kuchn", "samotn", "wyjści", "zamk", "gaz"], "tlumaczenie": "Wyzwalacze intruzji (brud, niebezpieczne przedmioty, wątpliwości)."},
+            "MYŚLI": {"slowa": ["co jeśli", "zaraz", "zabiję", "może", "nie sprawdz", "wina", "odpowiedzial", "przeze mnie"], "tlumaczenie": "Fuzja myśli z działaniem, hiperodpowiedzialność."},
+            "EMOCJE": {"slowa": ["lęk", "panik", "napięc", "wstręt", "obrzydzen", "niepokój"], "tlumaczenie": "Silny lęk i dyskomfort wywołany obsesją."},
+            "CIAŁO": {"slowa": ["spięt", "napięt", "serce", "ból", "żołądek"], "tlumaczenie": "Pobudzenie z lęku."},
+            "ZACHOWANIE": {"slowa": ["sprawdz", "myję", "liczę", "wracam", "pytam", "upewniam", "powtarz"], "tlumaczenie": "Rytuały jawne (mycie, sprawdzanie) i ukryte (liczenie w myślach)."}
+        }
+    },
+    {
+        "diagnoza": "F43.1 Zaburzenie stresowe pourazowe (PTSD)",
+        "roznicowa": "Ostra reakcja na stres, Zaburzenia adaptacyjne, Depresja.",
+        "icd10_kryteria": {
+            "Kryterium A: Zdarzenie traumatyczne": {
+                "icd10": "Narażenie na stresujące wydarzenie o wyjątkowo groźnym lub katastroficznym charakterze.",
+                "slowa": ["wypadek", "śmierć", "gwałt", "napad", "pożar", "wojna", "traum", "tragedi"]
+            },
+            "Kryterium B: Intruzje i Flashbacki": {
+                "icd10": "Uporczywe przypominanie sobie traumy w postaci natrętnych wspomnień (flashbacków), koszmarów sennych lub poczucia, że trauma dzieje się znów.",
+                "slowa": ["flashback", "koszmar", "wraca", "obraz", "przed oczami", "jakby to", "budzę się", "żywo"]
+            },
+            "Kryterium C: Unikanie i Pobudzenie": {
+                "icd10": "Faktyczne unikanie okoliczności przypominających stresor oraz objawy nadmiernego wzbudzenia wegetatywnego (wzmożona czujność).",
+                "slowa": ["unikam", "nie chodzę", "nie myśl", "napięt", "czuwam", "wybuch", "zaskoczen", "hałas"]
+            }
+        },
+        "cele_smart": "1. Zmniejszenie częstotliwości flashbacków.\n2. Przerwanie zachowań unikowych wokół wspomnień o traumie.",
+        "protokol_nazwa": "Przedłużona Ekspozycja (PE) lub Trauma-Focused CBT (Ehlers/Clark)",
+        "uzasadnienie_planu": "Ekspozycja wyobrażeniowa (praca z pamięcią) i ekspozycja in vivo (przełamanie unikania).",
+        "profil_cbt": {
+            "SYTUACJA": {"slowa": ["hałas", "zapach", "tłum", "samochód", "noc", "rocznic", "miejsce"], "tlumaczenie": "Bodźce przypominające traumę (triggery)."},
+            "MYŚLI": {"slowa": ["świat", "niebezpiecz", "nie ufam", "znowu", "nie dam rady", "zniszczon", "moja wina", "mogłem"], "tlumaczenie": "Poczucie aktualnego zagrożenia, negatywne oceny traumy."},
+            "EMOCJE": {"slowa": ["przeraż", "złość", "gniew", "wina", "wstyd", "odrętwien", "pustka"], "tlumaczenie": "Lęk, gniew, emocjonalne odrętwienie."},
+            "CIAŁO": {"slowa": ["napięt", "skaczę", "serce", "pot", "bezdech", "spięt", "reakcj"], "tlumaczenie": "Wzbudzenie fizjologiczne, odruch zaskoczenia."},
+            "ZACHOWANIE": {"slowa": ["unikam", "izoluj", "piję", "nie rozmaw", "sprawdzam", "chowam"], "tlumaczenie": "Unikanie sytuacji, tłumienie wspomnień, hiperczujność."}
+        }
+    },
+    {
+        "diagnoza": "F51 Nieorganiczna bezsenność",
+        "roznicowa": "Bezsenność wtórna (depresja, lęk), Zespół bezdechu sennego.",
+        "icd10_kryteria": {
+            "Kryterium A: Problemy ze snem": {
+                "icd10": "Trudności w zasypianiu, utrzymaniu snu lub sen jest złej jakości (nie dający odpoczynku).",
+                "slowa": ["zasnąć", "budzę", "sen", "zła jakość", "płytki", "wybudz"]
+            },
+            "Kryterium B: Częstotliwość": {
+                "icd10": "Zaburzenia snu występują co najmniej 3 razy w tygodniu przez co najmniej 1 miesiąc.",
+                "slowa": ["znowu", "często", "codzien", "tygodni", "miesiąc", "ciągle", "każdej nocy"]
+            },
+            "Kryterium C: Zaabsorbowanie i Lęk": {
+                "icd10": "Nadmierne zaabsorbowanie bezsennością, lęk przed niemożnością zaśnięcia i jej skutkami w ciągu dnia.",
+                "slowa": ["boję się że nie zasnę", "patrzę w sufit", "przewraca", "znowu nie", "jutro", "zmęczon", "tablet", "stres"]
+            }
+        },
+        "cele_smart": "1. Zwiększenie wydajności snu powyżej 85%.\n2. Skrócenie czasu zasypiania do max 30 minut.",
+        "protokol_nazwa": "Poznawczo-Behawioralna Terapia Bezsenności (CBT-I)",
+        "uzasadnienie_planu": "Dzienniczek snu, Restrykcja snu, Kontrola bodźców, Restrukturyzacja poznawcza (odkatastrofizowanie).",
+        "profil_cbt": {
+            "SYTUACJA": {"slowa": ["noc", "łóżk", "sypialn", "wieczór", "godzin", "ciemn"], "tlumaczenie": "Sytuacja kładzenia się do łóżka lub przebudzenie w nocy."},
+            "MYŚLI": {"slowa": ["nie zasnę", "jutro", "masakr", "muszę spać", "zmęczon", "ile godzin", "zniszczy"], "tlumaczenie": "Lęk antycypacyjny, wymuszanie snu, katastrofizowanie skutków niewyspania."},
+            "EMOCJE": {"slowa": ["lęk", "stres", "frustracj", "złość", "bezradn"], "tlumaczenie": "Frustracja łóżkowa, niepokój."},
+            "CIAŁO": {"slowa": ["rozbudzon", "serce", "gorąc", "zmęczon", "napięt", "przebudz"], "tlumaczenie": "Hiperwzbudzenie somatyczne, brak naturalnej senności."},
+            "ZACHOWANIE": {"slowa": ["przewracam", "patrzę w sufit", "telefon", "zegar", "drzemk", "leżę", "tablet"], "tlumaczenie": "Leżenie w łóżku bez snu, zerkanie na zegarek, odesypianie (drzemki)."}
         }
     }
 ]
@@ -147,8 +293,8 @@ icd10_full = {
     "F10-F19 Zab. spowodowane substancjami": ["F10 Zab. spowodowane alkoholem", "F11 Zab. spowodowane opioidami", "F12 Zab. spowodowane kanabinoidami", "F13 Leki uspokajające i nasenne", "F17 Palenie tytoniu"],
     "F20-F29 Schizofrenia i urojeniowe": ["F20 Schizofrenia", "F21 Zaburzenie schizotypowe", "F22 Uporczywe zaburzenia urojeniowe", "F23 Ostre zaburzenia psychotyczne", "F25 Zaburzenia schizoafektywne"],
     "F30-F39 Zaburzenia nastroju (afektywne)": ["F30 Epizod maniakalny", "F31 ChAD", "F32 Epizod depresyjny", "F33 Zaburzenia depresyjne nawracające", "F34 Uporczywe zaburzenia nastroju (Dystymia)"],
-    "F40-F48 Zaburzenia nerwicowe i lękowe": ["F40.0 Agorafobia", "F40.1 Fobie społeczne", "F40.2 Specyficzne fobie", "F41.0 Zaburzenie lękowe z napadami lęku", "F41.1 Zaburzenie lękowe uogólnione (GAD)", "F41.2 Zab. lękowo-depresyjne mieszane", "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", "F43.0 Ostra reakcja na stres", "F43.1 Zaburzenie stresowe pourazowe (PTSD)", "F43.2 Zaburzenia adaptacyjne", "F44 Zaburzenia dysocjacyjne", "F45 Zaburzenia pod postacią somatyczną (np. Hipochondria)"],
-    "F50-F59 Zespoły behawioralne": ["F50.0 Jadłowstręt psychiczny (Anoreksja)", "F50.2 Żarłoczność psychiczna (Bulimia)", "F51 Nieorganiczne zaburzenia snu", "F52 Dysfunkcje seksualne"],
+    "F40-F48 Zaburzenia nerwicowe i lękowe": ["F40.0 Agorafobia", "F40.1 Fobia społeczna", "F40.2 Specyficzne fobie", "F41.0 Lęk paniczny", "F41.1 Zaburzenie lękowe uogólnione (GAD)", "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)", "F43.0 Ostra reakcja na stres", "F43.1 Zaburzenie stresowe pourazowe (PTSD)", "F43.2 Zaburzenia adaptacyjne", "F44 Zaburzenia dysocjacyjne", "F45 Zaburzenia pod postacią somatyczną (np. Hipochondria)"],
+    "F50-F59 Zespoły behawioralne": ["F50.0 Jadłowstręt psychiczny (Anoreksja)", "F50.2 Żarłoczność psychiczna (Bulimia)", "F51 Nieorganiczna bezsenność", "F52 Dysfunkcje seksualne"],
     "F60-F69 Zaburzenia osobowości": ["F60.0 Osobowość paranoiczna", "F60.1 Osobowość schizoidalna", "F60.2 Osobowość dyssocjalna", "F60.30 Os. chwiejna emocjonalnie typ impulsywny", "F60.31 Os. chwiejna emocjonalnie typ borderline", "F60.4 Os. histrioniczna", "F60.5 Os. anankastyczna (OCPD)", "F60.6 Os. lękliwa (unikająca)", "F60.7 Os. zależna", "F61 Mieszane zab. osobowości"],
     "F90-F98 Zaburzenia wieku dziecięcego": ["F90 Zaburzenia hiperkinetyczne (ADHD)", "F91 Zaburzenia zachowania", "F95 Tiki"]
 }
@@ -225,7 +371,6 @@ if menu == "I. Diagnoza i Konceptualizacja":
                             wynik_choroby += len(znalezione_dowody) * 3 
                             dowody_html = "<br>".join([f"👉 <i>„{d}”</i>" for d in znalezione_dowody])
                             
-                            # Użyto zapisu zapobiegającego błędowi formatowania (brak wcięć na początku linijek HTML)
                             html_raport += "<div style='border-left: 5px solid #28a745; padding: 12px; background-color: #f0fdf4; margin-bottom: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'>\n"
                             html_raport += f"<h5 style='color: #155724; margin-top: 0;'>✅ SPEŁNIONE: {nazwa_kryterium}</h5>\n"
                             html_raport += f"<p style='font-size: 0.9em; color: #333; margin-bottom: 8px;'><b>Definicja ICD-10:</b> {dane_kryterium['icd10']}</p>\n"
@@ -349,6 +494,9 @@ if menu == "I. Diagnoza i Konceptualizacja":
         })
         st.success("Zapisano do bazy!")
 
+# ==========================================================
+# MODUŁ II: PLAN TERAPII I INTERWENCJE
+# ==========================================================
 elif menu == "II. Plan i Interwencje":
     st.title("II. Plan terapii i interwencje")
     st.header("II.1. Plan terapii (Uzasadnienie EBM)")
@@ -358,6 +506,9 @@ elif menu == "II. Plan i Interwencje":
     st.header("II.2. Zapis przebiegu poszczególnych sesji")
     st.text_area("Rejestr sesji (np. Sesja 1 [Data] - Psychoedukacja i BA...)", height=300)
 
+# ==========================================================
+# MODUŁ III: PODSUMOWANIE
+# ==========================================================
 elif menu == "III. Podsumowanie":
     st.title("III. Podsumowanie i Ewaluacja")
     st.header("III.1. Osiągnięte cele terapii")
@@ -376,6 +527,9 @@ elif menu == "III. Podsumowanie":
     st.header("III.4. Literatura")
     st.text_area("Materiały, protokoły wykorzystane do pracy")
 
+# ==========================================================
+# MODUŁ IV: ARCHIWUM DIAGNOZ
+# ==========================================================
 elif menu == "📂 Archiwum Diagnoz":
     st.title("Baza Terapii")
     if not st.session_state.baza_terapii:
