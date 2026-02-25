@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import re  # <--- Nowa biblioteka do wyciągania pełnych słów z tekstu
 
 # --- KONFIGURACJA STRONY ---
 st.set_page_config(page_title="Zapis Przebiegu Terapii CBT", layout="wide")
@@ -10,24 +11,21 @@ slownik_modeli = {
         {
             "Model": "Model poznawczy lęku panicznego (D. Clark)",
             "Opis": "Skupienie na błędnej, katastroficznej interpretacji normalnych doznań z ciała.",
-            "Interwencje": "Reatrybucja doznań, eksperymenty, eliminacja zachowań zabezpieczających.",
-            "Wizualizacja": "graph TD\nA[Wyzwalacz] --> B[Zagrożenie]\nB --> C[Lęk]\nC --> D[Doznania z ciała]\nD --> E{Katastroficzna interpretacja}\nE --> B\nstyle E fill:#4d0000,stroke:#ff3333,color:#fff"
+            "Interwencje": "Reatrybucja doznań, eksperymenty, eliminacja zachowań zabezpieczających."
         }
     ],
     "F32": [
         {
             "Model": "Triada Poznawcza Depresji (A. Beck)",
             "Opis": "Negatywna wizja siebie, świata i przyszłości.",
-            "Interwencje": "Zapisywanie myśli (Tabela Becka), restrukturyzacja, testowanie przekonań.",
-            "Wizualizacja": "graph TD\nA((Myśli O SOBIE)) <--> B((Myśli O ŚWIECIE))\nB <--> C((Myśli O PRZYSZŁOŚCI))\nC <--> A"
+            "Interwencje": "Zapisywanie myśli (Tabela Becka), restrukturyzacja, testowanie przekonań."
         }
     ],
     "F50.2": [
         {
             "Model": "Transdiagnostyczny model zaburzeń odżywiania (C. Fairburn)",
             "Opis": "Uzależnienie samooceny od wagi i sylwetki, prowadzące do restrykcji, napadów i kompensacji.",
-            "Interwencje": "Monitorowanie odżywiania, planowanie posiłków, restrukturyzacja przekonań.",
-            "Wizualizacja": "graph TD\nA[Koncentracja na sylwetce i wadze] --> B[Restrykcje dietetyczne]\nB --> C[Złamanie zasad / Napięcie]\nC --> D[Napad objadania się]\nD --> E[Zachowania kompensacyjne]\nD --> F[Poczucie winy]\nE --> F\nF --> A"
+            "Interwencje": "Monitorowanie odżywiania, planowanie posiłków, restrukturyzacja przekonań."
         }
     ]
 }
@@ -143,7 +141,6 @@ st.sidebar.divider()
 if menu == "I. Diagnoza i Konceptualizacja":
     st.title("I. Diagnoza i konceptualizacja zjawiska")
     
-    # ASYSTENT DIAGNOZY (ZAAWANSOWANY CBT)
     with st.expander("🤖 Asystent Diagnozy CBT (Model: Myśli-Emocje-Ciało-Zachowanie)", expanded=True):
         st.write("Wpisz swobodną wypowiedź pacjenta. Algorytm wychwyci słowa-klucze, przetłumaczy je na język poznawczo-behawioralny i stworzy listę problemów.")
         objawy_input = st.text_area("Cytaty pacjenta / Skarga główna:")
@@ -151,6 +148,9 @@ if menu == "I. Diagnoza i Konceptualizacja":
         if st.button("🔍 Analizuj i przygotuj konceptualizację CBT"):
             if objawy_input:
                 input_do_analizy = objawy_input.lower()
+                # Wyciągamy listę wszystkich pełnych słów pacjenta (bez kropek i przecinków)
+                slowa_z_tekstu = re.findall(r'\b\w+\b', input_do_analizy)
+                
                 najlepsze_dopasowanie = None
                 najwyzszy_wynik = 0
                 wygenerowana_lista_problemow = ""
@@ -161,10 +161,16 @@ if menu == "I. Diagnoza i Konceptualizacja":
                     tymczasowa_lista = f"WSTĘPNA KONCEPTUALIZACJA ({choroba['diagnoza']}):\n"
                     
                     for sfera, dane_sfery in choroba["profil_cbt"].items():
-                        znalezione_slowa = [slowo for slowo in dane_sfery["slowa"] if slowo in input_do_analizy]
-                        if znalezione_slowa:
-                            wynik_choroby += len(znalezione_slowa)
-                            tymczasowa_lista += f"\n👉 {sfera}:\n- Język pacjenta: '{', '.join(znalezione_slowa)}'\n- Tłumaczenie CBT: {dane_sfery['tlumaczenie']}\n"
+                        znalezione_pelne_slowa = []
+                        # Szukamy, czy rdzenie ukrywają się w pełnych słowach pacjenta
+                        for rdzen in dane_sfery["slowa"]:
+                            for slowo_pacjenta in slowa_z_tekstu:
+                                if rdzen in slowo_pacjenta and slowo_pacjenta not in znalezione_pelne_slowa:
+                                    znalezione_pelne_slowa.append(slowo_pacjenta)
+                        
+                        if znalezione_pelne_slowa:
+                            wynik_choroby += len(znalezione_pelne_slowa)
+                            tymczasowa_lista += f"\n👉 {sfera}:\n- Język pacjenta: '{', '.join(znalezione_pelne_slowa)}'\n- Tłumaczenie CBT: {dane_sfery['tlumaczenie']}\n"
                     
                     if wynik_choroby > najwyzszy_wynik:
                         najwyzszy_wynik = wynik_choroby
