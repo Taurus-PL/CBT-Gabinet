@@ -167,7 +167,7 @@ slownik_modeli = {
     ]
 }
 slownik_modeli["F33"] = slownik_modeli["F32"]
-slownik_modeli["F50.0"] = slownik_modeli["F50.2"] # Opcjonalne zrównanie dla anoreksji
+slownik_modeli["F50.0"] = slownik_modeli["F50.2"]
 
 # --- BAZA ASYSTENTA DIAGNOZY ---
 baza_symptomow = [
@@ -244,13 +244,24 @@ baza_symptomow = [
         "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Zastosowanie techniki restrykcji snu (skrócenie czasu spędzanego w łóżku do faktycznego czasu snu).\n2) Kontrolę bodźców (łóżko służy tylko do snu i seksu, wstawanie z łóżka w przypadku braku snu przez 20 min).\n3) Restrukturyzację poznawczą dysfunkcjonalnych przekonań dotyczących snu i jego braku."
     },
     {
-        "slowa_kluczowe": ["napad obżarstwa", "wymiotuję", "znowu się najadłam", "straciłam kontrolę nad jedzeniem", "boję się przytyć", "od jutra dieta", "przeczyszczam się", "głodówka", "nienawidzę swojego ciała", "zjadłam wszystko co było", "poczułam winę po jedzeniu", "wypijam litry wody", "waże się codziennie"],
+        "slowa_kluczowe": [
+            "napad", "popłynęłam", "wpadłam w ciąg", "zjadłam pół lodówki", 
+            "pochłaniam", "nie mogłam przestać jeść", "straciłam kontrolę", 
+            "zajadam stres", "wilczy głód", "zjadłam wszystko", "rzucam się na jedzenie",
+            "wymiotuję", "rzygam", "zwracam", "musiałam to z siebie wyrzucić", 
+            "wsadzam palce do gardła", "przeczyszczam się", "biorę tabletki na przeczyszczenie", 
+            "piję senes", "ćwiczę do upadłego", "katuje się na siłowni", "od jutra głodówka",
+            "jestem gruba", "nienawidzę swojego ciała", "brzydzę się sobą", 
+            "czuję się jak śmieć po jedzeniu", "wstydzę się", "mam wyrzuty sumienia", 
+            "boję się przytyć", "obsesja na punkcie wagi", "boję się wejść na wagę", 
+            "patrzę w lustro i płaczę", "wylewa mi się", "muszę schudnąć"
+        ],
         "diagnoza": "F50.2 Żarłoczność psychiczna (Bulimia)",
         "roznicowa": "Anoreksja z napadami objadania (F50.0), Zaburzenie z napadami objadania się (BED), Depresja nietypowa.",
-        "cbt_problemy": "ZABURZENIA ODŻYWIANIA:\n- Poznawcze: Uzależnienie samooceny od wagi i sylwetki, myślenie dychotomiczne ('wszystko albo nic' w diecie).\n- Emocjonalne: Wstyd, poczucie winy, lęk przed przytyciem.\n- Fizjologiczne: Zaburzenia elektrolitowe, wahania wagi, uszkodzenia szkliwa (przy wymiotach).\n- Behawioralne: Restrykcje dietetyczne, napady objadania się (utrata kontroli), zachowania kompensacyjne (wymioty, środki przeczyszczające, intensywne ćwiczenia).",
-        "cele_smart": "1. Wprowadzenie regularnego planu posiłków (3 główne, 2 przekąski) od najbliższego tygodnia.\n2. Zmniejszenie częstotliwości napadów objadania się z [aktualna] do 1 na tydzień w ciągu pierwszego miesiąca.\n3. Ograniczenie ważenia się do maksymalnie 1 razu w tygodniu.",
+        "cbt_problemy": "ZABURZENIA ODŻYWIANIA:\n- Poznawcze: Uzależnienie samooceny od wagi i sylwetki, myślenie dychotomiczne ('wszystko albo nic' w diecie).\n- Emocjonalne: Wstyd, poczucie winy, lęk przed przytyciem, obrzydzenie do siebie.\n- Fizjologiczne: Zaburzenia elektrolitowe, wahania wagi, uszkodzenia szkliwa (przy wymiotach), wyczerpanie.\n- Behawioralne: Restrykcje dietetyczne, napady objadania się (utrata kontroli), zachowania kompensacyjne (wymioty, środki przeczyszczające, intensywne ćwiczenia).",
+        "cele_smart": "1. Wprowadzenie regularnego planu posiłków (3 główne, 2 przekąski) od najbliższego tygodnia.\n2. Zmniejszenie częstotliwości napadów objadania się i wymiotów do 1 na tydzień w ciągu pierwszego miesiąca.\n3. Ograniczenie ważenia się do maksymalnie 1 razu w tygodniu.",
         "protokol_nazwa": "Transdiagnostyczna Terapia CBT Zaburzeń Odżywiania (CBT-E) wg C. Fairburna",
-        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Psychoedukację na temat fizjologicznych skutków restrykcji (błędne koło restrykcje -> objadanie się).\n2) Bieżące monitorowanie spożywanych posiłków, napadów i zachowań kompensacyjnych (dzienniczek).\n3) Restrukturyzację poznawczą nakierowaną na poszerzenie bazy do budowania samooceny (oderwanie jej wyłącznie od wagi/sylwetki)."
+        "uzasadnienie_planu": "Cele będą osiągane przez:\n1) Psychoedukację na temat fizjologicznych skutków restrykcji (błędne koło: restrykcje -> głód -> napad -> wymioty).\n2) Bieżące monitorowanie spożywanych posiłków, napadów i zachowań kompensacyjnych (dzienniczek pacjenta).\n3) Restrukturyzację poznawczą nakierowaną na poszerzenie bazy do budowania samooceny (oderwanie jej wyłącznie od wagi/sylwetki)."
     }
 ]
 
