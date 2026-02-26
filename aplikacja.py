@@ -95,14 +95,7 @@ baza_symptomow = [
         },
         "cele_smart": "1. Zmniejszenie częstotliwości intruzji/flashbacków.\n2. Przerwanie zachowań unikowych i ekspozycja na bodźce (in vivo).",
         "protokol_nazwa": "Przedłużona Ekspozycja (PE) lub Trauma-Focused CBT (Ehlers/Clark)",
-        "uzasadnienie_planu": "Ekspozycja wyobrażeniowa (praca z pamięcią) i ekspozycja in vivo (przełamanie unikania i hiperczujności).",
-        "profil_cbt": {
-            "SYTUACJA": {"slowa": ["hałas", "zapach", "tłum", "samochód", "noc", "miejsce", "dźwięk", "głos"], "tlumaczenie": "Bodźce (triggery), które wyzwalają reakcję alarmową."},
-            "MYŚLI": {"slowa": ["świat", "niebezpiecz", "nie ufam", "znowu", "nie dam rady", "zniszczon", "wina", "słab", "normaln", "coś się stanie"], "tlumaczenie": "Poczucie zagrożenia, negatywne oceny siebie i świata."},
-            "EMOCJE": {"slowa": ["przeraż", "złość", "gniew", "wina", "wstyd", "odrętwien", "pustka", "bezradność"], "tlumaczenie": "Lęk, gniew, wstyd, dysocjacja (odcięcie)."},
-            "CIAŁO": {"slowa": ["napięt", "skaczę", "serce", "pot", "bezdech", "spięt", "reakcj", "zimno", "spinają"], "tlumaczenie": "Wzbudzenie fizjologiczne, odruch zaskoczenia, zamrożenie (freeze)."},
-            "ZACHOWANIE": {"slowa": ["unikam", "izoluj", "piję", "nie rozmaw", "sprawdzam", "chowam", "robot"], "tlumaczenie": "Unikanie sytuacji i myśli, hiperczujność, odcięcie emocjonalne."}
-        }
+        "uzasadnienie_planu": "Ekspozycja wyobrażeniowa (praca z pamięcią) i ekspozycja in vivo (przełamanie unikania i hiperczujności)."
     },
     {
         "diagnoza": "F50.2 Żarłoczność psychiczna (Bulimia)",
@@ -127,14 +120,7 @@ baza_symptomow = [
         },
         "cele_smart": "1. Wprowadzenie regularnego planu posiłków.\n2. Zmniejszenie częstotliwości napadów/wymiotów do 1/tydz.",
         "protokol_nazwa": "CBT-E wg C. Fairburna",
-        "uzasadnienie_planu": "Psychoedukacja, dzienniczek myśli i reakcji, restrukturyzacja poznawcza i zmiana bazy samooceny.",
-        "profil_cbt": {
-            "SYTUACJA": {"slowa": ["wieczór", "samotn", "stres", "kłótni", "imprez", "lustrz"], "tlumaczenie": "Napięcie emocjonalne lub ekspozycja na bodźce (lustro, waga)."},
-            "MYŚLI": {"slowa": ["grub", "śmieć", "nienawidz", "waga", "lustr", "schudn", "diet", "nigdy", "muszę", "zasady"], "tlumaczenie": "Uzależnienie samooceny od wagi, myślenie dychotomiczne."},
-            "EMOCJE": {"slowa": ["wstyd", "wyrzut", "win", "lęk", "boję", "stres", "napięc"], "tlumaczenie": "Poczucie winy, wstyd po napadzie, silny lęk przed przytyciem."},
-            "CIAŁO": {"slowa": ["zmęcz", "słab", "mdł", "zimn", "brzuch", "opuch"], "tlumaczenie": "Wyczerpanie fizyczne, dolegliwości gastryczne."},
-            "ZACHOWANIE": {"slowa": ["napad", "obżarst", "lodówk", "pochłan", "wymiot", "rzyg", "przeczyszcz", "senes", "ćwicz", "głodów", "ograniczam"], "tlumaczenie": "Napady objadania się i zachowania kompensacyjne."}
-        }
+        "uzasadnienie_planu": "Psychoedukacja, dzienniczek myśli i reakcji, restrukturyzacja poznawcza i zmiana bazy samooceny."
     },
     {
         "diagnoza": "F32 Epizod depresyjny",
@@ -163,14 +149,7 @@ baza_symptomow = [
         },
         "cele_smart": "1. Zwiększenie aktywności celowej (min. 3x w tyg).\n2. Zapisywanie myśli w Tabeli Becka.",
         "protokol_nazwa": "Aktywacja Behawioralna / Terapia Poznawcza Depresji",
-        "uzasadnienie_planu": "Monitorowanie aktywności, testowanie myśli automatycznych.",
-        "profil_cbt": {
-            "SYTUACJA": {"slowa": ["rano", "wsta", "prac", "obowiąz", "problem", "poranek"], "tlumaczenie": "Konieczność podjęcia aktywności, wyzwania dnia codziennego."},
-            "MYŚLI": {"slowa": ["beznadziej", "bez sensu", "nikim", "ciężar", "głup", "win", "czarn", "nigdy", "zawsze"], "tlumaczenie": "Negatywna triada Becka, generalizacja."},
-            "EMOCJE": {"slowa": ["smut", "przygnęb", "płacz", "pust", "nic nie czuj", "znieczul", "płaka"], "tlumaczenie": "Obniżony nastrój, anhedonia, apatia."},
-            "CIAŁO": {"slowa": [" spać", "zmęcz", "brak sił", "budzę", "apetyt", "ociężał"], "tlumaczenie": "Spadek energii, zaburzenia snu/apetytu."},
-            "ZACHOWANIE": {"slowa": ["nie chce mi", "leżę", "wegetuj", "izoluj", "nie wychodz", "zaniedb"], "tlumaczenie": "Wycofanie, bierność behawioralna."}
-        }
+        "uzasadnienie_planu": "Monitorowanie aktywności, testowanie myśli automatycznych."
     },
     {
         "diagnoza": "F41.0 Lęk paniczny",
@@ -191,14 +170,7 @@ baza_symptomow = [
         },
         "cele_smart": "1. Zmniejszenie częstotliwości napadów paniki do 0/m-c.\n2. Eliminacja zachowań zabezpieczających.",
         "protokol_nazwa": "Terapia Lęku Panicznego wg D. Clarka",
-        "uzasadnienie_planu": "Reatrybucja doznań fizjologicznych, ekspozycja, eliminacja zachowań zabezpieczających.",
-        "profil_cbt": {
-            "SYTUACJA": {"slowa": ["tłum", "sklep", "kolejk", "autobus", "wysił", "samochód"], "tlumaczenie": "Miejsca zatłoczone, zamknięte przestrzenie."},
-            "MYŚLI": {"slowa": ["umrę", "uduszę", "zawał", "zwariuję", "tracę kontrol", "zemdlej"], "tlumaczenie": "Katastroficzna interpretacja doznań z ciała."},
-            "EMOCJE": {"slowa": ["panik", "przeraż", "strach", "lęk"], "tlumaczenie": "Nagły, silny lęk."},
-            "CIAŁO": {"slowa": ["serce", "wali", "tchu", "duszno", "kłuci", "drż", "pocę", "miękną"], "tlumaczenie": "Silne pobudzenie wegetatywne."},
-            "ZACHOWANIE": {"slowa": ["uciekam", "unikam", "karetk", "sor", "lekarz", "tablet", "woda"], "tlumaczenie": "Ucieczka z sytuacji, zachowania zabezpieczające."}
-        }
+        "uzasadnienie_planu": "Reatrybucja doznań fizjologicznych, ekspozycja, eliminacja zachowań zabezpieczających."
     },
     {
         "diagnoza": "F40.1 Fobia społeczna",
@@ -219,14 +191,7 @@ baza_symptomow = [
         },
         "cele_smart": "1. Rezygnacja z zachowań zabezpieczających podczas rozmowy.\n2. Wykonanie 3 eksperymentów behawioralnych (ekspozycji).",
         "protokol_nazwa": "Terapia Poznawcza Fobii Społecznej wg Clarka i Wellsa",
-        "uzasadnienie_planu": "Przenoszenie uwagi z wewnątrz na zewnątrz, eksperymenty, restrukturyzacja założeń.",
-        "profil_cbt": {
-            "SYTUACJA": {"slowa": ["imprez", "ludzi", "spotka", "wystąp", "rozmow", "prezentacj"], "tlumaczenie": "Sytuacje ekspozycji na ocenę innych."},
-            "MYŚLI": {"slowa": ["oceni", "wyśmiej", "głupio", "nudn", "dziwn", "zbłaźnię", "widzą", "zauważ"], "tlumaczenie": "Antycypacja negatywnej oceny, czytanie w myślach."},
-            "EMOCJE": {"slowa": ["lęk", "wstyd", "stres", "spięt", "niepokój"], "tlumaczenie": "Lęk społeczny, zakłopotanie."},
-            "CIAŁO": {"slowa": ["czerwieni", "drż", "pocę", "gorąc", "jąka", "głos"], "tlumaczenie": "Pobudzenie współczulne, widoczne objawy lęku."},
-            "ZACHOWANIE": {"slowa": ["unikam", "odwoł", "nie odzyw", "telefon", "patrzę w dół"], "tlumaczenie": "Unikanie, zachowania zabezpieczające."}
-        }
+        "uzasadnienie_planu": "Przenoszenie uwagi z wewnątrz na zewnątrz, eksperymenty, restrukturyzacja założeń."
     },
     {
         "diagnoza": "F42 Zaburzenie obsesyjno-kompulsyjne (OCD)",
@@ -247,14 +212,7 @@ baza_symptomow = [
         },
         "cele_smart": "1. Ograniczenie czasu rytuałów do X minut dziennie.\n2. Wykonanie ekspozycji bez reakcji zabezpieczającej.",
         "protokol_nazwa": "Ekspozycja z Powstrzymaniem Reakcji (ERP) / Model Salkovskisa",
-        "uzasadnienie_planu": "ERP, edukacja o powszechności myśli intruzowych, praca z nadmierną odpowiedzialnością.",
-        "profil_cbt": {
-            "SYTUACJA": {"slowa": ["klamk", "brud", "nóż", "kuchn", "wyjści", "zamk", "gaz"], "tlumaczenie": "Wyzwalacze intruzji (brud, niebezpieczne przedmioty, wątpliwości)."},
-            "MYŚLI": {"slowa": ["co jeśli", "zaraz", "zabiję", "może", "nie sprawdz", "wina", "odpowiedzial", "przeze mnie"], "tlumaczenie": "Fuzja myśli z działaniem, hiperodpowiedzialność."},
-            "EMOCJE": {"slowa": ["lęk", "panik", "napięc", "wstręt", "obrzydzen", "niepokój"], "tlumaczenie": "Silny lęk i dyskomfort wywołany obsesją."},
-            "CIAŁO": {"slowa": ["spięt", "napięt", "serce", "ból", "żołądek"], "tlumaczenie": "Pobudzenie z lęku."},
-            "ZACHOWANIE": {"slowa": ["sprawdz", "myję", "liczę", "wracam", "pytam", "upewniam", "powtarz"], "tlumaczenie": "Rytuały jawne (mycie, sprawdzanie) i ukryte (liczenie w myślach)."}
-        }
+        "uzasadnienie_planu": "ERP, edukacja o powszechności myśli intruzowych, praca z nadmierną odpowiedzialnością."
     },
     {
         "diagnoza": "F51 Nieorganiczna bezsenność",
@@ -275,14 +233,7 @@ baza_symptomow = [
         },
         "cele_smart": "1. Zwiększenie wydajności snu powyżej 85%.\n2. Skrócenie czasu zasypiania do max 30 minut.",
         "protokol_nazwa": "Poznawczo-Behawioralna Terapia Bezsenności (CBT-I)",
-        "uzasadnienie_planu": "Dzienniczek snu, Restrykcja snu, Kontrola bodźców, Restrukturyzacja poznawcza.",
-        "profil_cbt": {
-            "SYTUACJA": {"slowa": ["noc", "łóżk", "sypialn", "wieczór", "godzin", "ciemn"], "tlumaczenie": "Sytuacja kładzenia się do łóżka lub przebudzenie w nocy."},
-            "MYŚLI": {"slowa": ["nie zasnę", "jutro", "masakr", "muszę spać", "ile godzin", "zniszczy"], "tlumaczenie": "Lęk antycypacyjny, wymuszanie snu, katastrofizowanie skutków niewyspania."},
-            "EMOCJE": {"slowa": ["lęk", "stres", "frustracj", "złość", "bezradn"], "tlumaczenie": "Frustracja łóżkowa, niepokój."},
-            "CIAŁO": {"slowa": ["rozbudzon", "gorąc", "zmęczon", "przebudz"], "tlumaczenie": "Hiperwzbudzenie somatyczne, brak naturalnej senności."},
-            "ZACHOWANIE": {"slowa": ["przewracam", "patrzę w sufit", "telefon", "zegar", "drzemk", "leżę"], "tlumaczenie": "Leżenie w łóżku bez snu, zerkanie na zegarek, odesypianie (drzemki)."}
-        }
+        "uzasadnienie_planu": "Dzienniczek snu, Restrykcja snu, Kontrola bodźców, Restrukturyzacja poznawcza."
     }
 ]
 
@@ -331,29 +282,44 @@ if menu == "I. Diagnoza i Konceptualizacja":
     wiek = col2.number_input("Wiek", 0, 110)
     
     st.divider()
-    st.header("I.2. Diagnoza kliniczna")
+    st.header("I.2. Asystent Diagnozy (Wywiad Kliniczny)")
 
-    with st.expander("🤖 Asystent Diagnozy (Analiza Kryteriów ICD-10)", expanded=True):
-        st.write("Wpisz skargę pacjenta. Algorytm wygeneruje kolorowy raport ICD-10 oparty na cytatach z wywiadu.")
-        objawy_input = st.text_area("Wpisz swobodną skargę pacjenta:")
+    with st.expander("🤖 Kalkulator Diagnostyczny CBT (Wpisz słowa-klucze wyłapane na sesji)", expanded=True):
+        st.write("Jako terapeuta wpisz w poniższe pola słowa i objawy, które wyłapałeś podczas wywiadu. Algorytm na ich podstawie sprawdzi kryteria ICD-10.")
         
-        if st.button("🔍 Przetłumacz na kryteria kliniczne"):
-            if objawy_input:
-                input_lower = objawy_input.lower()
-                
-                # Podział na zdania
-                zdania_pacjenta = [z.strip() + "." for z in re.split(r'[.!?\n]+', objawy_input) if len(z.strip()) > 2]
+        # POLA DLA TERAPEUTY
+        a_sytuacja = st.text_input("📍 Sytuacja / Wyzwalacz:", value=st.session_state.ui_sytuacja)
+        
+        col_cbt1, col_cbt2 = st.columns(2)
+        with col_cbt1:
+            a_mysli = st.text_area("🧠 Myśli (np. zaraz coś się stanie, jestem beznadziejny):", value=st.session_state.ui_mysli)
+            a_emocje = st.text_area("❤️ Emocje (np. lęk, pustka, odcięcie, wstyd):", value=st.session_state.ui_emocje)
+        with col_cbt2:
+            a_cialo = st.text_area("⚡ Doznania z ciała (np. pot, napięte mięśnie):", value=st.session_state.ui_cialo)
+            a_zachowanie = st.text_area("🏃 Zachowanie (np. unikam, sprawdzam, myję, drzemki):", value=st.session_state.ui_zachowanie)
+
+        if st.button("🔍 Analizuj wprowadzone objawy kliniczne"):
+            # Aktualizacja stanu sesji z tego co wpisał terapeuta!
+            st.session_state.ui_sytuacja = a_sytuacja
+            st.session_state.ui_mysli = a_mysli
+            st.session_state.ui_emocje = a_emocje
+            st.session_state.ui_cialo = a_cialo
+            st.session_state.ui_zachowanie = a_zachowanie
+            
+            # Łączymy wszystko w jeden tekst dla sprawdzenia kryteriów
+            all_inputs = f"{a_sytuacja} {a_mysli} {a_emocje} {a_cialo} {a_zachowanie}"
+            
+            if len(all_inputs.strip()) > 3:
+                # Dzielimy na mniejsze fragmenty dla ładnego wypisywania dowodów (np. po przecinkach lub nowych liniach)
+                zdania_pacjenta = [z.strip() for z in re.split(r'[.,;!|\n]+', all_inputs) if len(z.strip()) > 1]
                 
                 najlepsze_dopasowanie = None
                 najwyzszy_wynik = 0
                 najlepszy_html = ""
                 
-                final_sytuacja = final_mysli = final_emocje = final_cialo = final_zachowanie = ""
-                
                 for choroba in baza_symptomow:
                     wynik_choroby = 0
-                    
-                    html_raport = f"<h4 style='color: #2c3e50;'>Analiza dla: {choroba['diagnoza']}</h4>\n"
+                    html_raport = f"<h4 style='color: #2c3e50;'>Dopasowanie do: {choroba['diagnoza']}</h4>\n"
                     
                     for nazwa_kryterium, dane_kryterium in choroba["icd10_kryteria"].items():
                         znalezione_dowody = [] 
@@ -371,45 +337,20 @@ if menu == "I. Diagnoza i Konceptualizacja":
                             html_raport += f"<h5 style='color: #155724; margin-top: 0;'>✅ SPEŁNIONE: {nazwa_kryterium}</h5>\n"
                             html_raport += f"<p style='font-size: 0.9em; color: #333; margin-bottom: 8px;'><b>Definicja ICD-10:</b> {dane_kryterium['icd10']}</p>\n"
                             html_raport += "<div style='padding: 8px; background-color: #d1e7dd; border-radius: 4px; color: #0f5132;'>\n"
-                            html_raport += f"<b>Materiał dowodowy z wywiadu:</b><br>{dowody_html}\n"
+                            html_raport += f"<b>Zidentyfikowano w Twoich notatkach:</b><br>{dowody_html}\n"
                             html_raport += "</div></div>\n"
                         else:
                             html_raport += "<div style='border-left: 5px solid #dc3545; padding: 12px; background-color: #fdf2f2; margin-bottom: 15px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'>\n"
                             html_raport += f"<h5 style='color: #721c24; margin-top: 0;'>❌ BRAK DANYCH: {nazwa_kryterium}</h5>\n"
                             html_raport += f"<p style='font-size: 0.9em; color: #333; margin-bottom: 8px;'><b>Definicja ICD-10:</b> {dane_kryterium['icd10']}</p>\n"
                             html_raport += "<div style='padding: 8px; background-color: #f8d7da; border-radius: 4px; color: #842029;'>\n"
-                            html_raport += "<i>Kryterium nieobecne w skardze. Wymaga dopytania podczas wywiadu.</i>\n"
+                            html_raport += "<i>Brak tych wskaźników w Twoim podsumowaniu. Dopytaj pacjenta.</i>\n"
                             html_raport += "</div></div>\n"
-
-                    temp_sytuacja = temp_mysli = temp_emocje = temp_cialo = temp_zachowanie = ""
-                    
-                    slowa_z_tekstu = re.findall(r'\b\w+\b', input_lower)
-                    for sfera, dane_sfery in choroba["profil_cbt"].items():
-                        znalezione_slowa = []
-                        for rdzen in dane_sfery["slowa"]:
-                            for s in slowa_z_tekstu:
-                                if rdzen.lower() in s.lower() and s not in znalezione_slowa: 
-                                    znalezione_slowa.append(s)
-                                    
-                        if znalezione_slowa:
-                            wynik_choroby += 1
-                            format_tekstu = f"Wykryte słowa pacjenta: {', '.join(znalezione_slowa)}\n[Znaczenie CBT: {dane_sfery['tlumaczenie']}]"
-                            if sfera == "SYTUACJA": temp_sytuacja = format_tekstu
-                            elif sfera == "MYŚLI": temp_mysli = format_tekstu
-                            elif sfera == "EMOCJE": temp_emocje = format_tekstu
-                            elif sfera == "CIAŁO": temp_cialo = format_tekstu
-                            elif sfera == "ZACHOWANIE": temp_zachowanie = format_tekstu
 
                     if wynik_choroby > najwyzszy_wynik:
                         najwyzszy_wynik = wynik_choroby
                         najlepsze_dopasowanie = choroba
                         najlepszy_html = html_raport
-                        
-                        final_sytuacja = temp_sytuacja
-                        final_mysli = temp_mysli
-                        final_emocje = temp_emocje
-                        final_cialo = temp_cialo
-                        final_zachowanie = temp_zachowanie
 
                 if najlepsze_dopasowanie and najwyzszy_wynik > 0:
                     st.success(f"🎯 Zidentyfikowano profil kliniczny: {najlepsze_dopasowanie['diagnoza']}")
@@ -419,24 +360,21 @@ if menu == "I. Diagnoza i Konceptualizacja":
                     st.session_state.ui_cele = najlepsze_dopasowanie['cele_smart']
                     st.session_state.ui_protokol = najlepsze_dopasowanie['protokol_nazwa']
                     st.session_state.ui_uzasadnienie = najlepsze_dopasowanie['uzasadnienie_planu']
-                    
-                    st.session_state.ui_sytuacja = final_sytuacja if final_sytuacja else "Brak wyraźnego wyzwalacza."
-                    st.session_state.ui_mysli = final_mysli if final_mysli else "Brak zidentyfikowanych myśli automatycznych."
-                    st.session_state.ui_emocje = final_emocje if final_emocje else "Brak zidentyfikowanych emocji."
-                    st.session_state.ui_cialo = final_cialo if final_cialo else "Brak zidentyfikowanych doznań somatycznych."
-                    st.session_state.ui_zachowanie = final_zachowanie if final_zachowanie else "Brak zidentyfikowanych zachowań."
+                    st.rerun() # Odśwież widok żeby zaktualizować pola poniżej
                 else:
-                    st.info("Algorytm nie wykrył żadnych specyficznych słów klinicznych.")
+                    st.info("Zbyt mało klinicznych słów-kluczy, by dopasować diagnozę.")
             else:
-                st.warning("Najpierw wpisz wypowiedź pacjenta!")
+                st.warning("Wypełnij chociaż jedno pole z objawami!")
 
+    st.divider()
+    
+    # Wybór diagnozy po analizie (lub manualny)
     c1, c2 = st.columns(2)
     kat_wybrana = c1.selectbox("Grupa ICD-10:", list(icd10_full.keys()))
     pelna_diagnoza = c2.selectbox("Rozpoznanie główne:", icd10_full[kat_wybrana])
     kod_icd = pelna_diagnoza.split(" ")[0]
     inne_rozpoznania = st.text_input("Inne rozpoznania (np. somatyczne, współwystępujące):")
 
-    st.divider()
     st.header(f"🧩 Modele CBT: {pelna_diagnoza}")
     if kod_icd in slownik_modeli:
         for dane in slownik_modeli[kod_icd]:
@@ -454,11 +392,14 @@ if menu == "I. Diagnoza i Konceptualizacja":
     if st.session_state.ui_problemy_html:
         st.markdown(st.session_state.ui_problemy_html, unsafe_allow_html=True)
     else:
-        st.text_area("Lista problemów (Czeka na analizę...)", disabled=True)
+        st.info("Lista problemów wygeneruje się po użyciu Kalkulatora Diagnostycznego powyżej.")
 
     st.text_area("Cele terapii (SMART)", key="ui_cele", on_change=sync_cele, height=100)
 
     st.subheader("I.3.2. Poziom pierwszy (Sytuacja bieżąca - przekrój poprzeczny)")
+    st.info("Pola poniżej zsynchronizowały się automatycznie z tym, co wpisałeś w Kalkulatorze Diagnostycznym.")
+    
+    # Te pola są powiązane bezpośrednio ze stanem sesji, więc wyświetlają to co wpisano w Asystencie!
     st.text_area("Sytuacja (Wyzwalacz)", key="ui_sytuacja")
     c3, c4 = st.columns(2)
     with c3:
@@ -490,6 +431,9 @@ if menu == "I. Diagnoza i Konceptualizacja":
         })
         st.success("Zapisano do bazy!")
 
+# ==========================================================
+# MODUŁ II: PLAN TERAPII I INTERWENCJE
+# ==========================================================
 elif menu == "II. Plan i Interwencje":
     st.title("II. Plan terapii i interwencje")
     st.header("II.1. Plan terapii (Uzasadnienie EBM)")
@@ -499,6 +443,9 @@ elif menu == "II. Plan i Interwencje":
     st.header("II.2. Zapis przebiegu poszczególnych sesji")
     st.text_area("Rejestr sesji (np. Sesja 1 [Data] - Psychoedukacja i BA...)", height=300)
 
+# ==========================================================
+# MODUŁ III: PODSUMOWANIE
+# ==========================================================
 elif menu == "III. Podsumowanie":
     st.title("III. Podsumowanie i Ewaluacja")
     st.header("III.1. Osiągnięte cele terapii")
@@ -517,6 +464,9 @@ elif menu == "III. Podsumowanie":
     st.header("III.4. Literatura")
     st.text_area("Materiały, protokoły wykorzystane do pracy")
 
+# ==========================================================
+# MODUŁ IV: ARCHIWUM DIAGNOZ
+# ==========================================================
 elif menu == "📂 Archiwum Diagnoz":
     st.title("Baza Terapii")
     if not st.session_state.baza_terapii:
