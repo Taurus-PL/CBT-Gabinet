@@ -401,4 +401,3 @@ index 0fa6c3dd2238f64b4c05cf382fc1b4194b0739c9..6767d70737ec3d4513de12b202105de1
  elif menu == "📂 Archiwum":
      st.title("Baza Terapii")
      st.info("Tutaj pojawią się zapisani pacjenci. (Funkcja wymaga bazy danych).")
-
