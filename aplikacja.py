@@ -1,4 +1,5 @@
 import streamlit as st
+streamlit run aplikacja.py
 import pandas as pd
 import re
 
