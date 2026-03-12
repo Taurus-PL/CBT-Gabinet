@@ -1,7 +1,12 @@
-import streamlit as st
-import pandas as pd
-import re
-impor unicodedata
+diff --git a/aplikacja.py b/aplikacja.py
+index 0fa6c3dd2238f64b4c05cf382fc1b4194b0739c9..6767d70737ec3d4513de12b202105de134c930e2 100644
+--- a/aplikacja.py
++++ b/aplikacja.py
+@@ -1,32 +1,116 @@
+ import streamlit as st
+ import pandas as pd
+ import re
++import unicodedata
  
  # --- KONFIGURACJA STRONY ---
  st.set_page_config(page_title="Zapis Przebiegu Terapii CBT", layout="wide")
