@@ -1,5 +1,3 @@
---- a/aplikacja.py
-+++ b/aplikacja.py
  import streamlit as st
  import pandas as pd
  import re
