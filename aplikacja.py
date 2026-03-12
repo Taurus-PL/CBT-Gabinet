@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import re
+
  
  # --- KONFIGURACJA STRONY ---
  st.set_page_config(page_title="Zapis Przebiegu Terapii CBT", layout="wide")
