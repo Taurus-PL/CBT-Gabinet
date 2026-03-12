@@ -1,6 +1,3 @@
---- a/aplikacja.py
-+++ b/aplikacja.py
-@@ -1,32 +1,116 @@
  import streamlit as st
  import pandas as pd
  import re
