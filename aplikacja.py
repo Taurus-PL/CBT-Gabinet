@@ -1,6 +1,6 @@
-impor streamlit as st
-impor pandas as pd
-impor re
+import streamlit as st
+import pandas as pd
+import re
 impor unicodedata
  
  # --- KONFIGURACJA STRONY ---
