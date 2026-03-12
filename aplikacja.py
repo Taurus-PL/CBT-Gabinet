@@ -1,4 +1,3 @@
-diff --git a/aplikacja.py b/aplikacja.py
 --- a/aplikacja.py
 +++ b/aplikacja.py
 @@ -1,32 +1,116 @@
