@@ -15,6 +15,33 @@ def normalizuj_tekst(tekst):
     return tekst
 
 
+def dopasuj_diagnozy(wejscie):
+    """Zwraca pozycje bazy pasujące do kodu lub nazwy rozpoznania."""
+    zapytanie = normalizuj_tekst(wejscie)
+    if len(zapytanie) < 3:
+        return []
+
+    # Akceptuj również popularny zapis kodu bez kropki, np. F410.
+    zapytanie = re.sub(r"\b([a-z]\d{2})(\d)\b", r"\1.\2", zapytanie)
+    dopasowania = []
+
+    for pozycja in baza_modeli_protokolow:
+        for fraza in pozycja["frazy"]:
+            fraza_norm = normalizuj_tekst(fraza)
+            if re.fullmatch(r"[a-z]\d{2}(?:\.\d+)?", fraza_norm):
+                pasuje = re.search(rf"(?<!\w){re.escape(fraza_norm)}(?!\w)", zapytanie)
+            elif len(fraza_norm) <= 3:
+                pasuje = re.search(rf"(?<!\w){re.escape(fraza_norm)}(?!\w)", zapytanie)
+            else:
+                pasuje = fraza_norm in zapytanie
+
+            if pasuje:
+                dopasowania.append(pozycja)
+                break
+
+    return dopasowania
+
+
 baza_modeli_protokolow = [
     {
         "diagnoza": "F32/F33 Epizod depresyjny / Zaburzenie depresyjne nawracające (ICD-10), Major Depressive Disorder (DSM-5)",
@@ -177,7 +204,7 @@ if menu == "Strona tytułowa i Autorefleksja":
     col1, col2 = st.columns(2)
     with col1:
         st.subheader("Dane ogólne")
-        st.text_input("Nazwisko i imię pacjenta:")
+        st.text_input("Pacjent (inicjały lub pseudonim):")
         st.text_input("Wiek:")
         st.text_input("Data rozpoczęcia terapii:")
     with col2:
@@ -276,16 +303,19 @@ elif menu == "II. Drugi Etap Terapii":
     st.subheader("🧠 Asystent modeli CBT i protokołów (DSM-5 / ICD-10)")
     st.caption("Wpisz kod (np. F41.0, F32) albo nazwę diagnozy DSM-5/ICD-10, aby zobaczyć dostępne modele poznawczo-behawioralne i rekomendowane protokoły.")
 
+    st.info(
+        "Wyniki mają charakter pomocniczy. Wybór modelu i protokołu wymaga "
+        "konceptualizacji przypadku, diagnozy różnicowej oraz oceny ryzyka i przeciwwskazań."
+    )
     diagnoza_wejscie = st.text_input("Diagnoza terapeuty:", placeholder="np. F43.1, PTSD, OCD, Major Depressive Disorder")
     if diagnoza_wejscie:
-        zapytanie = normalizuj_tekst(diagnoza_wejscie)
-        dopasowania = []
-        for pozycja in baza_modeli_protokolow:
-            frazy = [normalizuj_tekst(fraza) for fraza in pozycja["frazy"]]
-            if any(zapytanie in fraza or fraza in zapytanie for fraza in frazy):
-                dopasowania.append(pozycja)
+        dopasowania = dopasuj_diagnozy(diagnoza_wejscie)
 
-        if dopasowania:
+        if not normalizuj_tekst(diagnoza_wejscie):
+            st.warning("Wpisz kod lub nazwę diagnozy.")
+        elif len(normalizuj_tekst(diagnoza_wejscie)) < 3:
+            st.warning("Zapytanie jest zbyt krótkie. Wpisz pełny kod lub nazwę diagnozy.")
+        elif dopasowania:
             st.success(f"Znaleziono {len(dopasowania)} dopasowanie(a) diagnostyczne.")
             for wpis in dopasowania:
                 with st.expander(f"📌 {wpis['diagnoza']}", expanded=True):
